@@ -13,4 +13,10 @@ export class BackendService {
       .get<Order[]>('http://localhost:8000/orders')
       .toPromise();
   }
+
+  async loadOrder(id: String): Promise<Order> {
+    return await this.httpClient
+      .get<Order>('http://localhost:8000/orders/' + id)
+      .toPromise();
+  }
 }

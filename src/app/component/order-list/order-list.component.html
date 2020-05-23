@@ -1,9 +1,10 @@
 <h1>Order List</h1>
-<li>
-  <ul *ngFor="let order of orders">
-    {{
-      order.id
-    }}
-  </ul>
-</li>
+<ul>
+  <li *ngFor="let order of orders">
+    {{ order.id }}
+    <button (click)="loadOrder(order.id)">
+      Details
+    </button>
+  </li>
+</ul>
 <button (click)="loadOrders()">Load</button>
