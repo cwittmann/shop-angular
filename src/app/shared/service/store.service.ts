@@ -21,6 +21,7 @@ export class StoreService {
     this.users = await this.backendService.loadUsers();
     this.appendOrderLines();
     this.appendUsers();
+    this.sortOrders();
   }
 
   async loadOrder(id: String) {
@@ -41,5 +42,17 @@ export class StoreService {
       let user = this.users.find((user) => user.id === order.userId);
       order.user = user;
     }
+  }
+
+  private sortOrders() {
+    for (let order of this.orders) {
+      let dateTypeless: any = order.date;
+      order.date = new Date(
+        dateTypeless.year,
+        dateTypeless.month,
+        dateTypeless.day
+      );
+    }
+    this.orders.sort((order1, order2) => (order1.date > order2.date ? 1 : -1));
   }
 }
