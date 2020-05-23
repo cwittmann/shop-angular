@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../model/Order';
+import { OrderLine } from '../model/OrderLine';
+import { User } from '../model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,18 @@ export class BackendService {
   async loadOrder(id: String): Promise<Order> {
     return await this.httpClient
       .get<Order>('http://localhost:8000/orders/' + id)
+      .toPromise();
+  }
+
+  async loadOrderLines(): Promise<OrderLine[]> {
+    return await this.httpClient
+      .get<OrderLine[]>('http://localhost:8000/orderLines')
+      .toPromise();
+  }
+
+  async loadUsers(): Promise<User[]> {
+    return await this.httpClient
+      .get<User[]>('http://localhost:8000/users')
       .toPromise();
   }
 }
