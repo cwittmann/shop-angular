@@ -1,1 +1,16 @@
+<ul ngbNav [(activeId)]="activeId" class="nav-tabs">
+  <h5 class="p-2">Shop</h5>
+  <li [ngbNavItem]="orders">
+    <a ngbNavLink>Orders</a>
+  </li>
+  <li [ngbNavItem]="products">
+    <a ngbNavLink>Products</a>
+  </li>
+  <li [ngbNavItem]="manufacturers">
+    <a ngbNavLink>Manufacturers</a>
+  </li>
+  <li [ngbNavItem]="customers">
+    <a ngbNavLink>Customers</a>
+  </li>
+</ul>
 <router-outlet></router-outlet>
