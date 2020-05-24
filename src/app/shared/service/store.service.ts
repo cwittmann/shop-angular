@@ -4,28 +4,32 @@ import { BackendService } from './backend.service';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
 import { Product } from '../model/Product';
+import { Manufacturer } from '../model/Manufacturer';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
   orders: Order[] = [];
+  manufacturers: Manufacturer[] = [];
+  products: Product[] = [];
   orderLines: OrderLine[] = [];
   users: User[] = [];
-  products: Product[] = [];
   currentOrder: Order = new Order();
 
   constructor(private backendService: BackendService) {}
 
   async loadOrders() {
     this.orders = await this.backendService.loadOrders();
-    this.orderLines = await this.backendService.loadOrderLines();
     this.users = await this.backendService.loadUsers();
+    this.manufacturers = await this.backendService.loadManufacturers();
     this.products = await this.backendService.loadProducts();
+    this.orderLines = await this.backendService.loadOrderLines();
 
-    this.appendOrderLines();
     this.appendUsers();
+    this.appendManufacturers();
     this.appendProducts();
+    this.appendOrderLines();
     this.sortOrders();
   }
 
@@ -33,11 +37,28 @@ export class StoreService {
     this.currentOrder = this.orders.find((order) => order.id === id);
   }
 
+  private appendUsers() {
+    for (let order of this.orders) {
+      let user = this.users.find((user) => user.id === order.userId);
+      order.user = user;
+    }
+  }
+
+  private appendManufacturers() {
+    for (let product of this.products) {
+      let manufacturer = this.manufacturers.find(
+        (manufacturer) => manufacturer.id === product.manufacturerId
+      );
+      product.manufacturerName = manufacturer.name;
+    }
+  }
+
   private appendProducts() {
     for (let orderLine of this.orderLines) {
       let product = this.products.find(
         (product) => product.id === orderLine.productId
       );
+      orderLine.manufacturerName = product.manufacturerName;
       orderLine.productName = product.name;
       orderLine.productDescription = product.description;
       orderLine.totalPrice = orderLine.amount * Number(product.price);
@@ -50,13 +71,6 @@ export class StoreService {
         (orderLine) => orderLine.orderId === order.id
       );
       order.orderLines = orderLines;
-    }
-  }
-
-  private appendUsers() {
-    for (let order of this.orders) {
-      let user = this.users.find((user) => user.id === order.userId);
-      order.user = user;
     }
   }
 

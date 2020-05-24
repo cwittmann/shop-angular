@@ -1,7 +1,7 @@
 <h5 class="mr-auto p-2">Order</h5>
 
 <section>
-  <div class="d-flex w-100 justify-content-between mb-4">
+  <div class="d-flex justify-content-between mb-4">
     <h5><i>Date:</i> {{ order.date | date: "longDate" }}</h5>
     <h5>
       <i>Customer:</i> {{ order.user?.firstName }}
@@ -11,13 +11,13 @@
   </div>
   <ul class="list-group">
     <li
-      class="list-group-item d-flex w-100 justify-content-between"
+      class="list-group-item d-flex justify-content-between"
       *ngFor="let orderLine of order.orderLines"
     >
       <div>
-        <small>{{ orderLine.amount }} x </small>{{ orderLine.productName }} ({{
-          orderLine.productDescription
-        }})
+        <small>{{ orderLine.amount }} x </small>
+        <b class="text-primary">{{ orderLine.manufacturerName }}</b>
+        {{ orderLine.productName }} ({{ orderLine.productDescription }})
       </div>
 
       <div>{{ orderLine.totalPrice | currency }}</div>

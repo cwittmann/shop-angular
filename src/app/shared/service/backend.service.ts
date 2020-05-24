@@ -4,6 +4,7 @@ import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
 import { Product } from '../model/Product';
+import { Manufacturer } from '../model/Manufacturer';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +39,12 @@ export class BackendService {
   async loadProducts(): Promise<Product[]> {
     return await this.httpClient
       .get<Product[]>('http://localhost:8000/products')
+      .toPromise();
+  }
+
+  async loadManufacturers(): Promise<Manufacturer[]> {
+    return await this.httpClient
+      .get<Manufacturer[]>('http://localhost:8000/manufacturers')
       .toPromise();
   }
 }

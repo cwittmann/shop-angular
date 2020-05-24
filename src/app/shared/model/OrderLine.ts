@@ -4,6 +4,8 @@ export class OrderLine {
   public productId: string;
   public amount: number;
 
+  public manufacturerName: string;
+
   public productName: string;
   public productDescription: string;
   public totalPrice: number;
