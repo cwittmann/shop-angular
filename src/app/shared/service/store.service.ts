@@ -3,6 +3,7 @@ import { Order } from '../model/Order';
 import { BackendService } from './backend.service';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
+import { Product } from '../model/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ export class StoreService {
   orders: Order[] = [];
   orderLines: OrderLine[] = [];
   users: User[] = [];
+  products: Product[] = [];
   currentOrder: Order = new Order();
 
   constructor(private backendService: BackendService) {}
@@ -19,13 +21,27 @@ export class StoreService {
     this.orders = await this.backendService.loadOrders();
     this.orderLines = await this.backendService.loadOrderLines();
     this.users = await this.backendService.loadUsers();
+    this.products = await this.backendService.loadProducts();
+
     this.appendOrderLines();
     this.appendUsers();
+    this.appendProducts();
     this.sortOrders();
   }
 
   async loadOrder(id: String) {
     this.currentOrder = this.orders.find((order) => order.id === id);
+  }
+
+  private appendProducts() {
+    for (let orderLine of this.orderLines) {
+      let product = this.products.find(
+        (product) => product.id === orderLine.productId
+      );
+      orderLine.productName = product.name;
+      orderLine.productDescription = product.description;
+      orderLine.totalPrice = orderLine.amount * Number(product.price);
+    }
   }
 
   private appendOrderLines() {

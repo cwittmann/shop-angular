@@ -1,6 +1,26 @@
-<h1>Order</h1>
-<p>
-  {{ order.id }}
+<h5 class="mr-auto p-2">Order</h5>
 
-  <button routerLink="/order-list">Back to List</button>
-</p>
+<section>
+  <div class="d-flex w-100 justify-content-between mb-4">
+    <h5><i>Date:</i> {{ order.date | date: "longDate" }}</h5>
+    <h5>
+      <i>Customer:</i> {{ order.user?.firstName }}
+      {{ order.user?.lastName }} ({{ order.user?.city }})
+    </h5>
+    <h5><i>Status:</i> {{ order.status }}</h5>
+  </div>
+  <ul class="list-group">
+    <li
+      class="list-group-item d-flex w-100 justify-content-between"
+      *ngFor="let orderLine of order.orderLines"
+    >
+      <div>
+        <small>{{ orderLine.amount }} x </small>{{ orderLine.productName }} ({{
+          orderLine.productDescription
+        }})
+      </div>
+
+      <div>{{ orderLine.totalPrice | currency }}</div>
+    </li>
+  </ul>
+</section>

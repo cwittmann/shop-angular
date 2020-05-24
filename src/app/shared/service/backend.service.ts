@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
+import { Product } from '../model/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,12 @@ export class BackendService {
   async loadUsers(): Promise<User[]> {
     return await this.httpClient
       .get<User[]>('http://localhost:8000/users')
+      .toPromise();
+  }
+
+  async loadProducts(): Promise<Product[]> {
+    return await this.httpClient
+      .get<Product[]>('http://localhost:8000/products')
       .toPromise();
   }
 }

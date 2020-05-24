@@ -1,15 +1,15 @@
-<ul ngbNav [(activeId)]="activeId" class="nav-tabs">
+<ul ngbNav class="nav-tabs">
   <h5 class="p-2">Shop</h5>
-  <li [ngbNavItem]="orders">
-    <a ngbNavLink>Orders</a>
+  <li ngbNavItem>
+    <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
   </li>
-  <li [ngbNavItem]="products">
+  <li ngbNavItem>
     <a ngbNavLink>Products</a>
   </li>
-  <li [ngbNavItem]="manufacturers">
+  <li ngbNavItem>
     <a ngbNavLink>Manufacturers</a>
   </li>
-  <li [ngbNavItem]="customers">
+  <li ngbNavItem>
     <a ngbNavLink>Customers</a>
   </li>
 </ul>
