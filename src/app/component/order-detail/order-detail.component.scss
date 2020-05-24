@@ -2,7 +2,16 @@ p {
   margin: 0;
 }
 
+h5 {
+  font-size: calc(8px + 0.5vw);
+}
+
 .list-group-item {
   margin: 0.2vw;
   border-radius: 1vw;
+}
+
+.info {
+  background-color: #eeeeee;
+  border-radius: 0.5vw;
 }

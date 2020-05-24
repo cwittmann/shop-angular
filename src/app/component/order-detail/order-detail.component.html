@@ -1,13 +1,13 @@
-<h5 class="mr-auto p-2">Order</h5>
-
 <section>
-  <div class="d-flex justify-content-between mb-4">
-    <h5><i>Date:</i> {{ order.date | date: "longDate" }}</h5>
+  <div class="d-flex justify-content-between mb-2 p-3 info">
+    <h5><b>Order</b></h5>
+    <h5>{{ order.date | date: "longDate" }}</h5>
     <h5>
-      <i>Customer:</i> {{ order.user?.firstName }}
-      {{ order.user?.lastName }} ({{ order.user?.city }})
+      {{ order.user?.firstName }} {{ order.user?.lastName }} ({{
+        order.user?.city
+      }})
     </h5>
-    <h5><i>Status:</i> {{ order.status }}</h5>
+    <h5>Status: {{ order.status }}</h5>
   </div>
   <ul class="list-group">
     <li
