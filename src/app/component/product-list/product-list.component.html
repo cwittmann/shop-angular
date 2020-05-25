@@ -1,0 +1,18 @@
+<div class="d-flex m-4 sort">
+  <h5 class="mr-auto p-2"><b>Products</b></h5>
+</div>
+
+<section>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let product of products">
+      <div class="d-flex w-100 justify-content-between">
+        <small>{{ product.manufacturerName }}</small>
+
+        <h5>{{ product.price | currency }}</h5>
+      </div>
+      <div class="d-flex w-100 justify-content-between">
+        <h5>{{ product.name }} ({{ product.description }})</h5>
+      </div>
+    </li>
+  </ul>
+</section>

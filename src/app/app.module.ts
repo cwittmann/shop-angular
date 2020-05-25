@@ -8,10 +8,26 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderDetailComponent } from './component/order-detail/order-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductListComponent } from './component/product-list/product-list.component';
+import { ManufacturerListComponent } from './component/manufacturer-list/manufacturer-list.component';
+import { UserListComponent } from './component/user-list/user-list.component';
 
 @NgModule({
-  declarations: [AppComponent, OrderListComponent, OrderDetailComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, SharedModule, NgbModule],
+  declarations: [
+    AppComponent,
+    OrderListComponent,
+    OrderDetailComponent,
+    ProductListComponent,
+    ManufacturerListComponent,
+    UserListComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    SharedModule,
+    NgbModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

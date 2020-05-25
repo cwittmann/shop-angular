@@ -33,7 +33,7 @@ export class StoreService {
     this.sortOrders();
   }
 
-  async loadOrder(id: String) {
+  async loadOrder(id: string) {
     this.currentOrder = this.orders.find((order) => order.id === id);
   }
 
