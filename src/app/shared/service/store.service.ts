@@ -11,11 +11,12 @@ import { Manufacturer } from '../model/Manufacturer';
 })
 export class StoreService {
   orders: Order[] = [];
+  currentOrder: Order = new Order();
   manufacturers: Manufacturer[] = [];
   products: Product[] = [];
   orderLines: OrderLine[] = [];
   users: User[] = [];
-  currentOrder: Order = new Order();
+  shoppingCart: string[] = [];
 
   constructor(private backendService: BackendService) {}
 

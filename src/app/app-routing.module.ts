@@ -5,15 +5,17 @@ import { OrderDetailComponent } from './component/order-detail/order-detail.comp
 import { ProductListComponent } from './component/product-list/product-list.component';
 import { ManufacturerListComponent } from './component/manufacturer-list/manufacturer-list.component';
 import { UserListComponent } from './component/user-list/user-list.component';
+import { ShopComponent } from './component/shop/shop.component';
 
 const routes: Routes = [
+  { path: 'shop', component: ShopComponent },
   { path: 'order-list', component: OrderListComponent },
   { path: 'order-detail/:id', component: OrderDetailComponent },
   { path: 'product-list', component: ProductListComponent },
   { path: 'manufacturer-list', component: ManufacturerListComponent },
   { path: 'user-list', component: UserListComponent },
-  { path: '', redirectTo: 'order-list', pathMatch: 'full' },
-  { path: '*', redirectTo: 'order-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'shop', pathMatch: 'full' },
+  { path: '*', redirectTo: 'shop', pathMatch: 'full' },
 ];
 
 @NgModule({

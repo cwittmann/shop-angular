@@ -1,0 +1,35 @@
+<div class="d-flex m-4 sort">
+  <h5 class="mr-auto p-2"><b>Shop</b></h5>
+  <a href="#" class="btn btn-primary"
+    ><img class="icon" src="../../../assets/icons/shopping-cart.png" />{{
+      shoppingCart.length
+    }}
+    items</a
+  >
+</div>
+
+<section>
+  <div class="card" *ngFor="let product of products" style="width: 18rem;">
+    <img
+      [src]="'../../../assets/images/' + product.id + '.jpg'"
+      class="card-img-top"
+      alt="..."
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.description }}</p>
+      <a
+        *ngIf="!shoppingCart.includes(product.id)"
+        class="btn btn-primary text-white"
+        (click)="addToCart(product.id)"
+        >Order</a
+      >
+      <a
+        *ngIf="shoppingCart.includes(product.id)"
+        class="btn btn-danger text-white"
+        (click)="removeFromCart(product.id)"
+        >Remove</a
+      >
+    </div>
+  </div>
+</section>

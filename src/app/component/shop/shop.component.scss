@@ -1,0 +1,30 @@
+h5 {
+  font-size: calc(8px + 0.5vw);
+}
+
+.list-group-item {
+  margin: 0.2vw;
+  border-radius: 1vw;
+}
+
+.sort {
+  background-color: #eeeeee;
+  border-radius: 0.5vw;
+}
+
+.icon {
+  padding-right: 0.2vw;
+}
+
+.card {
+  display: inline-block;
+  padding: 1vw;
+  background-color: #eeeeee;
+}
+
+.card-img-top {
+  height: 10vw;
+  width: 100%;
+  object-fit: cover;
+  border: 1px solid #cccccc;
+}
