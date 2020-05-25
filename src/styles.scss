@@ -3,9 +3,15 @@
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
+@font-face {
+  font-family: "Lora";
+  src: url(./assets/fonts/Lora-Regular.ttf) format("truetype");
+}
+
 body {
   margin: auto;
   max-width: 1024px;
+  font-family: "Lora", sans-serif;
 }
 
 h1 {
