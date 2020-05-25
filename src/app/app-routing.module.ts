@@ -6,9 +6,11 @@ import { ProductListComponent } from './component/product-list/product-list.comp
 import { ManufacturerListComponent } from './component/manufacturer-list/manufacturer-list.component';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ShopComponent } from './component/shop/shop.component';
+import { CheckoutComponent } from './component/checkout/checkout.component';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'order-list', component: OrderListComponent },
   { path: 'order-detail/:id', component: OrderDetailComponent },
   { path: 'product-list', component: ProductListComponent },

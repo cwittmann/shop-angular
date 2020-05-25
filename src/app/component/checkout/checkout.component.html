@@ -1,0 +1,19 @@
+<div class="d-flex m-4 sort">
+  <h5 class="mr-auto p-2"><b>Checkout</b></h5>
+</div>
+
+<section>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let cartItem of shoppingCart">
+      <div class="d-flex w-100 justify-content-between">
+        <small>{{ cartItem.manufacturerName }}</small>
+
+        <h5>{{ cartItem.price | currency }}</h5>
+      </div>
+      <div class="d-flex w-100 justify-content-between">
+        <h5>{{ cartItem.name }} ({{ cartItem.description }})</h5>
+      </div>
+    </li>
+  </ul>
+  <a class="btn btn-primary text-white">Confirm</a>
+</section>

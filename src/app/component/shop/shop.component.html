@@ -1,6 +1,6 @@
 <div class="d-flex m-4 sort">
   <h5 class="mr-auto p-2"><b>Shop</b></h5>
-  <a href="#" class="btn btn-primary cart"
+  <a [routerLink]="['/checkout']" class="btn btn-primary cart"
     ><img class="icon" src="../../../assets/icons/shopping-cart.png" />{{
       shoppingCart.length
     }}
@@ -19,15 +19,15 @@
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text">{{ product.description }}</p>
       <a
-        *ngIf="!shoppingCart.includes(product.id)"
+        *ngIf="!shoppingCart.includes(product)"
         class="btn btn-primary text-white"
-        (click)="addToCart(product.id)"
+        (click)="addToCart(product)"
         >Order</a
       >
       <a
-        *ngIf="shoppingCart.includes(product.id)"
+        *ngIf="shoppingCart.includes(product)"
         class="btn btn-danger text-white"
-        (click)="removeFromCart(product.id)"
+        (click)="removeFromCart(product)"
         >Remove</a
       >
     </div>

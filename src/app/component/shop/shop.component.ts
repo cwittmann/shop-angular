@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
-import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/model/Product';
 
 @Component({
@@ -13,7 +12,7 @@ export class ShopComponent implements OnInit {
     return this.storeService.products;
   }
 
-  get shoppingCart(): string[] {
+  get shoppingCart(): Product[] {
     return this.storeService.shoppingCart;
   }
 
@@ -21,13 +20,13 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  addToCart(productId: string) {
-    if (!this.shoppingCart.includes(productId)) {
-      this.shoppingCart.push(productId);
+  addToCart(product: Product) {
+    if (!this.shoppingCart.includes(product)) {
+      this.shoppingCart.push(product);
     }
   }
 
-  removeFromCart(productId: string) {
-    this.shoppingCart.splice(this.shoppingCart.indexOf(productId), 1);
+  removeFromCart(product: Product) {
+    this.shoppingCart.splice(this.shoppingCart.indexOf(product), 1);
   }
 }

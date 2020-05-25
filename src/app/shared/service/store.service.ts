@@ -16,7 +16,8 @@ export class StoreService {
   products: Product[] = [];
   orderLines: OrderLine[] = [];
   users: User[] = [];
-  shoppingCart: string[] = [];
+
+  shoppingCart: Product[] = [];
 
   constructor(private backendService: BackendService) {}
 
