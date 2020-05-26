@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/shared/model/Order';
 import { StoreService } from 'src/app/shared/service/store.service';
+import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
+import { OrderLineViewModel } from 'src/app/shared/model/OrderLineViewModel';
 
 @Component({
   selector: 'app-order-detail',
@@ -8,7 +9,7 @@ import { StoreService } from 'src/app/shared/service/store.service';
   styleUrls: ['./order-detail.component.scss'],
 })
 export class OrderDetailComponent implements OnInit {
-  get order(): Order {
+  get order(): OrderViewModel {
     return this.storeService.currentOrder;
   }
 

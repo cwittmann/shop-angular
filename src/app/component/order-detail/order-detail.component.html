@@ -17,7 +17,7 @@
       <div>
         <small>{{ orderLine.amount }} x </small>
         <b class="text-primary">{{ orderLine.manufacturerName }}</b>
-        {{ orderLine.productName }} ({{ orderLine.productDescription }})
+        {{ orderLine.product.name }} ({{ orderLine.product.description }})
       </div>
 
       <div>{{ orderLine.totalPrice | currency }}</div>

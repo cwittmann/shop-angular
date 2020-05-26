@@ -4,18 +4,7 @@ export class OrderLine {
   public productId: string;
   public amount: number;
 
-  public manufacturerName: string;
-
-  public productName: string;
-  public productDescription: string;
-  public totalPrice: number;
-
-  public OrderLine(
-    id: string,
-    orderId: string,
-    productId: string,
-    amount: number
-  ) {
+  constructor(id: string, orderId: string, productId: string, amount: number) {
     this.id = id;
     this.orderId = orderId;
     this.productId = productId;

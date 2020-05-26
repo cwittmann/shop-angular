@@ -1,4 +1,4 @@
-export class Manufacturer {
+export class ManufacturerViewModel {
   id: string;
   name: string;
 

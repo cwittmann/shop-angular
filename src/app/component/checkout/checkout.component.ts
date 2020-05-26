@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
-import { Product } from 'src/app/shared/model/Product';
+import { Order } from 'src/app/shared/model/Order';
+import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
 
 @Component({
   selector: 'app-checkout',
@@ -8,8 +9,10 @@ import { Product } from 'src/app/shared/model/Product';
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
-  get shoppingCart(): Product[] {
-    return this.storeService.shoppingCart;
+  get shoppingCart(): OrderViewModel {
+    let shoppingCart = this.storeService.shoppingCart;
+    shoppingCart.calculatePrices();
+    return shoppingCart;
   }
 
   constructor(private storeService: StoreService) {}

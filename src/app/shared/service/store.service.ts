@@ -1,32 +1,58 @@
 import { Injectable } from '@angular/core';
 import { Order } from '../model/Order';
 import { BackendService } from './backend.service';
-import { OrderLine } from '../model/OrderLine';
-import { User } from '../model/User';
-import { Product } from '../model/Product';
-import { Manufacturer } from '../model/Manufacturer';
+import { v4 as uuidv4 } from 'uuid';
+import { OrderStatus } from '../enum/OrderStatus';
+import { OrderViewModel } from '../model/OrderViewModel';
+import { ManufacturerViewModel } from '../model/ManufacturerViewModel';
+import { ProductViewModel } from '../model/ProductViewModel';
+import { OrderLineViewModel } from '../model/OrderLineViewModel';
+import { UserViewModel } from '../model/UserViewModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
-  orders: Order[] = [];
-  currentOrder: Order = new Order();
-  manufacturers: Manufacturer[] = [];
-  products: Product[] = [];
-  orderLines: OrderLine[] = [];
-  users: User[] = [];
+  orders: OrderViewModel[] = [];
+  currentOrder: OrderViewModel;
+  manufacturers: ManufacturerViewModel[] = [];
+  products: ProductViewModel[] = [];
+  orderLines: OrderLineViewModel[] = [];
+  users: UserViewModel[] = [];
+  currentUser: UserViewModel;
 
-  shoppingCart: Product[] = [];
+  shoppingCart: OrderViewModel;
 
   constructor(private backendService: BackendService) {}
 
-  async loadOrders() {
-    this.orders = await this.backendService.loadOrders();
-    this.users = await this.backendService.loadUsers();
-    this.manufacturers = await this.backendService.loadManufacturers();
-    this.products = await this.backendService.loadProducts();
-    this.orderLines = await this.backendService.loadOrderLines();
+  async initialize() {
+    await this.loadUser();
+    await this.initializeShoppingCart();
+    this.loadOrders();
+  }
+
+  private async loadUser() {
+    this.currentUser = await this.backendService.loadUser(
+      '9b4fb2f7-5b02-425a-8818-181d3488a25e'
+    );
+  }
+
+  private initializeShoppingCart() {
+    this.shoppingCart = new OrderViewModel(
+      uuidv4(),
+      new Date(),
+      OrderStatus.Created,
+      [],
+      this.currentUser
+    );
+  }
+
+  private async loadOrders() {
+    this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
+    this.users = (await this.backendService.loadUsers()) as UserViewModel[];
+    this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
+    this.products = (await this.backendService.loadProducts()) as ProductViewModel[];
+    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
 
     this.appendUsers();
     this.appendManufacturers();
@@ -36,7 +62,8 @@ export class StoreService {
   }
 
   async loadOrder(id: string) {
-    this.currentOrder = this.orders.find((order) => order.id === id);
+    this.currentOrder = await this.orders.find((order) => order.id === id);
+    this.currentOrder.calculatePrices();
   }
 
   private appendUsers() {
@@ -51,7 +78,7 @@ export class StoreService {
       let manufacturer = this.manufacturers.find(
         (manufacturer) => manufacturer.id === product.manufacturerId
       );
-      product.manufacturerName = manufacturer.name;
+      product.manufacturer = manufacturer;
     }
   }
 
@@ -60,10 +87,7 @@ export class StoreService {
       let product = this.products.find(
         (product) => product.id === orderLine.productId
       );
-      orderLine.manufacturerName = product.manufacturerName;
-      orderLine.productName = product.name;
-      orderLine.productDescription = product.description;
-      orderLine.totalPrice = orderLine.amount * Number(product.price);
+      orderLine.product = product;
     }
   }
 

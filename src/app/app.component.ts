@@ -12,6 +12,6 @@ export class AppComponent {
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    this.storeService.loadOrders();
+    this.storeService.initialize();
   }
 }

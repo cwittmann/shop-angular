@@ -2,7 +2,7 @@
   <h5 class="mr-auto p-2"><b>Shop</b></h5>
   <a [routerLink]="['/checkout']" class="btn btn-primary cart"
     ><img class="icon" src="../../../assets/icons/shopping-cart.png" />{{
-      shoppingCart.length
+      shoppingCart.orderLines.length
     }}
     items</a
   >
@@ -21,13 +21,13 @@
         <small>{{ product.description }}</small>
       </p>
       <a
-        *ngIf="!shoppingCart.includes(product)"
+        *ngIf="!isInOrder(product)"
         class="btn btn-primary text-white"
         (click)="addToCart(product)"
         >Order</a
       >
       <a
-        *ngIf="shoppingCart.includes(product)"
+        *ngIf="isInOrder(product)"
         class="btn btn-danger text-white"
         (click)="removeFromCart(product)"
         >Remove</a

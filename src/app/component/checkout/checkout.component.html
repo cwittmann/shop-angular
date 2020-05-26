@@ -4,14 +4,19 @@
 
 <section>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let cartItem of shoppingCart">
+    <li
+      class="list-group-item"
+      *ngFor="let orderLine of shoppingCart.orderLines"
+    >
       <div class="d-flex w-100 justify-content-between">
-        <small>{{ cartItem.manufacturerName }}</small>
+        <small>{{ orderLine.product.manufacturer.name }}</small>
 
-        <h5>{{ cartItem.price | currency }}</h5>
+        <h5>{{ orderLine.totalPrice | currency }}</h5>
       </div>
       <div class="d-flex w-100 justify-content-between">
-        <h5>{{ cartItem.name }} ({{ cartItem.description }})</h5>
+        <h5>
+          {{ orderLine.product.name }} ({{ orderLine.product.description }})
+        </h5>
       </div>
     </li>
   </ul>

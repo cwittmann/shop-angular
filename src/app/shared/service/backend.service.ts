@@ -18,12 +18,6 @@ export class BackendService {
       .toPromise();
   }
 
-  async loadOrder(id: String): Promise<Order> {
-    return await this.httpClient
-      .get<Order>('http://localhost:8000/orders/' + id)
-      .toPromise();
-  }
-
   async loadOrderLines(): Promise<OrderLine[]> {
     return await this.httpClient
       .get<OrderLine[]>('http://localhost:8000/orderLines')
@@ -33,6 +27,12 @@ export class BackendService {
   async loadUsers(): Promise<User[]> {
     return await this.httpClient
       .get<User[]>('http://localhost:8000/users')
+      .toPromise();
+  }
+
+  async loadUser(id: string): Promise<User> {
+    return await this.httpClient
+      .get<User>('http://localhost:8000/users/' + id)
       .toPromise();
   }
 
