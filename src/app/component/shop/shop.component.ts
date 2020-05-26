@@ -34,10 +34,16 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isInOrder(product: Product) {
+  isInOrder(productId: string) {
     return this.shoppingCart.orderLines.some(
-      (orderLine) => orderLine.productId === product.id
+      (orderLine) => orderLine.productId === productId
     );
+  }
+
+  getAmount(productId: string) {
+    return this.shoppingCart.orderLines.find(
+      (orderLine) => orderLine.productId === productId
+    ).amount;
   }
 
   addToCart(product: Product) {

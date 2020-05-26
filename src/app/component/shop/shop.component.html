@@ -24,7 +24,7 @@
         {{ product.price | currency }}
       </p>
       <select
-        *ngIf="!isInOrder(product)"
+        *ngIf="!isInOrder(product.id)"
         class="form-control numberSelect"
         [id]="product.id"
         #linkRef
@@ -34,18 +34,18 @@
         }}</option>
       </select>
       <button
-        *ngIf="!isInOrder(product)"
+        *ngIf="!isInOrder(product.id)"
         class="btn btn-primary text-white"
         (click)="addToCart(product)"
       >
         Order
       </button>
       <button
-        *ngIf="isInOrder(product)"
+        *ngIf="isInOrder(product.id)"
         class="btn btn-danger text-white"
         (click)="removeFromCart(product)"
       >
-        Remove
+        Remove ({{ getAmount(product.id) }})
       </button>
     </div>
   </div>
