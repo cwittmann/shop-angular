@@ -20,18 +20,33 @@
       <p class="card-text">
         <small>{{ product.description }}</small>
       </p>
-      <a
+      <p class="card-text">
+        {{ product.price | currency }}
+      </p>
+      <select
+        *ngIf="!isInOrder(product)"
+        class="form-control numberSelect"
+        [id]="product.id"
+        #linkRef
+      >
+        <option *ngFor="let number of numbers" [value]="number">{{
+          number
+        }}</option>
+      </select>
+      <button
         *ngIf="!isInOrder(product)"
         class="btn btn-primary text-white"
         (click)="addToCart(product)"
-        >Order</a
       >
-      <a
+        Order
+      </button>
+      <button
         *ngIf="isInOrder(product)"
         class="btn btn-danger text-white"
         (click)="removeFromCart(product)"
-        >Remove</a
       >
+        Remove
+      </button>
     </div>
   </div>
 </section>

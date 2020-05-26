@@ -13,6 +13,7 @@ import { ManufacturerListComponent } from './component/manufacturer-list/manufac
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ShopComponent } from './component/shop/shop.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { CheckoutComponent } from './component/checkout/checkout.component';
     HttpClientModule,
     SharedModule,
     NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

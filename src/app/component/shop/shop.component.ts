@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  ViewChild,
+} from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { Product } from 'src/app/shared/model/Product';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,6 +18,10 @@ import { OrderLineViewModel } from 'src/app/shared/model/OrderLineViewModel';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
+  numbers: Number[] = [1, 2, 3];
+
+  @ViewChildren('linkRef') linkRefs;
+
   get products(): ProductViewModel[] {
     return this.storeService.products;
   }
@@ -31,6 +41,10 @@ export class ShopComponent implements OnInit {
   }
 
   addToCart(product: Product) {
+    let amount = this.linkRefs.find(
+      (linkRef) => linkRef.nativeElement.id === product.id
+    ).nativeElement.value;
+
     if (
       !this.shoppingCart.orderLines.find(
         (orderLine) => orderLine.productId === product.id
@@ -39,7 +53,7 @@ export class ShopComponent implements OnInit {
       let orderLine: OrderLineViewModel = new OrderLineViewModel(
         uuidv4(),
         this.shoppingCart.id,
-        1,
+        amount,
         product
       );
       this.shoppingCart.orderLines.push(orderLine);
