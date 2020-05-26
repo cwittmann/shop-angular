@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
-import { OrderLineViewModel } from 'src/app/shared/model/OrderLineViewModel';
 
 @Component({
   selector: 'app-order-detail',
@@ -10,7 +9,9 @@ import { OrderLineViewModel } from 'src/app/shared/model/OrderLineViewModel';
 })
 export class OrderDetailComponent implements OnInit {
   get order(): OrderViewModel {
-    return this.storeService.currentOrder;
+    let currentOrder = this.storeService.currentOrder;
+    currentOrder.calculatePrices();
+    return currentOrder;
   }
 
   constructor(private storeService: StoreService) {}

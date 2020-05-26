@@ -8,6 +8,7 @@ import { ManufacturerViewModel } from '../model/ManufacturerViewModel';
 import { ProductViewModel } from '../model/ProductViewModel';
 import { OrderLineViewModel } from '../model/OrderLineViewModel';
 import { UserViewModel } from '../model/UserViewModel';
+import { OrderLine } from '../model/OrderLine';
 
 @Injectable({
   providedIn: 'root',
@@ -62,8 +63,28 @@ export class StoreService {
   }
 
   async loadOrder(id: string) {
-    this.currentOrder = await this.orders.find((order) => order.id === id);
-    this.currentOrder.calculatePrices();
+    let loadedOrder = await this.orders.find((order) => order.id === id);
+
+    let currentOrderLines: OrderLineViewModel[] = [];
+
+    for (let orderLine of loadedOrder.orderLines) {
+      let currentOrderLine = new OrderLineViewModel(
+        orderLine.id,
+        orderLine.orderId,
+        orderLine.amount,
+        orderLine.product
+      );
+
+      currentOrderLines.push(currentOrderLine);
+    }
+
+    this.currentOrder = new OrderViewModel(
+      loadedOrder.id,
+      loadedOrder.date,
+      loadedOrder.status,
+      currentOrderLines,
+      loadedOrder.user
+    );
   }
 
   private appendUsers() {

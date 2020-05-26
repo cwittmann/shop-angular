@@ -17,8 +17,8 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  loadOrder(id: string) {
-    this.storeService.loadOrder(id);
+  async loadOrder(id: string) {
+    await this.storeService.loadOrder(id);
     this.router.navigate(['/order-detail/', id]);
   }
 }
