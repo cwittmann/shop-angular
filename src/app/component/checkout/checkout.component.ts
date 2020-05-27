@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
 import { ModelConverterService } from 'src/app/shared/service/model-converter.service';
-import { BackendService } from 'src/app/shared/service/backend.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -10,6 +10,9 @@ import { BackendService } from 'src/app/shared/service/backend.service';
   styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
+  isSaved: boolean = false;
+  subscription: Subscription;
+
   get shoppingCart(): OrderViewModel {
     let shoppingCart = this.storeService.shoppingCart;
     shoppingCart.calculatePrices();
@@ -18,14 +21,22 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    private backendService: BackendService,
     private modelConverterService: ModelConverterService
-  ) {}
+  ) {
+    this.subscription = this.modelConverterService.savedSuccessfully.subscribe(
+      () => {
+        this.isSaved = true;
+      }
+    );
+  }
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   async confirm() {
-    await this.modelConverterService.convertOrderViewModelToModels();
-    this.backendService.saveOrder(this.storeService.shoppingCart);
+    this.storeService.saveOrder();
   }
 }

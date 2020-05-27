@@ -2,7 +2,7 @@
   <h5 class="mr-auto p-2"><b>Checkout</b></h5>
 </div>
 
-<section>
+<section *ngIf="!isSaved">
   <ul class="list-group">
     <li
       class="list-group-item"
@@ -22,4 +22,8 @@
     </li>
   </ul>
   <a class="btn btn-primary text-white" (click)="confirm()">Confirm</a>
+</section>
+
+<section *ngIf="isSaved">
+  <h5>Order saved successfully!</h5>
 </section>

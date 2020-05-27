@@ -1,27 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
-import { StoreService } from './store.service';
 import { BackendService } from './backend.service';
+import { OrderViewModel } from '../model/OrderViewModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModelConverterService {
-  constructor(
-    private storeService: StoreService,
-    private backendService: BackendService
-  ) {}
+  savedSuccessfully: EventEmitter<Boolean>;
 
-  convertOrderViewModelToModels() {
-    let order: Order = this.storeService.shoppingCart as Order;
-    this.backendService.saveOrder(order);
+  constructor(private backendService: BackendService) {
+    this.savedSuccessfully = new EventEmitter<Boolean>();
+  }
 
-    let orderLines: OrderLine[] = this.storeService.shoppingCart
-      .orderLines as OrderLine[];
+  convertAndSave(shoppingCart: OrderViewModel) {
+    try {
+      let order: Order = shoppingCart as Order;
+      this.backendService.saveOrder(order);
 
-    for (let orderLine of orderLines) {
-      this.backendService.saveOrderLine(orderLine);
+      let orderLines: OrderLine[] = shoppingCart.orderLines as OrderLine[];
+
+      for (let orderLine of orderLines) {
+        this.backendService.saveOrderLine(orderLine);
+      }
+
+      this.savedSuccessfully.emit(true);
+    } catch (exception) {
+      console.log('Could not save order:' + exception);
     }
   }
 }

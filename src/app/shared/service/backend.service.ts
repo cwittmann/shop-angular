@@ -18,8 +18,8 @@ export class BackendService {
       .toPromise();
   }
 
-  async saveOrder(order: Order) {
-    await this.httpClient
+  async saveOrder(order: Order): Promise<Order> {
+    return await this.httpClient
       .post<Order>('http://localhost:8000/orders', order)
       .toPromise();
   }

@@ -9,6 +9,7 @@ import { ProductViewModel } from '../model/ProductViewModel';
 import { OrderLineViewModel } from '../model/OrderLineViewModel';
 import { UserViewModel } from '../model/UserViewModel';
 import { OrderLine } from '../model/OrderLine';
+import { ModelConverterService } from './model-converter.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,10 @@ export class StoreService {
 
   shoppingCart: OrderViewModel;
 
-  constructor(private backendService: BackendService) {}
+  constructor(
+    private backendService: BackendService,
+    private modelConverterService: ModelConverterService
+  ) {}
 
   async initialize() {
     await this.loadOrders();
@@ -61,6 +65,10 @@ export class StoreService {
       currentOrderLines,
       loadedOrder.user
     );
+  }
+
+  async saveOrder() {
+    await this.modelConverterService.convertAndSave(this.shoppingCart);
   }
 
   private initializeShoppingCart() {
