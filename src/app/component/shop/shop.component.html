@@ -17,11 +17,13 @@
 
 <section *ngIf="shoppingCart">
   <div class="card" *ngFor="let product of products" style="width: 18rem;">
-    <img
-      [src]="'../../../assets/images/' + product.id + '.jpg'"
-      class="card-img-top"
-      alt="..."
-    />
+    <div class="card-img-container">
+      <img
+        class="card-img-top"
+        [src]="'../../../assets/images/' + product.id + '.png'"
+        alt="..."
+      />
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{ product?.name }}</h5>
       <p class="card-text">
