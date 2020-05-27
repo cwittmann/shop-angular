@@ -18,3 +18,13 @@ h1 {
 section {
   margin: 1vw;
 }
+
+.btn-primary {
+  background-color: #0275d8;
+  border: 0;
+  transition: background-color 0.5s;
+}
+
+.btn-primary:hover {
+  background-color: #d9534f;
+}
