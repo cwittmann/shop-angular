@@ -34,7 +34,7 @@ export class StoreService {
 
   private async loadUser() {
     this.currentUser = await this.backendService.loadUser(
-      '9b4fb2f7-5b02-425a-8818-181d3488a25e'
+      'ef0307a9-2b68-4ff4-ad73-056518297e18'
     );
   }
 
@@ -122,14 +122,6 @@ export class StoreService {
   }
 
   private sortOrders() {
-    for (let order of this.orders) {
-      let dateTypeless: any = order.date;
-      order.date = new Date(
-        dateTypeless.year,
-        dateTypeless.month,
-        dateTypeless.day
-      );
-    }
     this.orders.sort((order1, order2) => (order1.date > order2.date ? 1 : -1));
   }
 }

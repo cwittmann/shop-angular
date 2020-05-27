@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
+import { ModelConverterService } from 'src/app/shared/service/model-converter.service';
+import { BackendService } from 'src/app/shared/service/backend.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,7 +16,16 @@ export class CheckoutComponent implements OnInit {
     return shoppingCart;
   }
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private backendService: BackendService,
+    private modelConverterService: ModelConverterService
+  ) {}
 
   ngOnInit(): void {}
+
+  async confirm() {
+    await this.modelConverterService.convertOrderViewModelToModels();
+    this.backendService.saveOrder(this.storeService.shoppingCart);
+  }
 }

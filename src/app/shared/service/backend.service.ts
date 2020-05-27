@@ -18,6 +18,12 @@ export class BackendService {
       .toPromise();
   }
 
+  async saveOrder(order: Order) {
+    await this.httpClient
+      .post<Order>('http://localhost:8000/orders', order)
+      .toPromise();
+  }
+
   async loadOrderLines(): Promise<OrderLine[]> {
     return await this.httpClient
       .get<OrderLine[]>('http://localhost:8000/orderLines')
