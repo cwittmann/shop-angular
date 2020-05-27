@@ -10,6 +10,7 @@ import { OrderLineViewModel } from '../model/OrderLineViewModel';
 import { UserViewModel } from '../model/UserViewModel';
 import { OrderLine } from '../model/OrderLine';
 import { ModelConverterService } from './model-converter.service';
+import { Manufacturer } from '../model/Manufacturer';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +70,18 @@ export class StoreService {
 
   async saveOrder() {
     await this.modelConverterService.convertAndSave(this.shoppingCart);
+  }
+
+  async postManufacturer(manufacturer: Manufacturer) {
+    await this.backendService.postManufacturer(manufacturer);
+  }
+
+  async putManufacturer(manufacturer: Manufacturer) {
+    await this.backendService.putManufacturer(manufacturer);
+  }
+
+  async deleteManufacturer(id: string) {
+    await this.backendService.deleteManufacturer(id);
   }
 
   private initializeShoppingCart() {

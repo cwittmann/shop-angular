@@ -59,4 +59,25 @@ export class BackendService {
       .get<Manufacturer[]>('http://localhost:8000/manufacturers')
       .toPromise();
   }
+
+  async postManufacturer(manufacturer: Manufacturer): Promise<Manufacturer> {
+    return await this.httpClient
+      .post<Manufacturer>('http://localhost:8000/manufacturers', manufacturer)
+      .toPromise();
+  }
+
+  async putManufacturer(manufacturer: Manufacturer): Promise<Manufacturer> {
+    return await this.httpClient
+      .put<Manufacturer>(
+        'http://localhost:8000/manufacturers/' + manufacturer.id,
+        manufacturer
+      )
+      .toPromise();
+  }
+
+  async deleteManufacturer(id: string) {
+    return await this.httpClient
+      .delete<Manufacturer>('http://localhost:8000/manufacturers/' + id)
+      .toPromise();
+  }
 }

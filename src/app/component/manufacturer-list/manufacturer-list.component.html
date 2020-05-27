@@ -6,7 +6,21 @@
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let manufacturer of manufacturers">
       <div class="d-flex w-100 justify-content-between">
-        <h5>{{ manufacturer.name }}</h5>
+        <input type="text" [(ngModel)]="manufacturer.name" />
+        <button class="ml-auto" (click)="saveEditedInput(manufacturer)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="deleteInput(manufacturer.id)">
+          <img src="../../../assets/icons/delete.png" />
+        </button>
+      </div>
+    </li>
+    <li class="list-group-item new">
+      <div class="d-flex w-100 justify-content-between">
+        <input type="text" [(ngModel)]="newManufacturer.name" />
+        <button class="ml-auto" (click)="saveNewInput(newManufacturer)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
       </div>
     </li>
   </ul>
