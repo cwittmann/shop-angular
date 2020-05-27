@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { Product } from 'src/app/shared/model/Product';
 import { v4 as uuidv4 } from 'uuid';
