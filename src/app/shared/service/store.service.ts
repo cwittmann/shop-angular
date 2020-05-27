@@ -27,39 +27,15 @@ export class StoreService {
   constructor(private backendService: BackendService) {}
 
   async initialize() {
+    await this.loadOrders();
     await this.loadUser();
-    await this.initializeShoppingCart();
-    this.loadOrders();
+    this.initializeShoppingCart();
   }
 
-  private async loadUser() {
-    this.currentUser = await this.backendService.loadUser(
-      'ef0307a9-2b68-4ff4-ad73-056518297e18'
-    );
-  }
-
-  private initializeShoppingCart() {
-    this.shoppingCart = new OrderViewModel(
-      uuidv4(),
-      new Date(),
-      OrderStatus.Created,
-      [],
-      this.currentUser
-    );
-  }
-
-  private async loadOrders() {
-    this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
-    this.users = (await this.backendService.loadUsers()) as UserViewModel[];
-    this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
-    this.products = (await this.backendService.loadProducts()) as ProductViewModel[];
-    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
-
-    this.appendUsers();
-    this.appendManufacturers();
-    this.appendProducts();
-    this.appendOrderLines();
-    this.sortOrders();
+  loadUser() {
+    let numberOfUsers = this.users.length;
+    let randomNumber = Math.floor(Math.random() * Math.floor(numberOfUsers));
+    this.currentUser = this.users[randomNumber];
   }
 
   async loadOrder(id: string) {
@@ -85,6 +61,30 @@ export class StoreService {
       currentOrderLines,
       loadedOrder.user
     );
+  }
+
+  private initializeShoppingCart() {
+    this.shoppingCart = new OrderViewModel(
+      uuidv4(),
+      new Date(),
+      OrderStatus.Created,
+      [],
+      this.currentUser
+    );
+  }
+
+  private async loadOrders() {
+    this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
+    this.users = (await this.backendService.loadUsers()) as UserViewModel[];
+    this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
+    this.products = (await this.backendService.loadProducts()) as ProductViewModel[];
+    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
+
+    this.appendUsers();
+    this.appendManufacturers();
+    this.appendProducts();
+    this.appendOrderLines();
+    this.sortOrders();
   }
 
   private appendUsers() {

@@ -1,14 +1,21 @@
-<div class="d-flex m-4 sort">
+<div *ngIf="shoppingCart" class="d-flex m-4 sort">
   <h5 class="mr-auto p-2"><b>Shop</b></h5>
-  <a [routerLink]="['/checkout']" class="btn btn-primary cart"
+  <a
+    *ngIf="shoppingCart.orderLines.length > 0"
+    [routerLink]="['/checkout']"
+    class="btn btn-primary cart"
     ><img class="icon" src="../../../assets/icons/shopping-cart.png" />{{
-      shoppingCart.orderLines.length
+      shoppingCart?.orderLines?.length
     }}
+    items</a
+  >
+  <a *ngIf="shoppingCart.orderLines.length == 0" class="btn btn-primary cart"
+    ><img class="icon" src="../../../assets/icons/shopping-cart.png" />0
     items</a
   >
 </div>
 
-<section>
+<section *ngIf="shoppingCart">
   <div class="card" *ngFor="let product of products" style="width: 18rem;">
     <img
       [src]="'../../../assets/images/' + product.id + '.jpg'"
@@ -16,12 +23,12 @@
       alt="..."
     />
     <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
+      <h5 class="card-title">{{ product?.name }}</h5>
       <p class="card-text">
-        <small>{{ product.description }}</small>
+        <small>{{ product?.description }}</small>
       </p>
       <p class="card-text">
-        {{ product.price | currency }}
+        {{ product?.price | currency }}
       </p>
       <select
         *ngIf="!isInOrder(product.id)"
@@ -45,8 +52,11 @@
         class="btn btn-danger text-white"
         (click)="removeFromCart(product)"
       >
-        Remove ({{ getAmount(product.id) }})
+        Remove ({{ getAmount(product?.id) }})
       </button>
     </div>
   </div>
+</section>
+<section *ngIf="!shoppingCart">
+  <h5>Loading...</h5>
 </section>

@@ -1,16 +1,22 @@
-<ul ngbNav class="nav-tabs">
-  <h5 class="p-2" [routerLink]="['/shop']">Shop</h5>
-  <li ngbNavItem>
-    <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
-  </li>
-  <li ngbNavItem>
-    <a ngbNavLink [routerLink]="['/product-list']">Products</a>
-  </li>
-  <li ngbNavItem>
-    <a ngbNavLink [routerLink]="['/manufacturer-list']">Manufacturers</a>
-  </li>
-  <li ngbNavItem>
-    <a ngbNavLink [routerLink]="['/user-list']">Users</a>
-  </li>
-</ul>
+<nav class="navbar">
+  <ul ngbNav class="nav-tabs mr-auto">
+    <h5 [routerLink]="['/shop']">Shop</h5>
+    <li ngbNavItem>
+      <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink [routerLink]="['/product-list']">Products</a>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink [routerLink]="['/manufacturer-list']">Manufacturers</a>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink [routerLink]="['/user-list']">Users</a>
+    </li>
+  </ul>
+  <span class="navbar-text" (click)="changeUser()">
+    {{ currentUser?.firstName }} {{ currentUser?.lastName }}
+  </span>
+</nav>
+
 <router-outlet></router-outlet>

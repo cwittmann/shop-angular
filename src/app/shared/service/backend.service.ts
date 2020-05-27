@@ -30,6 +30,12 @@ export class BackendService {
       .toPromise();
   }
 
+  async saveOrderLine(orderLine: OrderLine) {
+    await this.httpClient
+      .post<OrderLine>('http://localhost:8000/orderLines', orderLine)
+      .toPromise();
+  }
+
   async loadUsers(): Promise<User[]> {
     return await this.httpClient
       .get<User[]>('http://localhost:8000/users')
