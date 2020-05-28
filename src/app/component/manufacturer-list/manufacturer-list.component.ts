@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ManufacturerListComponent implements OnInit {
   newManufacturer: Manufacturer;
+  showNew: boolean = false;
 
   get manufacturers(): Manufacturer[] {
     return this.storeService.manufacturers;
@@ -20,6 +21,10 @@ export class ManufacturerListComponent implements OnInit {
 
   ngOnInit(): void {
     this.newManufacturer = new Manufacturer(uuidv4(), 'New manufacturer');
+  }
+
+  toggleNew() {
+    this.showNew = !this.showNew;
   }
 
   async saveEditedInput(manufacturer: Manufacturer) {
