@@ -19,8 +19,6 @@ img {
 }
 
 .sort {
-  background-color: #eeeeee;
-  border-radius: 0.5vw;
 }
 
 .new {
@@ -30,4 +28,12 @@ img {
 button {
   background: none;
   border: none;
+}
+
+.btn-primary {
+  color: white;
+}
+
+.btn-primary:hover {
+  color: white;
 }
