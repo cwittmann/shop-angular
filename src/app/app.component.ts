@@ -9,6 +9,7 @@ import { User } from './shared/model/User';
 })
 export class AppComponent {
   title = 'shop';
+  finishedLoading: boolean = false;
 
   get currentUser(): User {
     return this.storeService.currentUser;
@@ -16,8 +17,9 @@ export class AppComponent {
 
   constructor(private storeService: StoreService) {}
 
-  ngOnInit(): void {
-    this.storeService.initialize();
+  async ngOnInit(): Promise<void> {
+    await this.storeService.initialize();
+    this.finishedLoading = true;
   }
 
   changeUser() {

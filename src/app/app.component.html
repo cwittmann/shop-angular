@@ -1,7 +1,7 @@
-<nav class="navbar">
+<nav *ngIf="finishedLoading" class="navbar">
   <ul ngbNav class="nav-tabs mr-auto">
     <h5 [routerLink]="['/shop']">Shop</h5>
-    <li ngbNavItem *ngIf="['order', 'read'] | rights">
+    <li ngbNavItem *ngIf="['Order', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
     </li>
     <li ngbNavItem>

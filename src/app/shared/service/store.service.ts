@@ -39,10 +39,12 @@ export class StoreService {
     private orderService: OrderService
   ) {}
 
-  async initialize() {
+  async initialize(): Promise<boolean> {
     await this.loadOrders();
     await this.loadUser();
-    this.initializeShoppingCart();
+    await this.initializeShoppingCart();
+
+    return true;
   }
 
   async reload() {
@@ -205,7 +207,7 @@ export class StoreService {
       let user = this.users.find((user) => user.id === userRight.userId);
       let right = this.rights.find((right) => right.id === userRight.rightId);
 
-      if (user.rights === undefined) {
+      if (!user.rights) {
         user.rights = [];
       }
       user.rights.push(right);
@@ -215,6 +217,9 @@ export class StoreService {
   private appendUsers() {
     for (let order of this.orders) {
       let user = this.users.find((user) => user.id === order.userId);
+      if (!user.rights) {
+        user.rights = [];
+      }
       order.user = user;
     }
   }
