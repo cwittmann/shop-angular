@@ -11,6 +11,7 @@ import { OrderService } from './order.service';
 import { Manufacturer } from '../model/Manufacturer';
 import { User } from '../model/User';
 import { Product } from '../model/Product';
+import { Order } from '../model/Order';
 
 @Injectable({
   providedIn: 'root',
@@ -68,17 +69,24 @@ export class StoreService {
     );
   }
 
-  async postOrder() {
+  async postOrderViewModel() {
     await this.orderService.postOrder(this.shoppingCart);
     this.shoppingCart.clear(this.currentUser);
   }
 
-  async putOrder(order: OrderViewModel) {
+  async putOrderViewModel(order: OrderViewModel) {
     await this.orderService.putOrder(order);
   }
 
-  async deleteOrder(order: OrderViewModel) {
+  async putOrder(order: Order) {
+    await this.backendService.putOrder(order);
+  }
+
+  async deleteOrderViewModel(order: OrderViewModel) {
     await this.orderService.deleteOrder(order);
+  }
+  async deleteOrder(id: string) {
+    await this.backendService.deleteOrder(id);
   }
 
   async postProduct(product: Product) {
@@ -176,6 +184,6 @@ export class StoreService {
   }
 
   private sortOrders() {
-    this.orders.sort((order1, order2) => (order1.date > order2.date ? 1 : -1));
+    this.orders.sort((order1, order2) => (order1.date < order2.date ? 1 : -1));
   }
 }

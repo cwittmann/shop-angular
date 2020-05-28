@@ -1,18 +1,67 @@
-<div class="d-flex m-4 sort">
+<div class="d-flex sort">
   <h5 class="mr-auto p-2"><b>Products</b></h5>
 </div>
 
-<section>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let product of products">
-      <div class="d-flex w-100 justify-content-between">
-        <small>{{ product.manufacturer.name }}</small>
-
-        <h5>{{ product.price | currency }}</h5>
-      </div>
-      <div class="d-flex w-100 justify-content-between">
-        <h5>{{ product.name }} ({{ product.description }})</h5>
-      </div>
-    </li>
-  </ul>
-</section>
+<table class="table table-hover">
+  <thead class="">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Manufacturer</th>
+      <th>Price</th>
+      <th>
+        <a
+          *ngIf="!showNew"
+          class="btn btn-primary ml-auto"
+          (click)="toggleNew()"
+        >
+          Add Product
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="showNew" class="table-primary">
+      <td><input type="text" [(ngModel)]="newProduct.name" /></td>
+      <td><input type="text" [(ngModel)]="newProduct.description" /></td>
+      <select [(ngModel)]="newProduct.manufacturerId">
+        <option
+          *ngFor="let manufacturer of manufacturers"
+          [value]="manufacturer.id"
+          >{{ manufacturer.name }}</option
+        >
+      </select>
+      <td><input type="text" [(ngModel)]="newProduct.price" /></td>
+      <td>
+        <button class="ml-auto" (click)="saveNewInput(newProduct)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="toggleNew()">
+          <img src="../../../assets/icons/cancel.png" />
+        </button>
+      </td>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td><input type="text" [(ngModel)]="product.name" /></td>
+      <td><input type="text" [(ngModel)]="product.description" /></td>
+      <td>
+        <select [(ngModel)]="product.manufacturerId">
+          <option
+            *ngFor="let manufacturer of manufacturers"
+            [value]="manufacturer.id"
+            >{{ manufacturer.name }}</option
+          >
+        </select>
+      </td>
+      <td><input type="text" [(ngModel)]="product.price" /></td>
+      <td>
+        <button class="ml-auto" (click)="saveEditedInput(product)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="deleteInput(product.id)">
+          <img src="../../../assets/icons/delete.png" />
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

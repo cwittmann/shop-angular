@@ -37,6 +37,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   async confirm() {
-    this.storeService.postOrder();
+    this.storeService.postOrderViewModel();
   }
 }
