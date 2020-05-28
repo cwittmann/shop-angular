@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Order } from '../model/Order';
 import { BackendService } from './backend.service';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderStatus } from '../enum/OrderStatus';
@@ -8,9 +7,10 @@ import { ManufacturerViewModel } from '../model/ManufacturerViewModel';
 import { ProductViewModel } from '../model/ProductViewModel';
 import { OrderLineViewModel } from '../model/OrderLineViewModel';
 import { UserViewModel } from '../model/UserViewModel';
-import { OrderLine } from '../model/OrderLine';
-import { ModelConverterService } from './model-converter.service';
+import { OrderService } from './order.service';
 import { Manufacturer } from '../model/Manufacturer';
+import { User } from '../model/User';
+import { Product } from '../model/Product';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,7 @@ export class StoreService {
 
   constructor(
     private backendService: BackendService,
-    private modelConverterService: ModelConverterService
+    private orderService: OrderService
   ) {}
 
   async initialize() {
@@ -68,8 +68,29 @@ export class StoreService {
     );
   }
 
-  async saveOrder() {
-    await this.modelConverterService.convertAndSave(this.shoppingCart);
+  async postOrder() {
+    await this.orderService.postOrder(this.shoppingCart);
+    this.shoppingCart.clear(this.currentUser);
+  }
+
+  async putOrder(order: OrderViewModel) {
+    await this.orderService.putOrder(order);
+  }
+
+  async deleteOrder(order: OrderViewModel) {
+    await this.orderService.deleteOrder(order);
+  }
+
+  async postProduct(product: Product) {
+    await this.backendService.postProduct(product);
+  }
+
+  async putProduct(product: Product) {
+    await this.backendService.putProduct(product);
+  }
+
+  async deleteProduct(id: string) {
+    await this.backendService.deleteProduct(id);
   }
 
   async postManufacturer(manufacturer: Manufacturer) {
@@ -82,6 +103,18 @@ export class StoreService {
 
   async deleteManufacturer(id: string) {
     await this.backendService.deleteManufacturer(id);
+  }
+
+  async postUser(user: User) {
+    await this.backendService.postUser(user);
+  }
+
+  async putUser(user: User) {
+    await this.backendService.putUser(user);
+  }
+
+  async deleteUser(id: string) {
+    await this.backendService.deleteUser(id);
   }
 
   private initializeShoppingCart() {

@@ -1,13 +1,36 @@
 <div class="d-flex m-4 sort">
   <h5 class="mr-auto p-2"><b>Users</b></h5>
+  <button *ngIf="!showNew" class="ml-auto mr-3" (click)="toggleNew()">
+    <img src="../../../assets/icons/add.png" />
+  </button>
 </div>
 
 <section>
   <ul class="list-group">
+    <li *ngIf="showNew" class="list-group-item new">
+      <div class="d-flex w-100 justify-content-between">
+        <input type="text" [(ngModel)]="newUser.firstName" />
+        <input type="text" [(ngModel)]="newUser.lastName" />
+        <input type="text" [(ngModel)]="newUser.city" />
+        <button class="ml-auto" (click)="saveNewInput(newUser)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="toggleNew()">
+          <img src="../../../assets/icons/cancel.png" />
+        </button>
+      </div>
+    </li>
     <li class="list-group-item" *ngFor="let user of users">
       <div class="d-flex w-100 justify-content-between">
-        <h5>{{ user.firstName }} {{ user.lastName }}</h5>
-        <small>{{ user.city }}</small>
+        <input type="text" [(ngModel)]="user.firstName" />
+        <input type="text" [(ngModel)]="user.lastName" />
+        <input type="text" [(ngModel)]="user.city" />
+        <button class="ml-auto" (click)="saveEditedInput(user)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="deleteInput(user.id)">
+          <img src="../../../assets/icons/delete.png" />
+        </button>
       </div>
     </li>
   </ul>

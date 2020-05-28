@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { Manufacturer } from 'src/app/shared/model/Manufacturer';
 import { v4 as uuidv4 } from 'uuid';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -17,7 +16,7 @@ export class ManufacturerListComponent implements OnInit {
     return this.storeService.manufacturers;
   }
 
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
     this.newManufacturer = new Manufacturer(uuidv4(), 'New manufacturer');

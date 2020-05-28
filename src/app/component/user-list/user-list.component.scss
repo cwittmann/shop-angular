@@ -2,6 +2,17 @@ h5 {
   font-size: calc(8px + 0.5vw);
 }
 
+input {
+  font-size: calc(8px + 0.5vw);
+  background: 0;
+  border: 0;
+}
+
+img {
+  width: 1.5vw;
+  opacity: 0.3;
+}
+
 .list-group-item {
   margin: 0.2vw;
   border-radius: 1vw;
@@ -10,4 +21,13 @@ h5 {
 .sort {
   background-color: #eeeeee;
   border-radius: 0.5vw;
+}
+
+.new {
+  background-color: lightblue;
+}
+
+button {
+  background: none;
+  border: none;
 }

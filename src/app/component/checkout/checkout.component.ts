@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
-import { ModelConverterService } from 'src/app/shared/service/model-converter.service';
+import { OrderService } from 'src/app/shared/service/order.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    private modelConverterService: ModelConverterService
+    private modelConverterService: OrderService
   ) {
     this.subscription = this.modelConverterService.savedSuccessfully.subscribe(
       () => {
@@ -37,6 +37,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   async confirm() {
-    this.storeService.saveOrder();
+    this.storeService.postOrder();
   }
 }

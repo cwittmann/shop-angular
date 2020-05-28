@@ -1,6 +1,7 @@
 import { OrderStatus } from '../enum/OrderStatus';
 import { User } from './User';
 import { OrderLineViewModel } from './OrderLineViewModel';
+import { v4 as uuidv4 } from 'uuid';
 
 export class OrderViewModel {
   id: string;
@@ -24,6 +25,14 @@ export class OrderViewModel {
     this.status = status;
     this.orderLines = orderLines;
     this.user = user;
+  }
+
+  public clear(currentUser: User) {
+    this.id = uuidv4();
+    this.date = new Date();
+    this.status = OrderStatus.Created;
+    this.orderLines = [];
+    this.user = currentUser;
   }
 
   public calculatePrices() {
