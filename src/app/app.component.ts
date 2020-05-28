@@ -21,8 +21,4 @@ export class AppComponent {
     await this.storeService.initialize();
     this.finishedLoading = true;
   }
-
-  changeUser() {
-    this.storeService.loadUser();
-  }
 }
