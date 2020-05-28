@@ -21,7 +21,9 @@ export class ProductListComponent implements OnInit {
     return this.storeService.manufacturers;
   }
 
-  constructor(private storeService: StoreService) {
+  constructor(private storeService: StoreService) {}
+
+  ngOnInit(): void {
     this.newProduct = new Product(
       uuidv4(),
       null,
@@ -31,8 +33,6 @@ export class ProductListComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
-
   toggleNew() {
     this.showNew = !this.showNew;
   }
@@ -40,15 +40,19 @@ export class ProductListComponent implements OnInit {
   async saveEditedInput(product: Product) {
     await this.storeService.putProduct(product);
     this.storeService.reload();
+    this.ngOnInit();
   }
 
   async saveNewInput(newProduct: Product) {
     await this.storeService.postProduct(newProduct);
     this.storeService.reload();
+    this.ngOnInit();
+    this.toggleNew();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteProduct(id);
     this.storeService.reload();
+    this.ngOnInit();
   }
 }

@@ -41,15 +41,19 @@ export class OrderDetailComponent implements OnInit {
   async saveEditedInput(orderLine: OrderLine) {
     await this.storeService.putOrderLine(orderLine);
     this.storeService.reload();
+    this.ngOnInit();
   }
 
   async saveNewInput(newOrderLine: OrderLine) {
     await this.storeService.postOrderLine(newOrderLine);
     this.storeService.reload();
+    this.ngOnInit();
+    this.toggleNew();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteOrderLine(id);
     this.storeService.reload();
+    this.ngOnInit();
   }
 }

@@ -5,6 +5,8 @@ import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
 import { Product } from '../model/Product';
 import { Manufacturer } from '../model/Manufacturer';
+import { Right } from '../model/Right';
+import { UserRight } from '../model/UserRight';
 
 @Injectable({
   providedIn: 'root',
@@ -151,6 +153,73 @@ export class BackendService {
   async deleteUser(id: string) {
     return await this.httpClient
       .delete<User>('http://localhost:8000/users/' + id)
+      .toPromise();
+  }
+
+  // RIGHTS
+
+  async loadRights(): Promise<Right[]> {
+    return await this.httpClient
+      .get<Right[]>('http://localhost:8000/rights')
+      .toPromise();
+  }
+
+  async loadRight(id: string): Promise<Right> {
+    return await this.httpClient
+      .get<Right>('http://localhost:8000/rights/' + id)
+      .toPromise();
+  }
+
+  async postRight(right: Right): Promise<Right> {
+    return await this.httpClient
+      .post<Right>('http://localhost:8000/rights', right)
+      .toPromise();
+  }
+
+  async putRight(right: Right): Promise<Right> {
+    return await this.httpClient
+      .put<Right>('http://localhost:8000/rights/' + right.id, right)
+      .toPromise();
+  }
+
+  async deleteRight(id: string) {
+    return await this.httpClient
+      .delete<Right>('http://localhost:8000/rights/' + id)
+      .toPromise();
+  }
+
+  // USER RIGHTS
+
+  async loadUserRights(): Promise<UserRight[]> {
+    return await this.httpClient
+      .get<UserRight[]>('http://localhost:8000/userRights')
+      .toPromise();
+  }
+
+  async loadUserRight(id: string): Promise<UserRight> {
+    return await this.httpClient
+      .get<UserRight>('http://localhost:8000/userRights/' + id)
+      .toPromise();
+  }
+
+  async postUserRight(userRight: UserRight): Promise<UserRight> {
+    return await this.httpClient
+      .post<UserRight>('http://localhost:8000/userRights', userRight)
+      .toPromise();
+  }
+
+  async putUserRight(userRight: UserRight): Promise<UserRight> {
+    return await this.httpClient
+      .put<UserRight>(
+        'http://localhost:8000/userRights/' + userRight.id,
+        userRight
+      )
+      .toPromise();
+  }
+
+  async deleteUserRight(id: string) {
+    return await this.httpClient
+      .delete<UserRight>('http://localhost:8000/userRights/' + id)
       .toPromise();
   }
 }

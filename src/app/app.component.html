@@ -1,7 +1,7 @@
 <nav class="navbar">
   <ul ngbNav class="nav-tabs mr-auto">
     <h5 [routerLink]="['/shop']">Shop</h5>
-    <li ngbNavItem>
+    <li ngbNavItem *ngIf="['order', 'read'] | rights">
       <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
     </li>
     <li ngbNavItem>
@@ -12,6 +12,12 @@
     </li>
     <li ngbNavItem>
       <a ngbNavLink [routerLink]="['/user-list']">Users</a>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink [routerLink]="['/right-list']">Rights</a>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink [routerLink]="['/user-right-list']">User Rights</a>
     </li>
   </ul>
   <span class="navbar-text" (click)="changeUser()">

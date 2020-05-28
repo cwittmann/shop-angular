@@ -29,15 +29,19 @@ export class ManufacturerListComponent implements OnInit {
   async saveEditedInput(manufacturer: Manufacturer) {
     await this.storeService.putManufacturer(manufacturer);
     this.storeService.reload();
+    this.ngOnInit();
   }
 
   async saveNewInput(newManufacturer: Manufacturer) {
     await this.storeService.postManufacturer(newManufacturer);
     this.storeService.reload();
+    this.ngOnInit();
+    this.toggleNew();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteManufacturer(id);
     this.storeService.reload();
+    this.ngOnInit();
   }
 }

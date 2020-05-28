@@ -13,6 +13,10 @@ import { User } from '../model/User';
 import { Product } from '../model/Product';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
+import { Right } from '../model/Right';
+import { RightViewModel } from '../model/RightViewModel';
+import { UserRightViewModel } from '../model/UserRightViewModel';
+import { UserRight } from '../model/UserRight';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +28,8 @@ export class StoreService {
   products: ProductViewModel[] = [];
   orderLines: OrderLineViewModel[] = [];
   users: UserViewModel[] = [];
+  rights: RightViewModel[] = [];
+  userRights: UserRightViewModel[] = [];
   currentUser: UserViewModel;
 
   shoppingCart: OrderViewModel;
@@ -143,6 +149,30 @@ export class StoreService {
     await this.backendService.deleteUser(id);
   }
 
+  async postRight(right: Right) {
+    await this.backendService.postRight(right);
+  }
+
+  async putRight(right: Right) {
+    await this.backendService.putRight(right);
+  }
+
+  async deleteRight(id: string) {
+    await this.backendService.deleteRight(id);
+  }
+
+  async postUserRight(userRight: UserRight) {
+    await this.backendService.postUserRight(userRight);
+  }
+
+  async putUserRight(userRight: UserRight) {
+    await this.backendService.putUserRight(userRight);
+  }
+
+  async deleteUserRight(id: string) {
+    await this.backendService.deleteUserRight(id);
+  }
+
   private initializeShoppingCart() {
     this.shoppingCart = new OrderViewModel(
       uuidv4(),
@@ -155,16 +185,31 @@ export class StoreService {
 
   private async loadOrders() {
     this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
+    this.rights = (await this.backendService.loadRights()) as RightViewModel[];
+    this.userRights = (await this.backendService.loadUserRights()) as UserRightViewModel[];
     this.users = (await this.backendService.loadUsers()) as UserViewModel[];
     this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
     this.products = (await this.backendService.loadProducts()) as ProductViewModel[];
     this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
 
+    this.appendUserRights();
     this.appendUsers();
     this.appendManufacturers();
     this.appendProducts();
     this.appendOrderLines();
     this.sortOrders();
+  }
+
+  private appendUserRights() {
+    for (let userRight of this.userRights) {
+      let user = this.users.find((user) => user.id === userRight.userId);
+      let right = this.rights.find((right) => right.id === userRight.rightId);
+
+      if (user.rights === undefined) {
+        user.rights = [];
+      }
+      user.rights.push(right);
+    }
   }
 
   private appendUsers() {

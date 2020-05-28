@@ -1,0 +1,47 @@
+<div class="d-flex sort">
+  <h5 class="mr-auto p-2"><b>Rights</b></h5>
+</div>
+
+<table class="table table-hover">
+  <thead class="">
+    <tr>
+      <th>Entity</th>
+      <th>Permission</th>
+      <th>
+        <a
+          *ngIf="!showNew"
+          class="btn btn-primary ml-auto"
+          (click)="toggleNew()"
+        >
+          Add Right
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="showNew" class="table-primary">
+      <td><input type="text" [(ngModel)]="newRight.entity" /></td>
+      <td><input type="text" [(ngModel)]="newRight.permission" /></td>
+      <td>
+        <button class="ml-auto" (click)="saveNewInput(newRight)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="toggleNew()">
+          <img src="../../../assets/icons/cancel.png" />
+        </button>
+      </td>
+    </tr>
+    <tr *ngFor="let right of rights">
+      <td><input type="text" [(ngModel)]="right.entity" /></td>
+      <td><input type="text" [(ngModel)]="right.permission" /></td>
+      <td>
+        <button class="ml-auto" (click)="saveEditedInput(right)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="deleteInput(right.id)">
+          <img src="../../../assets/icons/delete.png" />
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

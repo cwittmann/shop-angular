@@ -14,6 +14,9 @@ import { UserListComponent } from './component/user-list/user-list.component';
 import { ShopComponent } from './component/shop/shop.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RightsPipe } from './shared/pipe/rights.pipe';
+import { RightListComponent } from './component/right-list/right-list.component';
+import { UserRightListComponent } from './component/user-right-list/user-right-list.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserListComponent,
     ShopComponent,
     CheckoutComponent,
+    RightsPipe,
+    RightListComponent,
+    UserRightListComponent,
   ],
   imports: [
     BrowserModule,
