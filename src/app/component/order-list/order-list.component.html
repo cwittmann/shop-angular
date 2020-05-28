@@ -22,9 +22,11 @@
         />
       </td>
       <td>
-        <span class="badge badge-primary badge-pill"
-          >{{ order.orderLines?.length }} items</span
-        >
+        <button (click)="loadOrder(order.id)">
+          <span class="badge badge-primary badge-pill"
+            >{{ order.orderLines?.length }} items</span
+          >
+        </button>
       </td>
       <td>
         <select [(ngModel)]="order.userId">

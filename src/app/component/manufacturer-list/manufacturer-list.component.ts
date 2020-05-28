@@ -28,16 +28,16 @@ export class ManufacturerListComponent implements OnInit {
 
   async saveEditedInput(manufacturer: Manufacturer) {
     await this.storeService.putManufacturer(manufacturer);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async saveNewInput(newManufacturer: Manufacturer) {
     await this.storeService.postManufacturer(newManufacturer);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteManufacturer(id);
-    window.location.reload();
+    this.storeService.reload();
   }
 }

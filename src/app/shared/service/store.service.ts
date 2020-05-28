@@ -12,6 +12,7 @@ import { Manufacturer } from '../model/Manufacturer';
 import { User } from '../model/User';
 import { Product } from '../model/Product';
 import { Order } from '../model/Order';
+import { OrderLine } from '../model/OrderLine';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,11 @@ export class StoreService {
   async initialize() {
     await this.loadOrders();
     await this.loadUser();
+    this.initializeShoppingCart();
+  }
+
+  async reload() {
+    await this.loadOrders();
     this.initializeShoppingCart();
   }
 
@@ -87,6 +93,18 @@ export class StoreService {
   }
   async deleteOrder(id: string) {
     await this.backendService.deleteOrder(id);
+  }
+
+  async postOrderLine(orderLine: OrderLine) {
+    await this.backendService.postOrderLine(orderLine);
+  }
+
+  async putOrderLine(orderLine: OrderLine) {
+    await this.backendService.putOrderLine(orderLine);
+  }
+
+  async deleteOrderLine(id: string) {
+    await this.backendService.deleteOrderLine(id);
   }
 
   async postProduct(product: Product) {

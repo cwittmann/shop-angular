@@ -44,11 +44,11 @@ export class OrderListComponent implements OnInit {
   async saveEditedInput(order: Order) {
     console.log(order);
     await this.storeService.putOrder(order);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteOrder(id);
-    window.location.reload();
+    this.storeService.reload();
   }
 }

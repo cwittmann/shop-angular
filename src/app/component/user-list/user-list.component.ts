@@ -28,16 +28,16 @@ export class UserListComponent implements OnInit {
 
   async saveEditedInput(user: User) {
     await this.storeService.putUser(user);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async saveNewInput(newUser: User) {
     await this.storeService.postUser(newUser);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteUser(id);
-    window.location.reload();
+    this.storeService.reload();
   }
 }

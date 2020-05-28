@@ -39,16 +39,16 @@ export class ProductListComponent implements OnInit {
 
   async saveEditedInput(product: Product) {
     await this.storeService.putProduct(product);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async saveNewInput(newProduct: Product) {
     await this.storeService.postProduct(newProduct);
-    window.location.reload();
+    this.storeService.reload();
   }
 
   async deleteInput(id: string) {
     await this.storeService.deleteProduct(id);
-    window.location.reload();
+    this.storeService.reload();
   }
 }

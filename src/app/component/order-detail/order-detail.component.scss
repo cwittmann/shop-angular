@@ -1,9 +1,16 @@
-p {
-  margin: 0;
-}
-
 h5 {
   font-size: calc(8px + 0.5vw);
+}
+
+input {
+  font-size: calc(8px + 0.5vw);
+  background: 0;
+  border: 0;
+}
+
+img {
+  width: 1.5vw;
+  opacity: 0.3;
 }
 
 .list-group-item {
@@ -11,7 +18,15 @@ h5 {
   border-radius: 1vw;
 }
 
-.info {
-  background-color: #eeeeee;
-  border-radius: 0.5vw;
+button {
+  background: none;
+  border: none;
+}
+
+.btn-primary {
+  color: white;
+}
+
+.btn-primary:hover {
+  color: white;
 }
