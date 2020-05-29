@@ -1,6 +1,9 @@
 <nav *ngIf="finishedLoading" class="navbar">
   <ul ngbNav class="nav-tabs mr-auto">
-    <h5 [routerLink]="['/shop']" *ngIf="['Shop', 'Read'] | rights">Shop</h5>
+    <img class="logo" src="../assets/images/logo.png" />
+    <li ngbNavItem *ngIf="['Shop', 'Read'] | rights">
+      <a ngbNavLink [routerLink]="['/shop']">Shop</a>
+    </li>
     <li ngbNavItem *ngIf="['Order', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
     </li>
