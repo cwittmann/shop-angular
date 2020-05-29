@@ -1,11 +1,11 @@
 <div class="d-flex sort">
-  <h5 class="mr-auto p-2"><b>UserRights</b></h5>
+  <h5 class="mr-auto p-2"><b>RoleRights</b></h5>
 </div>
 
 <table class="table table-hover">
   <thead class="">
     <tr>
-      <th>User</th>
+      <th>Role</th>
       <th>Right</th>
       <th>
         <a
@@ -13,7 +13,7 @@
           class="btn btn-primary ml-auto"
           (click)="toggleNew()"
         >
-          Add UserRight
+          Add RoleRight
         </a>
       </th>
     </tr>
@@ -21,21 +21,21 @@
   <tbody>
     <tr *ngIf="showNew" class="table-primary">
       <td>
-        <select [(ngModel)]="newUserRight.userId">
-          <option *ngFor="let user of users" [value]="user.id"
-            >{{ user.lastName }}, {{ user.firstName }}</option
-          >
+        <select [(ngModel)]="newRoleRight.roleId">
+          <option *ngFor="let role of roles" [value]="role.id">{{
+            role.name
+          }}</option>
         </select>
       </td>
       <td>
-        <select [(ngModel)]="newUserRight.rightId">
+        <select [(ngModel)]="newRoleRight.rightId">
           <option *ngFor="let right of rights" [value]="right.id"
             >{{ right.entity }} - {{ right.permission }}</option
           >
         </select>
       </td>
       <td>
-        <button class="ml-auto" (click)="saveNewInput(newUserRight)">
+        <button class="ml-auto" (click)="saveNewInput(newRoleRight)">
           <img src="../../../assets/icons/save.png" />
         </button>
         <button (click)="toggleNew()">
@@ -43,26 +43,26 @@
         </button>
       </td>
     </tr>
-    <tr *ngFor="let userRight of userRights">
+    <tr *ngFor="let roleRight of roleRights">
       <td>
-        <select [(ngModel)]="userRight.userId">
-          <option *ngFor="let user of users" [value]="user.id"
-            >{{ user.lastName }}, {{ user.firstName }}</option
-          >
+        <select [(ngModel)]="roleRight.roleId">
+          <option *ngFor="let role of roles" [value]="role.id">{{
+            role.name
+          }}</option>
         </select>
       </td>
       <td>
-        <select [(ngModel)]="userRight.rightId">
+        <select [(ngModel)]="roleRight.rightId">
           <option *ngFor="let right of rights" [value]="right.id"
             >{{ right.entity }} - {{ right.permission }}</option
           >
         </select>
       </td>
       <td>
-        <button class="ml-auto" (click)="saveEditedInput(userRight)">
+        <button class="ml-auto" (click)="saveEditedInput(roleRight)">
           <img src="../../../assets/icons/save.png" />
         </button>
-        <button (click)="deleteInput(userRight.id)">
+        <button (click)="deleteInput(roleRight.id)">
           <img src="../../../assets/icons/delete.png" />
         </button>
       </td>

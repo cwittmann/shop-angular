@@ -15,8 +15,10 @@ import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { Right } from '../model/Right';
 import { RightViewModel } from '../model/RightViewModel';
-import { UserRightViewModel } from '../model/UserRightViewModel';
-import { UserRight } from '../model/UserRight';
+import { RoleRightViewModel } from '../model/RoleRightViewModel';
+import { RoleRight } from '../model/RoleRight';
+import { RoleViewModel } from '../model/RoleViewModel';
+import { Role } from '../model/Role';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +30,9 @@ export class StoreService {
   products: ProductViewModel[] = [];
   orderLines: OrderLineViewModel[] = [];
   users: UserViewModel[] = [];
+  roles: RoleViewModel[] = [];
   rights: RightViewModel[] = [];
-  userRights: UserRightViewModel[] = [];
+  roleRights: RoleRightViewModel[] = [];
   currentUser: UserViewModel;
 
   shoppingCart: OrderViewModel;
@@ -163,16 +166,28 @@ export class StoreService {
     await this.backendService.deleteRight(id);
   }
 
-  async postUserRight(userRight: UserRight) {
-    await this.backendService.postUserRight(userRight);
+  async postRole(role: Role) {
+    await this.backendService.postRole(role);
   }
 
-  async putUserRight(userRight: UserRight) {
-    await this.backendService.putUserRight(userRight);
+  async putRole(role: Role) {
+    await this.backendService.putRole(role);
   }
 
-  async deleteUserRight(id: string) {
-    await this.backendService.deleteUserRight(id);
+  async deleteRole(id: string) {
+    await this.backendService.deleteRole(id);
+  }
+
+  async postRoleRight(roleRight: RoleRight) {
+    await this.backendService.postRoleRight(roleRight);
+  }
+
+  async putRoleRight(roleRight: RoleRight) {
+    await this.backendService.putRoleRight(roleRight);
+  }
+
+  async deleteRoleRight(id: string) {
+    await this.backendService.deleteRoleRight(id);
   }
 
   private initializeShoppingCart() {
@@ -188,13 +203,15 @@ export class StoreService {
   private async loadOrders() {
     this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
     this.rights = (await this.backendService.loadRights()) as RightViewModel[];
-    this.userRights = (await this.backendService.loadUserRights()) as UserRightViewModel[];
+    this.roles = (await this.backendService.loadRoles()) as RoleViewModel[];
+    this.roleRights = (await this.backendService.loadRoleRights()) as RoleRightViewModel[];
     this.users = (await this.backendService.loadUsers()) as UserViewModel[];
     this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
     this.products = (await this.backendService.loadProducts()) as ProductViewModel[];
     this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
 
-    this.appendUserRights();
+    this.appendRoleRights();
+    this.appendRoles();
     this.appendUsers();
     this.appendManufacturers();
     this.appendProducts();
@@ -202,24 +219,29 @@ export class StoreService {
     this.sortOrders();
   }
 
-  private appendUserRights() {
-    for (let userRight of this.userRights) {
-      let user = this.users.find((user) => user.id === userRight.userId);
-      let right = this.rights.find((right) => right.id === userRight.rightId);
+  private appendRoleRights() {
+    for (let roleRight of this.roleRights) {
+      let role = this.roles.find((role) => role.id === roleRight.roleId);
+      let right = this.rights.find((right) => right.id === roleRight.rightId);
 
-      if (!user.rights) {
-        user.rights = [];
+      if (!role.rights) {
+        role.rights = [];
       }
-      user.rights.push(right);
+
+      role.rights.push(right);
+    }
+  }
+
+  private appendRoles() {
+    for (let user of this.users) {
+      let role = this.roles.find((role) => role.id === user.roleId);
+      user.role = role;
     }
   }
 
   private appendUsers() {
     for (let order of this.orders) {
       let user = this.users.find((user) => user.id === order.userId);
-      if (!user.rights) {
-        user.rights = [];
-      }
       order.user = user;
     }
   }

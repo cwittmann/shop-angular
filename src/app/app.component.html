@@ -1,27 +1,31 @@
 <nav *ngIf="finishedLoading" class="navbar">
   <ul ngbNav class="nav-tabs mr-auto">
-    <h5 [routerLink]="['/shop']">Shop</h5>
+    <h5 [routerLink]="['/shop']" *ngIf="['Shop', 'Read'] | rights">Shop</h5>
     <li ngbNavItem *ngIf="['Order', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
     </li>
-    <li ngbNavItem>
+    <li ngbNavItem *ngIf="['Product', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/product-list']">Products</a>
     </li>
-    <li ngbNavItem>
+    <li ngbNavItem *ngIf="['Manufacturer', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/manufacturer-list']">Manufacturers</a>
     </li>
-    <li ngbNavItem>
+    <li ngbNavItem *ngIf="['User', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/user-list']">Users</a>
     </li>
-    <li ngbNavItem>
+    <li ngbNavItem *ngIf="['Role', 'Read'] | rights">
+      <a ngbNavLink [routerLink]="['/role-list']">Roles</a>
+    </li>
+    <li ngbNavItem *ngIf="['Right', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/right-list']">Rights</a>
     </li>
-    <li ngbNavItem>
-      <a ngbNavLink [routerLink]="['/user-right-list']">User Rights</a>
+    <li ngbNavItem *ngIf="['RoleRight', 'Read'] | rights">
+      <a ngbNavLink [routerLink]="['/role-right-list']">Role Rights</a>
     </li>
   </ul>
   <span class="navbar-text">
     {{ currentUser?.firstName }} {{ currentUser?.lastName }}
+    <small>({{ currentUser?.role?.name }})</small>
   </span>
 </nav>
 

@@ -1,24 +1,25 @@
-import { Right } from './Right';
+import { RoleViewModel } from './RoleViewModel';
 
 export class UserViewModel {
   public id: string;
   public firstName: string;
   public lastName: string;
   public city: string;
+  public roleId: string;
 
-  public rights: Right[];
+  public role: RoleViewModel;
 
   constructor(
     id: string,
     firstName: string,
     lastName: string,
     city: string,
-    rights: Right[]
+    roleId: string
   ) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.city = city;
-    this.rights = rights;
+    this.roleId = roleId;
   }
 }

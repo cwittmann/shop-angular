@@ -8,7 +8,8 @@ import { UserListComponent } from './component/user-list/user-list.component';
 import { ShopComponent } from './component/shop/shop.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { RightListComponent } from './component/right-list/right-list.component';
-import { UserRightListComponent } from './component/user-right-list/user-right-list.component';
+import { RoleRightListComponent } from './component/role-right-list/role-right-list.component';
+import { RoleListComponent } from './component/role-list/role-list.component';
 
 const routes: Routes = [
   { path: 'shop', component: ShopComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'manufacturer-list', component: ManufacturerListComponent },
   { path: 'user-list', component: UserListComponent },
   { path: 'right-list', component: RightListComponent },
-  { path: 'user-right-list', component: UserRightListComponent },
+  { path: 'role-list', component: RoleListComponent },
+  { path: 'role-right-list', component: RoleRightListComponent },
   { path: '', redirectTo: 'shop', pathMatch: 'full' },
   { path: '*', redirectTo: 'shop', pathMatch: 'full' },
 ];

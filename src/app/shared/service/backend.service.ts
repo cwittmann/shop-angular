@@ -6,7 +6,8 @@ import { User } from '../model/User';
 import { Product } from '../model/Product';
 import { Manufacturer } from '../model/Manufacturer';
 import { Right } from '../model/Right';
-import { UserRight } from '../model/UserRight';
+import { RoleRight } from '../model/RoleRight';
+import { Role } from '../model/Role';
 
 @Injectable({
   providedIn: 'root',
@@ -188,38 +189,70 @@ export class BackendService {
       .toPromise();
   }
 
-  // USER RIGHTS
+  // ROLES
 
-  async loadUserRights(): Promise<UserRight[]> {
+  async loadRoles(): Promise<Role[]> {
     return await this.httpClient
-      .get<UserRight[]>('http://localhost:8000/userRights')
+      .get<Role[]>('http://localhost:8000/roles')
       .toPromise();
   }
 
-  async loadUserRight(id: string): Promise<UserRight> {
+  async loadRole(id: string): Promise<Role> {
     return await this.httpClient
-      .get<UserRight>('http://localhost:8000/userRights/' + id)
+      .get<Role>('http://localhost:8000/roles/' + id)
       .toPromise();
   }
 
-  async postUserRight(userRight: UserRight): Promise<UserRight> {
+  async postRole(role: Role): Promise<Role> {
     return await this.httpClient
-      .post<UserRight>('http://localhost:8000/userRights', userRight)
+      .post<Role>('http://localhost:8000/roles', role)
       .toPromise();
   }
 
-  async putUserRight(userRight: UserRight): Promise<UserRight> {
+  async putRole(role: Role): Promise<Role> {
     return await this.httpClient
-      .put<UserRight>(
-        'http://localhost:8000/userRights/' + userRight.id,
-        userRight
+      .put<Role>('http://localhost:8000/roles/' + role.id, role)
+      .toPromise();
+  }
+
+  async deleteRole(id: string) {
+    return await this.httpClient
+      .delete<Role>('http://localhost:8000/roles/' + id)
+      .toPromise();
+  }
+
+  // ROLE RIGHTS
+
+  async loadRoleRights(): Promise<RoleRight[]> {
+    return await this.httpClient
+      .get<RoleRight[]>('http://localhost:8000/roleRights')
+      .toPromise();
+  }
+
+  async loadRoleRight(id: string): Promise<RoleRight> {
+    return await this.httpClient
+      .get<RoleRight>('http://localhost:8000/roleRights/' + id)
+      .toPromise();
+  }
+
+  async postRoleRight(roleRight: RoleRight): Promise<RoleRight> {
+    return await this.httpClient
+      .post<RoleRight>('http://localhost:8000/roleRights', roleRight)
+      .toPromise();
+  }
+
+  async putRoleRight(roleRight: RoleRight): Promise<RoleRight> {
+    return await this.httpClient
+      .put<RoleRight>(
+        'http://localhost:8000/roleRights/' + roleRight.id,
+        roleRight
       )
       .toPromise();
   }
 
-  async deleteUserRight(id: string) {
+  async deleteRoleRight(id: string) {
     return await this.httpClient
-      .delete<UserRight>('http://localhost:8000/userRights/' + id)
+      .delete<RoleRight>('http://localhost:8000/roleRights/' + id)
       .toPromise();
   }
 }

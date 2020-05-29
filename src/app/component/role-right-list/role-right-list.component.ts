@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from './node_modules/src/app/shared/service/store.service';
-import { User } from './node_modules/src/app/shared/model/User';
-import { Right } from './node_modules/src/app/shared/model/Right';
-import { RoleRight } from './node_modules/src/app/shared/model/RoleRight';
-import { v4 as uuidv4 } from './node_modules/uuid';
+import { StoreService } from 'src/app/shared/service/store.service';
+import { User } from 'src/app/shared/model/User';
+import { Right } from 'src/app/shared/model/Right';
+import { RoleRight } from 'src/app/shared/model/RoleRight';
+import { v4 as uuidv4 } from 'uuid';
+import { Role } from 'src/app/shared/model/Role';
 
 @Component({
   selector: 'app-role-right-list',
@@ -22,8 +23,8 @@ export class RoleRightListComponent implements OnInit {
     return this.storeService.rights;
   }
 
-  get users(): User[] {
-    return this.storeService.users;
+  get roles(): Role[] {
+    return this.storeService.roles;
   }
 
   constructor(private storeService: StoreService) {}

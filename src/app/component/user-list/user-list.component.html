@@ -25,6 +25,13 @@
       <td><input type="text" [(ngModel)]="newUser.lastName" /></td>
       <td><input type="text" [(ngModel)]="newUser.city" /></td>
       <td>
+        <select [(ngModel)]="newUser.roleId">
+          <option *ngFor="let role of roles" [value]="role.id">{{
+            role.name
+          }}</option>
+        </select>
+      </td>
+      <td>
         <button class="ml-auto" (click)="saveNewInput(newUser)">
           <img src="../../../assets/icons/save.png" />
         </button>
@@ -37,6 +44,13 @@
       <td><input type="text" [(ngModel)]="user.firstName" /></td>
       <td><input type="text" [(ngModel)]="user.lastName" /></td>
       <td><input type="text" [(ngModel)]="user.city" /></td>
+      <td>
+        <select [(ngModel)]="user.roleId">
+          <option *ngFor="let role of roles" [value]="role.id">{{
+            role.name
+          }}</option>
+        </select>
+      </td>
       <td>
         <button class="ml-auto" (click)="saveEditedInput(user)">
           <img src="../../../assets/icons/save.png" />

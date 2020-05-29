@@ -1,21 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
-import { User } from 'src/app/shared/model/User';
-import { v4 as uuidv4 } from 'uuid';
 import { Role } from 'src/app/shared/model/Role';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  selector: 'app-role-list',
+  templateUrl: './role-list.component.html',
+  styleUrls: ['./role-list.component.scss'],
 })
-export class UserListComponent implements OnInit {
-  newUser: User;
+export class RoleListComponent implements OnInit {
+  newRole: Role;
   showNew: boolean = false;
-
-  get users(): User[] {
-    return this.storeService.users;
-  }
 
   get roles(): Role[] {
     return this.storeService.roles;
@@ -24,28 +19,28 @@ export class UserListComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    this.newUser = new User(uuidv4(), 'First name', 'Last name', 'City', null);
+    this.newRole = new Role(uuidv4(), 'New role');
   }
 
   toggleNew() {
     this.showNew = !this.showNew;
   }
 
-  async saveEditedInput(user: User) {
-    await this.storeService.putUser(user);
+  async saveEditedInput(role: Role) {
+    await this.storeService.putRole(role);
     this.storeService.reload();
     this.ngOnInit();
   }
 
-  async saveNewInput(newUser: User) {
-    await this.storeService.postUser(newUser);
+  async saveNewInput(newRole: Role) {
+    await this.storeService.postRole(newRole);
     this.storeService.reload();
     this.ngOnInit();
     this.toggleNew();
   }
 
   async deleteInput(id: string) {
-    await this.storeService.deleteUser(id);
+    await this.storeService.deleteRole(id);
     this.storeService.reload();
     this.ngOnInit();
   }
