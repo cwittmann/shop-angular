@@ -56,6 +56,16 @@ export class StoreService {
     this.initializeShoppingCart();
   }
 
+  async reloadItems(dbName: string) {
+    switch (dbName) {
+      case 'manufacturers':
+        this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
+        break;
+    }
+
+    this.initializeShoppingCart();
+  }
+
   post<T>(item: T, dbName: string) {
     this.backendService.post<T>(item, dbName);
   }
@@ -141,18 +151,6 @@ export class StoreService {
 
   async deleteProduct(id: string) {
     await this.backendService.deleteProduct(id);
-  }
-
-  async postManufacturer(manufacturer: Manufacturer) {
-    await this.backendService.postManufacturer(manufacturer);
-  }
-
-  async putManufacturer(manufacturer: Manufacturer) {
-    await this.backendService.putManufacturer(manufacturer);
-  }
-
-  async deleteManufacturer(id: string) {
-    await this.backendService.deleteManufacturer(id);
   }
 
   async postUser(user: User) {

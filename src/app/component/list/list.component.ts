@@ -17,10 +17,10 @@ export class ListComponent implements OnInit {
   @Input()
   columns: Column[];
 
-  itemLink: any;
+  itemLink: any[];
 
   get items(): any[] {
-    return this.itemLink;
+    return this.storeService[this.model.dbName];
   }
 
   newItem: any;
@@ -29,7 +29,6 @@ export class ListComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    this.itemLink = this.storeService[this.model.dbName];
     this.newItem = new this.model(uuidv4());
   }
 
