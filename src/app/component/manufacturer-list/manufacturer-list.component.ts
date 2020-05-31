@@ -12,9 +12,6 @@ export class ManufacturerListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.columns = [
-      new Column('name', 'Name', 'text'),
-      new Column('foundationDate', 'Foundation Date', 'date'),
-    ];
+    this.columns = [new Column('name', 'Name', 'text')];
   }
 }
