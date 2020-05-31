@@ -18,6 +18,7 @@ import { RightsPipe } from './shared/pipe/rights.pipe';
 import { RightListComponent } from './component/right-list/right-list.component';
 import { RoleRightListComponent } from './component/role-right-list/role-right-list.component';
 import { RoleListComponent } from './component/role-list/role-list.component';
+import { ListComponent } from './component/list/list.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RoleListComponent } from './component/role-list/role-list.component';
     RightListComponent,
     RoleRightListComponent,
     RoleListComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
