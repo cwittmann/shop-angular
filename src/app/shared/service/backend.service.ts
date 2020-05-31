@@ -8,12 +8,33 @@ import { Manufacturer } from '../model/Manufacturer';
 import { Right } from '../model/Right';
 import { RoleRight } from '../model/RoleRight';
 import { Role } from '../model/Role';
+import { BaseModel } from '../model/BaseModel';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendService {
   constructor(private httpClient: HttpClient) {}
+
+  // GENERIC
+
+  async post<T>(item: T, dbName: string): Promise<T> {
+    return await this.httpClient
+      .post<T>('http://localhost:8000/' + dbName, item)
+      .toPromise();
+  }
+
+  async put<T extends BaseModel>(item: T, dbName: string): Promise<T> {
+    return await this.httpClient
+      .put<T>('http://localhost:8000/' + dbName + '/' + item.id, item)
+      .toPromise();
+  }
+
+  async delete<T>(id: string, dbName: string) {
+    return await this.httpClient
+      .delete<T>('http://localhost:8000/' + dbName + '/' + id)
+      .toPromise();
+  }
 
   // ORDERS
 

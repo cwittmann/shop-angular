@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Type } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
-import { Manufacturer } from 'src/app/shared/model/Manufacturer';
 import { v4 as uuidv4 } from 'uuid';
 import { Column } from 'src/app/shared/model/Column';
+import { IGenericModel } from 'src/app/shared/model/GenericModel';
+import { BaseModel } from 'src/app/shared/model/BaseModel';
 
 @Component({
   selector: 'app-list',
@@ -11,7 +12,7 @@ import { Column } from 'src/app/shared/model/Column';
 })
 export class ListComponent implements OnInit {
   @Input()
-  itemType: string;
+  model: IGenericModel<any>;
 
   @Input()
   columns: Column[];
@@ -28,31 +29,29 @@ export class ListComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    if (this.itemType === 'Manufacturer') {
-      this.itemLink = this.storeService.manufacturers;
-      this.newItem = new Manufacturer(uuidv4(), 'New manufacturer');
-    }
+    this.itemLink = this.storeService[this.model.dbName];
+    this.newItem = new this.model(uuidv4());
   }
 
   toggleNew() {
     this.showNew = !this.showNew;
   }
 
-  async saveEditedInput(item: any) {
-    await this.storeService.putManufacturer(item);
-    this.storeService.reload();
-    this.ngOnInit();
-  }
-
-  async saveNewInput(newItem: any) {
-    await this.storeService.postManufacturer(newItem);
+  async saveNewInput<T>(newItem: T) {
+    await this.storeService.post<T>(newItem, this.model.dbName);
     this.storeService.reload();
     this.ngOnInit();
     this.toggleNew();
   }
 
-  async deleteInput(id: string) {
-    await this.storeService.deleteManufacturer(id);
+  async saveEditedInput<T extends BaseModel>(item: T) {
+    await this.storeService.put<T>(item, this.model.dbName);
+    this.storeService.reload();
+    this.ngOnInit();
+  }
+
+  async deleteInput<T>(id: string) {
+    await this.storeService.delete<T>(id, this.model.dbName);
     this.storeService.reload();
     this.ngOnInit();
   }

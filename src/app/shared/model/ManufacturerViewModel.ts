@@ -1,9 +1,3 @@
-export class ManufacturerViewModel {
-  id: string;
-  name: string;
+import { Manufacturer } from './Manufacturer';
 
-  constructor(id: string, name: string) {
-    this.id = id;
-    this.name = name;
-  }
-}
+export class ManufacturerViewModel extends Manufacturer {}

@@ -2,13 +2,9 @@ import { OrderStatus } from '../enum/OrderStatus';
 import { User } from './User';
 import { OrderLineViewModel } from './OrderLineViewModel';
 import { v4 as uuidv4 } from 'uuid';
+import { Order } from './Order';
 
-export class OrderViewModel {
-  id: string;
-  userId: string;
-  date: Date;
-  status: OrderStatus;
-
+export class OrderViewModel extends Order {
   orderLines: OrderLineViewModel[];
   user: User;
 
@@ -19,14 +15,10 @@ export class OrderViewModel {
     orderLines: OrderLineViewModel[],
     user: User
   ) {
-    this.id = id;
-    this.userId = user.id;
-    this.date = date;
-    this.status = status;
+    super(id, user.id, date, status);
     this.orderLines = orderLines;
     this.user = user;
   }
-
   public clear(currentUser: User) {
     this.id = uuidv4();
     this.date = new Date();

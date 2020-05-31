@@ -1,11 +1,3 @@
-export class RightViewModel {
-  public id: string;
-  public entity: string;
-  public permission: string;
+import { Right } from './Right';
 
-  constructor(id: string, entity: string, permission: string) {
-    this.id = id;
-    this.entity = entity;
-    this.permission = permission;
-  }
-}
+export class RightViewModel extends Right {}

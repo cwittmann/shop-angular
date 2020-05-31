@@ -1,13 +1,6 @@
 import { RightViewModel } from './RightViewModel';
+import { Role } from './Role';
 
-export class RoleViewModel {
-  public id: string;
-  public name: string;
-
+export class RoleViewModel extends Role {
   public rights: RightViewModel[];
-
-  constructor(id: string, name: string) {
-    this.id = id;
-    this.name = name;
-  }
 }

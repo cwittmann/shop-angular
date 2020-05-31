@@ -1,9 +1,12 @@
-export class Manufacturer {
-  id: string;
-  name: string;
+import { BaseModel } from './BaseModel';
+
+export class Manufacturer extends BaseModel {
+  public static dbName = 'manufacturers';
+  public id: string;
+  public name: string;
 
   constructor(id: string, name: string) {
-    this.id = id;
+    super(id);
     this.name = name;
   }
 }

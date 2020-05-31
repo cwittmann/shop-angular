@@ -1,13 +1,15 @@
 import { OrderStatus } from '../enum/OrderStatus';
+import { BaseModel } from './BaseModel';
 
-export class Order {
-  id: string;
-  userId: string;
-  date: Date;
-  status: OrderStatus;
+export class Order extends BaseModel {
+  public static dbName = 'orders';
+  public id: string;
+  public userId: string;
+  public date: Date;
+  public status: OrderStatus;
 
   constructor(id: string, userId: string, date: Date, status: OrderStatus) {
-    this.id = id;
+    super(id);
     this.userId = userId;
     this.date = date;
     this.status = status;

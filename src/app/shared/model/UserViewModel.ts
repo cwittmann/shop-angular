@@ -1,25 +1,6 @@
 import { RoleViewModel } from './RoleViewModel';
+import { User } from './User';
 
-export class UserViewModel {
-  public id: string;
-  public firstName: string;
-  public lastName: string;
-  public city: string;
-  public roleId: string;
-
+export class UserViewModel extends User {
   public role: RoleViewModel;
-
-  constructor(
-    id: string,
-    firstName: string,
-    lastName: string,
-    city: string,
-    roleId: string
-  ) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.city = city;
-    this.roleId = roleId;
-  }
 }

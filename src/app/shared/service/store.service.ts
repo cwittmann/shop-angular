@@ -19,6 +19,7 @@ import { RoleRightViewModel } from '../model/RoleRightViewModel';
 import { RoleRight } from '../model/RoleRight';
 import { RoleViewModel } from '../model/RoleViewModel';
 import { Role } from '../model/Role';
+import { BaseModel } from '../model/BaseModel';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,18 @@ export class StoreService {
   async reload() {
     await this.loadOrders();
     this.initializeShoppingCart();
+  }
+
+  post<T>(item: T, dbName: string) {
+    this.backendService.post<T>(item, dbName);
+  }
+
+  put<T extends BaseModel>(item: T, dbName: string) {
+    this.backendService.put<T>(item, dbName);
+  }
+
+  delete<T>(id: string, dbName: string) {
+    this.backendService.delete<T>(id, dbName);
   }
 
   loadUser() {

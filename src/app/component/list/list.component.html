@@ -1,7 +1,3 @@
-<div class="d-flex sort">
-  <h5 class="mr-auto p-2"><b>Items</b></h5>
-</div>
-
 <table class="table table-hover">
   <thead class="">
     <tr>
@@ -12,7 +8,7 @@
           class="btn btn-primary ml-auto"
           (click)="toggleNew()"
         >
-          Add Item
+          Add {{ model.name }}
         </a>
       </th>
     </tr>
@@ -20,7 +16,11 @@
   <tbody>
     <tr *ngIf="showNew" class="table-primary">
       <td *ngFor="let column of columns">
-        <input [type]="column.dateType" [(ngModel)]="newItem[column.name]" />
+        <input
+          class="newInput"
+          [type]="column.dateType"
+          [(ngModel)]="newItem[column.name]"
+        />
       </td>
       <td>
         <button class="ml-auto" (click)="saveNewInput(newItem)">

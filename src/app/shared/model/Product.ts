@@ -1,4 +1,7 @@
-export class Product {
+import { BaseModel } from './BaseModel';
+
+export class Product extends BaseModel {
+  public static dbName = 'products';
   public id: string;
   public manufacturerId: string;
   public name: string;
@@ -12,7 +15,7 @@ export class Product {
     description: string,
     price: string
   ) {
-    this.id = id;
+    super(id);
     this.manufacturerId = manufacturerId;
     this.name = name;
     this.description = description;
