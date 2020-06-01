@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StoreService } from './shared/service/store.service';
-import { UserViewModel } from './shared/model/UserViewModel';
+import { User } from './shared/model/User';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent {
     return this.storeService.loading;
   }
 
-  get currentUser(): UserViewModel {
+  get currentUser(): User {
     return this.storeService.currentUser;
   }
 

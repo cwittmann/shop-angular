@@ -25,8 +25,8 @@
       <td><input type="text" [(ngModel)]="newUser.lastName" /></td>
       <td><input type="text" [(ngModel)]="newUser.city" /></td>
       <td>
-        <select [(ngModel)]="newUser.roleId">
-          <option *ngFor="let role of roles" [value]="role.id">{{
+        <select [(ngModel)]="newUser.role">
+          <option *ngFor="let role of roles" [ngValue]="role">{{
             role.name
           }}</option>
         </select>
@@ -45,7 +45,7 @@
       <td><input type="text" [(ngModel)]="user.lastName" /></td>
       <td><input type="text" [(ngModel)]="user.city" /></td>
       <td>
-        <select [(ngModel)]="user.roleId">
+        <select [(ngModel)]="user.role.id" (change)="setRole(user, $event)">
           <option *ngFor="let role of roles" [value]="role.id">{{
             role.name
           }}</option>

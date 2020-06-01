@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { OrderStatus } from '../enum/OrderStatus';
 import { OrderViewModel } from '../model/OrderViewModel';
 import { OrderLineViewModel } from '../model/OrderLineViewModel';
-import { UserViewModel } from '../model/UserViewModel';
 import { OrderService } from './order.service';
 import { User } from '../model/User';
 import { Manufacturer } from '../model/Manufacturer';
@@ -13,7 +12,6 @@ import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { Right } from '../model/Right';
 import { RoleRight } from '../model/RoleRight';
-import { RoleViewModel } from '../model/RoleViewModel';
 import { Role } from '../model/Role';
 import { BaseModel } from '../model/BaseModel';
 
@@ -26,11 +24,11 @@ export class StoreService {
   manufacturers: Manufacturer[] = [];
   products: Product[] = [];
   orderLines: OrderLineViewModel[] = [];
-  users: UserViewModel[] = [];
-  roles: RoleViewModel[] = [];
+  users: User[] = [];
+  roles: Role[] = [];
   rights: Right[] = [];
   roleRights: RoleRight[] = [];
-  currentUser: UserViewModel;
+  currentUser: User;
 
   shoppingCart: OrderViewModel;
 
@@ -212,39 +210,17 @@ export class StoreService {
   private async loadOrders() {
     this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
     this.rights = (await this.backendService.loadRights()) as Right[];
-    this.roles = (await this.backendService.loadRoles()) as RoleViewModel[];
+    this.roles = (await this.backendService.loadRoles()) as Role[];
     this.roleRights = (await this.backendService.loadRoleRights()) as RoleRight[];
-    this.users = (await this.backendService.loadUsers()) as UserViewModel[];
+    this.users = (await this.backendService.loadUsers()) as User[];
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
     this.products = (await this.backendService.loadProducts()) as Product[];
     this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
 
-    this.appendRoleRights();
-    this.appendRoles();
     this.appendUsers();
     this.appendProducts();
     this.appendOrderLines();
     this.sortOrders();
-  }
-
-  private appendRoleRights() {
-    for (let roleRight of this.roleRights) {
-      let role = this.roles.find((role) => role.id === roleRight.roleId);
-      let right = this.rights.find((right) => right.id === roleRight.rightId);
-
-      if (!role.rights) {
-        role.rights = [];
-      }
-
-      role.rights.push(right);
-    }
-  }
-
-  private appendRoles() {
-    for (let user of this.users) {
-      let role = this.roles.find((role) => role.id === user.roleId);
-      user.role = role;
-    }
   }
 
   private appendUsers() {
