@@ -41,7 +41,7 @@ export class StoreService {
   async initialize(): Promise<boolean> {
     this.loading = true;
 
-    await this.loadOrders();
+    await this.loadData();
     await this.loadUser();
     await this.initializeShoppingCart();
 
@@ -52,7 +52,7 @@ export class StoreService {
 
   async reload() {
     this.loading = true;
-    await this.loadOrders();
+    await this.loadData();
     this.initializeShoppingCart();
     this.loading = false;
   }
@@ -134,29 +134,68 @@ export class StoreService {
     );
   }
 
-  private async loadOrders() {
-    this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
+  private async loadData() {
     this.rights = (await this.backendService.loadRights()) as Right[];
-    this.roles = (await this.backendService.loadRoles()) as Role[];
     this.roleRights = (await this.backendService.loadRoleRights()) as RoleRight[];
+    this.roles = (await this.backendService.loadRoles()) as Role[];
+    this.appendRightsToRoles();
+
     this.users = (await this.backendService.loadUsers()) as User[];
+    this.appendRolesToUsers();
+
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
     this.products = (await this.backendService.loadProducts()) as Product[];
-    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLine[];
+    this.appendManufacturersToProducts();
 
-    this.appendUsers();
-    this.appendOrderLines();
+    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLine[];
+    this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
+    this.appendOrderLinesToOrders();
+
+    this.appendUsersToOrders();
     this.sortOrders();
   }
 
-  private appendUsers() {
+  private appendRightsToRoles() {
+    for (let role of this.roles) {
+      if (!role.rights) {
+        role.rights = [];
+      }
+
+      let roleRights = this.roleRights.filter(
+        (roleRight) => roleRight.roleId === role.id
+      );
+
+      for (let roleRight of roleRights) {
+        let right = this.rights.find((right) => right.id === roleRight.rightId);
+        role.rights.push(right);
+      }
+    }
+  }
+
+  private appendRolesToUsers() {
+    for (let user of this.users) {
+      let role = this.roles.find((role) => role.id === user.roleId);
+      user.role = role;
+    }
+  }
+
+  private appendManufacturersToProducts() {
+    for (let product of this.products) {
+      let manufacturer = this.manufacturers.find(
+        (manufacturer) => manufacturer.id === product.manufacturerId
+      );
+      product.manufacturer = manufacturer;
+    }
+  }
+
+  private appendUsersToOrders() {
     for (let order of this.orders) {
       let user = this.users.find((user) => user.id === order.userId);
       order.user = user;
     }
   }
 
-  private appendOrderLines() {
+  private appendOrderLinesToOrders() {
     for (let order of this.orders) {
       let orderLines = this.orderLines.filter(
         (orderLine) => orderLine.orderId === order.id

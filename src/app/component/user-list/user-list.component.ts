@@ -24,7 +24,14 @@ export class UserListComponent implements OnInit {
   constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {
-    this.newUser = new User(uuidv4(), 'First name', 'Last name', 'City', null);
+    this.newUser = new User(
+      uuidv4(),
+      'First name',
+      'Last name',
+      'City',
+      null,
+      null
+    );
   }
 
   toggleNew() {

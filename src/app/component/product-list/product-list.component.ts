@@ -29,6 +29,7 @@ export class ProductListComponent implements OnInit {
       'Name',
       'Description',
       '0.00',
+      null,
       null
     );
   }

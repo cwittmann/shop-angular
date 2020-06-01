@@ -7,6 +7,7 @@ export class Product extends BaseModel {
   public name: string;
   public description: string;
   public price: string;
+  public manufacturerId: string;
   public manufacturer: Manufacturer;
 
   constructor(
@@ -14,12 +15,14 @@ export class Product extends BaseModel {
     name: string,
     description: string,
     price: string,
+    manufacturerId: string,
     manufacturer: Manufacturer
   ) {
     super(id);
     this.name = name;
     this.description = description;
     this.price = price;
+    this.manufacturerId = manufacturerId;
     this.manufacturer = manufacturer;
   }
 }
