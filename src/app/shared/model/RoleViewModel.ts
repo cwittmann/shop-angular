@@ -1,6 +1,6 @@
-import { RightViewModel } from './RightViewModel';
 import { Role } from './Role';
+import { Right } from './Right';
 
 export class RoleViewModel extends Role {
-  public rights: RightViewModel[];
+  public rights: Right[];
 }

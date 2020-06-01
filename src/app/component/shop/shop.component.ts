@@ -3,7 +3,6 @@ import { StoreService } from 'src/app/shared/service/store.service';
 import { Product } from 'src/app/shared/model/Product';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
-import { ProductViewModel } from 'src/app/shared/model/ProductViewModel';
 import { OrderLineViewModel } from 'src/app/shared/model/OrderLineViewModel';
 
 @Component({
@@ -16,7 +15,7 @@ export class ShopComponent implements OnInit {
 
   @ViewChildren('linkRef') linkRefs;
 
-  get products(): ProductViewModel[] {
+  get products(): Product[] {
     return this.storeService.products;
   }
 

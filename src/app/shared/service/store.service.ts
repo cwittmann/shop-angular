@@ -12,8 +12,6 @@ import { Product } from '../model/Product';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { Right } from '../model/Right';
-import { RightViewModel } from '../model/RightViewModel';
-import { RoleRightViewModel } from '../model/RoleRightViewModel';
 import { RoleRight } from '../model/RoleRight';
 import { RoleViewModel } from '../model/RoleViewModel';
 import { Role } from '../model/Role';
@@ -30,8 +28,8 @@ export class StoreService {
   orderLines: OrderLineViewModel[] = [];
   users: UserViewModel[] = [];
   roles: RoleViewModel[] = [];
-  rights: RightViewModel[] = [];
-  roleRights: RoleRightViewModel[] = [];
+  rights: Right[] = [];
+  roleRights: RoleRight[] = [];
   currentUser: UserViewModel;
 
   shoppingCart: OrderViewModel;
@@ -213,9 +211,9 @@ export class StoreService {
 
   private async loadOrders() {
     this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
-    this.rights = (await this.backendService.loadRights()) as RightViewModel[];
+    this.rights = (await this.backendService.loadRights()) as Right[];
     this.roles = (await this.backendService.loadRoles()) as RoleViewModel[];
-    this.roleRights = (await this.backendService.loadRoleRights()) as RoleRightViewModel[];
+    this.roleRights = (await this.backendService.loadRoleRights()) as RoleRight[];
     this.users = (await this.backendService.loadUsers()) as UserViewModel[];
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
     this.products = (await this.backendService.loadProducts()) as Product[];
