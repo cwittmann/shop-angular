@@ -21,8 +21,8 @@
   <tbody>
     <tr *ngIf="showNew" class="table-primary">
       <td>
-        <select class="form-control" [(ngModel)]="newOrderLine.productId">
-          <option *ngFor="let product of products" [value]="product.id">{{
+        <select class="form-control" [(ngModel)]="newOrderLine.product">
+          <option *ngFor="let product of products" [ngValue]="product">{{
             product.name
           }}</option>
         </select>
@@ -46,7 +46,11 @@
     </tr>
     <tr *ngFor="let orderLine of order.orderLines">
       <td>
-        <select class="form-control" [(ngModel)]="orderLine.productId">
+        <select
+          class="form-control"
+          [(ngModel)]="orderLine.product.id"
+          (change)="setProduct(orderLine, $event)"
+        >
           <option *ngFor="let product of products" [value]="product.id">{{
             product.name
           }}</option>

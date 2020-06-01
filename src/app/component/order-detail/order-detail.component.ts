@@ -29,8 +29,8 @@ export class OrderDetailComponent implements OnInit {
     this.newOrderLine = new OrderLine(
       uuidv4(),
       this.storeService.currentOrder.id,
-      null,
-      1
+      1,
+      null
     );
   }
 
@@ -55,5 +55,13 @@ export class OrderDetailComponent implements OnInit {
     await this.storeService.delete<OrderLine>(id, 'orderLines');
     this.storeService.reload();
     this.ngOnInit();
+  }
+
+  setProduct(orderLine: OrderLine, event) {
+    let productId = event.target.value;
+    let product = this.storeService.products.find(
+      (product) => product.id === productId
+    );
+    orderLine.product = product;
   }
 }

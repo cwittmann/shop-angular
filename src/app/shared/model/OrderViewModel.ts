@@ -1,18 +1,18 @@
 import { OrderStatus } from '../enum/OrderStatus';
 import { User } from './User';
-import { OrderLineViewModel } from './OrderLineViewModel';
 import { v4 as uuidv4 } from 'uuid';
 import { Order } from './Order';
+import { OrderLine } from './OrderLine';
 
 export class OrderViewModel extends Order {
-  orderLines: OrderLineViewModel[];
+  orderLines: OrderLine[];
   user: User;
 
   constructor(
     id: string,
     date: Date,
     status: OrderStatus,
-    orderLines: OrderLineViewModel[],
+    orderLines: OrderLine[],
     user: User
   ) {
     super(id, user.id, date, status);

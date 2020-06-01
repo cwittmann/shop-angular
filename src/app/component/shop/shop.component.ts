@@ -3,7 +3,7 @@ import { StoreService } from 'src/app/shared/service/store.service';
 import { Product } from 'src/app/shared/model/Product';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
-import { OrderLineViewModel } from 'src/app/shared/model/OrderLineViewModel';
+import { OrderLine } from 'src/app/shared/model/OrderLine';
 
 @Component({
   selector: 'app-shop',
@@ -29,13 +29,13 @@ export class ShopComponent implements OnInit {
 
   isInOrder(productId: string) {
     return this.shoppingCart.orderLines.some(
-      (orderLine) => orderLine.productId === productId
+      (orderLine) => orderLine.product.id === productId
     );
   }
 
   getAmount(productId: string) {
     return this.shoppingCart.orderLines.find(
-      (orderLine) => orderLine.productId === productId
+      (orderLine) => orderLine.product.id === productId
     ).amount;
   }
 
@@ -46,10 +46,10 @@ export class ShopComponent implements OnInit {
 
     if (
       !this.shoppingCart.orderLines.find(
-        (orderLine) => orderLine.productId === product.id
+        (orderLine) => orderLine.product.id === product.id
       )
     ) {
-      let orderLine: OrderLineViewModel = new OrderLineViewModel(
+      let orderLine: OrderLine = new OrderLine(
         uuidv4(),
         this.shoppingCart.id,
         amount,
@@ -61,7 +61,7 @@ export class ShopComponent implements OnInit {
 
   removeFromCart(product: Product) {
     let orderLineWithProduct = this.shoppingCart.orderLines.find(
-      (orderLine) => orderLine.productId === product.id
+      (orderLine) => orderLine.product.id === product.id
     );
 
     this.shoppingCart.orderLines.splice(

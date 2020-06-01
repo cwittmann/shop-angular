@@ -1,16 +1,23 @@
 import { BaseModel } from './BaseModel';
+import { Product } from './Product';
 
 export class OrderLine extends BaseModel {
   public static dbName = 'orderLines';
   public id: string;
   public orderId: string;
-  public productId: string;
   public amount: number;
+  public product: Product;
 
-  constructor(id: string, orderId: string, productId: string, amount: number) {
+  public totalPrice: number;
+
+  constructor(id: string, orderId: string, amount: number, product: Product) {
     super(id);
     this.orderId = orderId;
-    this.productId = productId;
     this.amount = amount;
+    this.product = product;
+  }
+
+  public calculatePrice() {
+    this.totalPrice = this.amount * Number(this.product.price);
   }
 }

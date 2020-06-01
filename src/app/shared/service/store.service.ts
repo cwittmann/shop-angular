@@ -3,7 +3,6 @@ import { BackendService } from './backend.service';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderStatus } from '../enum/OrderStatus';
 import { OrderViewModel } from '../model/OrderViewModel';
-import { OrderLineViewModel } from '../model/OrderLineViewModel';
 import { OrderService } from './order.service';
 import { User } from '../model/User';
 import { Manufacturer } from '../model/Manufacturer';
@@ -23,7 +22,7 @@ export class StoreService {
   currentOrder: OrderViewModel;
   manufacturers: Manufacturer[] = [];
   products: Product[] = [];
-  orderLines: OrderLineViewModel[] = [];
+  orderLines: OrderLine[] = [];
   users: User[] = [];
   roles: Role[] = [];
   rights: Right[] = [];
@@ -81,10 +80,10 @@ export class StoreService {
 
     let loadedOrder = await this.orders.find((order) => order.id === id);
 
-    let currentOrderLines: OrderLineViewModel[] = [];
+    let currentOrderLines: OrderLine[] = [];
 
     for (let orderLine of loadedOrder.orderLines) {
-      let currentOrderLine = new OrderLineViewModel(
+      let currentOrderLine = new OrderLine(
         orderLine.id,
         orderLine.orderId,
         orderLine.amount,
@@ -143,10 +142,9 @@ export class StoreService {
     this.users = (await this.backendService.loadUsers()) as User[];
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
     this.products = (await this.backendService.loadProducts()) as Product[];
-    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
+    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLine[];
 
     this.appendUsers();
-    this.appendProducts();
     this.appendOrderLines();
     this.sortOrders();
   }
@@ -155,15 +153,6 @@ export class StoreService {
     for (let order of this.orders) {
       let user = this.users.find((user) => user.id === order.userId);
       order.user = user;
-    }
-  }
-
-  private appendProducts() {
-    for (let orderLine of this.orderLines) {
-      let product = this.products.find(
-        (product) => product.id === orderLine.productId
-      );
-      orderLine.product = product;
     }
   }
 
