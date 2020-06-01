@@ -38,20 +38,20 @@ export class RoleRightListComponent implements OnInit {
   }
 
   async saveEditedInput(roleRight: RoleRight) {
-    await this.storeService.putRoleRight(roleRight);
+    await this.storeService.put<RoleRight>(roleRight, 'roleRights');
     this.storeService.reload();
     this.ngOnInit();
   }
 
   async saveNewInput(newRoleRight: RoleRight) {
-    await this.storeService.postRoleRight(newRoleRight);
+    await this.storeService.post<RoleRight>(newRoleRight, 'roleRights');
     this.storeService.reload();
     this.ngOnInit();
     this.toggleNew();
   }
 
   async deleteInput(id: string) {
-    await this.storeService.deleteRoleRight(id);
+    await this.storeService.delete<RoleRight>(id, 'roleRights');
     this.storeService.reload();
     this.ngOnInit();
   }

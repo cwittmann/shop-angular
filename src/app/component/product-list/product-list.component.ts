@@ -38,20 +38,20 @@ export class ProductListComponent implements OnInit {
   }
 
   async saveEditedInput(product: Product) {
-    await this.storeService.putProduct(product);
+    await this.storeService.put<Product>(product, 'products');
     this.storeService.reload();
     this.ngOnInit();
   }
 
   async saveNewInput(newProduct: Product) {
-    await this.storeService.postProduct(newProduct);
+    await this.storeService.post<Product>(newProduct, 'products');
     this.storeService.reload();
     this.ngOnInit();
     this.toggleNew();
   }
 
   async deleteInput(id: string) {
-    await this.storeService.deleteProduct(id);
+    await this.storeService.delete<Product>(id, 'products');
     this.storeService.reload();
     this.ngOnInit();
   }
