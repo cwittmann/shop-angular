@@ -38,32 +38,30 @@ export class StoreService {
 
   shoppingCart: OrderViewModel;
 
+  loading: boolean = false;
+
   constructor(
     private backendService: BackendService,
     private orderService: OrderService
   ) {}
 
   async initialize(): Promise<boolean> {
+    this.loading = true;
+
     await this.loadOrders();
     await this.loadUser();
     await this.initializeShoppingCart();
+
+    this.loading = false;
 
     return true;
   }
 
   async reload() {
+    this.loading = true;
     await this.loadOrders();
     this.initializeShoppingCart();
-  }
-
-  async reloadItems(dbName: string) {
-    switch (dbName) {
-      case 'manufacturers':
-        this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
-        break;
-    }
-
-    this.initializeShoppingCart();
+    this.loading = false;
   }
 
   post<T>(item: T, dbName: string) {
@@ -85,6 +83,8 @@ export class StoreService {
   }
 
   async loadOrder(id: string) {
+    this.loading = true;
+
     let loadedOrder = await this.orders.find((order) => order.id === id);
 
     let currentOrderLines: OrderLineViewModel[] = [];
@@ -107,6 +107,8 @@ export class StoreService {
       currentOrderLines,
       loadedOrder.user
     );
+
+    this.loading = false;
   }
 
   async postOrderViewModel() {

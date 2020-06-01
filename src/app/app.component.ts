@@ -9,7 +9,9 @@ import { UserViewModel } from './shared/model/UserViewModel';
 })
 export class AppComponent {
   title = 'shop';
-  finishedLoading: boolean = false;
+  get loading(): boolean {
+    return this.storeService.loading;
+  }
 
   get currentUser(): UserViewModel {
     return this.storeService.currentUser;
@@ -18,7 +20,6 @@ export class AppComponent {
   constructor(private storeService: StoreService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.storeService.initialize();
-    this.finishedLoading = true;
+    this.storeService.initialize();
   }
 }
