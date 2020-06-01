@@ -24,10 +24,10 @@
     <tr *ngIf="showNew" class="table-primary">
       <td><input type="text" [(ngModel)]="newProduct.name" /></td>
       <td><input type="text" [(ngModel)]="newProduct.description" /></td>
-      <select [(ngModel)]="newProduct.manufacturerId">
+      <select [(ngModel)]="newProduct.manufacturer">
         <option
           *ngFor="let manufacturer of manufacturers"
-          [value]="manufacturer.id"
+          [ngValue]="manufacturer"
           >{{ manufacturer.name }}</option
         >
       </select>
@@ -45,7 +45,10 @@
       <td><input type="text" [(ngModel)]="product.name" /></td>
       <td><input type="text" [(ngModel)]="product.description" /></td>
       <td>
-        <select [(ngModel)]="product.manufacturerId">
+        <select
+          [(ngModel)]="product.manufacturer.id"
+          (change)="setManufacturer(product, $event)"
+        >
           <option
             *ngFor="let manufacturer of manufacturers"
             [value]="manufacturer.id"

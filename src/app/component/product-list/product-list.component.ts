@@ -26,10 +26,10 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.newProduct = new Product(
       uuidv4(),
-      null,
       'Name',
       'Description',
-      '0.00'
+      '0.00',
+      null
     );
   }
 
@@ -54,5 +54,13 @@ export class ProductListComponent implements OnInit {
     await this.storeService.deleteProduct(id);
     this.storeService.reload();
     this.ngOnInit();
+  }
+
+  setManufacturer(product: Product, event) {
+    let manufacturerId = event.target.value;
+    let manufacturer = this.storeService.manufacturers.find(
+      (manufacturer) => manufacturer.id === manufacturerId
+    );
+    product.manufacturer = manufacturer;
   }
 }

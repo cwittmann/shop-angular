@@ -3,13 +3,11 @@ import { BackendService } from './backend.service';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderStatus } from '../enum/OrderStatus';
 import { OrderViewModel } from '../model/OrderViewModel';
-import { ManufacturerViewModel } from '../model/ManufacturerViewModel';
-import { ProductViewModel } from '../model/ProductViewModel';
 import { OrderLineViewModel } from '../model/OrderLineViewModel';
 import { UserViewModel } from '../model/UserViewModel';
 import { OrderService } from './order.service';
-import { Manufacturer } from '../model/Manufacturer';
 import { User } from '../model/User';
+import { Manufacturer } from '../model/Manufacturer';
 import { Product } from '../model/Product';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
@@ -27,8 +25,8 @@ import { BaseModel } from '../model/BaseModel';
 export class StoreService {
   orders: OrderViewModel[] = [];
   currentOrder: OrderViewModel;
-  manufacturers: ManufacturerViewModel[] = [];
-  products: ProductViewModel[] = [];
+  manufacturers: Manufacturer[] = [];
+  products: Product[] = [];
   orderLines: OrderLineViewModel[] = [];
   users: UserViewModel[] = [];
   roles: RoleViewModel[] = [];
@@ -219,14 +217,13 @@ export class StoreService {
     this.roles = (await this.backendService.loadRoles()) as RoleViewModel[];
     this.roleRights = (await this.backendService.loadRoleRights()) as RoleRightViewModel[];
     this.users = (await this.backendService.loadUsers()) as UserViewModel[];
-    this.manufacturers = (await this.backendService.loadManufacturers()) as ManufacturerViewModel[];
-    this.products = (await this.backendService.loadProducts()) as ProductViewModel[];
+    this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
+    this.products = (await this.backendService.loadProducts()) as Product[];
     this.orderLines = (await this.backendService.loadOrderLines()) as OrderLineViewModel[];
 
     this.appendRoleRights();
     this.appendRoles();
     this.appendUsers();
-    this.appendManufacturers();
     this.appendProducts();
     this.appendOrderLines();
     this.sortOrders();
@@ -256,15 +253,6 @@ export class StoreService {
     for (let order of this.orders) {
       let user = this.users.find((user) => user.id === order.userId);
       order.user = user;
-    }
-  }
-
-  private appendManufacturers() {
-    for (let product of this.products) {
-      let manufacturer = this.manufacturers.find(
-        (manufacturer) => manufacturer.id === product.manufacturerId
-      );
-      product.manufacturer = manufacturer;
     }
   }
 
