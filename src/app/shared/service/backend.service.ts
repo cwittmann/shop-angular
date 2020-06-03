@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
@@ -14,25 +14,37 @@ import { BaseModel } from '../model/BaseModel';
   providedIn: 'root',
 })
 export class BackendService {
-  constructor(private httpClient: HttpClient) {}
+  headers: HttpHeaders;
+
+  constructor(private httpClient: HttpClient) {
+    this.headers = new HttpHeaders({
+      Authorization: 'Basic ' + btoa('user1:password1'),
+    });
+  }
 
   // GENERIC
 
   async post<T>(item: T, dbName: string): Promise<T> {
     return await this.httpClient
-      .post<T>('http://localhost:8000/' + dbName, item)
+      .post<T>('http://localhost:8000/' + dbName, item, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async put<T extends BaseModel>(item: T, dbName: string): Promise<T> {
     return await this.httpClient
-      .put<T>('http://localhost:8000/' + dbName + '/' + item.id, item)
+      .put<T>('http://localhost:8000/' + dbName + '/' + item.id, item, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async delete<T>(id: string, dbName: string) {
     return await this.httpClient
-      .delete<T>('http://localhost:8000/' + dbName + '/' + id)
+      .delete<T>('http://localhost:8000/' + dbName + '/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -40,25 +52,31 @@ export class BackendService {
 
   async loadOrders(): Promise<Order[]> {
     return await this.httpClient
-      .get<Order[]>('http://localhost:8000/orders')
+      .get<Order[]>('http://localhost:8000/orders', { headers: this.headers })
       .toPromise();
   }
 
   async postOrder(order: Order): Promise<Order> {
     return await this.httpClient
-      .post<Order>('http://localhost:8000/orders', order)
+      .post<Order>('http://localhost:8000/orders', order, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async putOrder(order: Order): Promise<Order> {
     return await this.httpClient
-      .put<Order>('http://localhost:8000/orders/' + order.id, order)
+      .put<Order>('http://localhost:8000/orders/' + order.id, order, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async deleteOrder(id: string) {
     return await this.httpClient
-      .delete<Order>('http://localhost:8000/orders/' + id)
+      .delete<Order>('http://localhost:8000/orders/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -66,13 +84,17 @@ export class BackendService {
 
   async loadOrderLines(): Promise<OrderLine[]> {
     return await this.httpClient
-      .get<OrderLine[]>('http://localhost:8000/orderLines')
+      .get<OrderLine[]>('http://localhost:8000/orderLines', {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async postOrderLine(orderLine: OrderLine) {
     await this.httpClient
-      .post<OrderLine>('http://localhost:8000/orderLines', orderLine)
+      .post<OrderLine>('http://localhost:8000/orderLines', orderLine, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -80,14 +102,17 @@ export class BackendService {
     return await this.httpClient
       .put<OrderLine>(
         'http://localhost:8000/orderLines/' + orderLine.id,
-        orderLine
+        orderLine,
+        { headers: this.headers }
       )
       .toPromise();
   }
 
   async deleteOrderLine(id: string) {
     return await this.httpClient
-      .delete<OrderLine>('http://localhost:8000/orderLines/' + id)
+      .delete<OrderLine>('http://localhost:8000/orderLines/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -95,25 +120,33 @@ export class BackendService {
 
   async loadProducts(): Promise<Product[]> {
     return await this.httpClient
-      .get<Product[]>('http://localhost:8000/products')
+      .get<Product[]>('http://localhost:8000/products', {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async postProduct(product: Product): Promise<Product> {
     return await this.httpClient
-      .post<Product>('http://localhost:8000/products', product)
+      .post<Product>('http://localhost:8000/products', product, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async putProduct(product: Product): Promise<Product> {
     return await this.httpClient
-      .put<Product>('http://localhost:8000/products/' + product.id, product)
+      .put<Product>('http://localhost:8000/products/' + product.id, product, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async deleteProduct(id: string) {
     return await this.httpClient
-      .delete<Product>('http://localhost:8000/products/' + id)
+      .delete<Product>('http://localhost:8000/products/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -121,13 +154,17 @@ export class BackendService {
 
   async loadManufacturers(): Promise<Manufacturer[]> {
     return await this.httpClient
-      .get<Manufacturer[]>('http://localhost:8000/manufacturers')
+      .get<Manufacturer[]>('http://localhost:8000/manufacturers', {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async postManufacturer(manufacturer: Manufacturer): Promise<Manufacturer> {
     return await this.httpClient
-      .post<Manufacturer>('http://localhost:8000/manufacturers', manufacturer)
+      .post<Manufacturer>('http://localhost:8000/manufacturers', manufacturer, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -135,14 +172,17 @@ export class BackendService {
     return await this.httpClient
       .put<Manufacturer>(
         'http://localhost:8000/manufacturers/' + manufacturer.id,
-        manufacturer
+        manufacturer,
+        { headers: this.headers }
       )
       .toPromise();
   }
 
   async deleteManufacturer(id: string) {
     return await this.httpClient
-      .delete<Manufacturer>('http://localhost:8000/manufacturers/' + id)
+      .delete<Manufacturer>('http://localhost:8000/manufacturers/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -150,31 +190,37 @@ export class BackendService {
 
   async loadUsers(): Promise<User[]> {
     return await this.httpClient
-      .get<User[]>('http://localhost:8000/users')
+      .get<User[]>('http://localhost:8000/users', { headers: this.headers })
       .toPromise();
   }
 
   async loadUser(id: string): Promise<User> {
     return await this.httpClient
-      .get<User>('http://localhost:8000/users/' + id)
+      .get<User>('http://localhost:8000/users/' + id, { headers: this.headers })
       .toPromise();
   }
 
   async postUser(user: User): Promise<User> {
     return await this.httpClient
-      .post<User>('http://localhost:8000/users', user)
+      .post<User>('http://localhost:8000/users', user, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async putUser(user: User): Promise<User> {
     return await this.httpClient
-      .put<User>('http://localhost:8000/users/' + user.id, user)
+      .put<User>('http://localhost:8000/users/' + user.id, user, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async deleteUser(id: string) {
     return await this.httpClient
-      .delete<User>('http://localhost:8000/users/' + id)
+      .delete<User>('http://localhost:8000/users/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -182,31 +228,39 @@ export class BackendService {
 
   async loadRights(): Promise<Right[]> {
     return await this.httpClient
-      .get<Right[]>('http://localhost:8000/rights')
+      .get<Right[]>('http://localhost:8000/rights', { headers: this.headers })
       .toPromise();
   }
 
   async loadRight(id: string): Promise<Right> {
     return await this.httpClient
-      .get<Right>('http://localhost:8000/rights/' + id)
+      .get<Right>('http://localhost:8000/rights/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async postRight(right: Right): Promise<Right> {
     return await this.httpClient
-      .post<Right>('http://localhost:8000/rights', right)
+      .post<Right>('http://localhost:8000/rights', right, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async putRight(right: Right): Promise<Right> {
     return await this.httpClient
-      .put<Right>('http://localhost:8000/rights/' + right.id, right)
+      .put<Right>('http://localhost:8000/rights/' + right.id, right, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async deleteRight(id: string) {
     return await this.httpClient
-      .delete<Right>('http://localhost:8000/rights/' + id)
+      .delete<Right>('http://localhost:8000/rights/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -214,31 +268,37 @@ export class BackendService {
 
   async loadRoles(): Promise<Role[]> {
     return await this.httpClient
-      .get<Role[]>('http://localhost:8000/roles')
+      .get<Role[]>('http://localhost:8000/roles', { headers: this.headers })
       .toPromise();
   }
 
   async loadRole(id: string): Promise<Role> {
     return await this.httpClient
-      .get<Role>('http://localhost:8000/roles/' + id)
+      .get<Role>('http://localhost:8000/roles/' + id, { headers: this.headers })
       .toPromise();
   }
 
   async postRole(role: Role): Promise<Role> {
     return await this.httpClient
-      .post<Role>('http://localhost:8000/roles', role)
+      .post<Role>('http://localhost:8000/roles', role, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async putRole(role: Role): Promise<Role> {
     return await this.httpClient
-      .put<Role>('http://localhost:8000/roles/' + role.id, role)
+      .put<Role>('http://localhost:8000/roles/' + role.id, role, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async deleteRole(id: string) {
     return await this.httpClient
-      .delete<Role>('http://localhost:8000/roles/' + id)
+      .delete<Role>('http://localhost:8000/roles/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -246,19 +306,25 @@ export class BackendService {
 
   async loadRoleRights(): Promise<RoleRight[]> {
     return await this.httpClient
-      .get<RoleRight[]>('http://localhost:8000/roleRights')
+      .get<RoleRight[]>('http://localhost:8000/roleRights', {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async loadRoleRight(id: string): Promise<RoleRight> {
     return await this.httpClient
-      .get<RoleRight>('http://localhost:8000/roleRights/' + id)
+      .get<RoleRight>('http://localhost:8000/roleRights/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
   async postRoleRight(roleRight: RoleRight): Promise<RoleRight> {
     return await this.httpClient
-      .post<RoleRight>('http://localhost:8000/roleRights', roleRight)
+      .post<RoleRight>('http://localhost:8000/roleRights', roleRight, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 
@@ -266,14 +332,17 @@ export class BackendService {
     return await this.httpClient
       .put<RoleRight>(
         'http://localhost:8000/roleRights/' + roleRight.id,
-        roleRight
+        roleRight,
+        { headers: this.headers }
       )
       .toPromise();
   }
 
   async deleteRoleRight(id: string) {
     return await this.httpClient
-      .delete<RoleRight>('http://localhost:8000/roleRights/' + id)
+      .delete<RoleRight>('http://localhost:8000/roleRights/' + id, {
+        headers: this.headers,
+      })
       .toPromise();
   }
 }
