@@ -61,6 +61,5 @@ export class UserListComponent implements OnInit {
     let roleId = event.target.value;
     let role = this.storeService.roles.find((role) => role.id === roleId);
     user.role = role;
-    console.log(this.users);
   }
 }

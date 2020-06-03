@@ -1,6 +1,6 @@
 <div *ngIf="loading" class="spinner" role="status"></div>
 
-<nav *ngIf="!loading" class="navbar">
+<nav *ngIf="!loading && currentUser" class="navbar">
   <ul ngbNav class="nav-tabs mr-auto">
     <img class="logo" src="../assets/images/logo.png" />
     <li ngbNavItem *ngIf="['Shop', 'Read'] | rights">
@@ -31,6 +31,9 @@
   <span class="navbar-text">
     {{ currentUser?.firstName }} {{ currentUser?.lastName }}
     <small>({{ currentUser?.role?.name }})</small>
+    <button class="btn ml-1" (click)="logout()">
+      <img src="../assets/icons/logout.png" />
+    </button>
   </span>
 </nav>
 

@@ -10,20 +10,59 @@ import { CheckoutComponent } from './component/checkout/checkout.component';
 import { RightListComponent } from './component/right-list/right-list.component';
 import { RoleRightListComponent } from './component/role-right-list/role-right-list.component';
 import { RoleListComponent } from './component/role-list/role-list.component';
+import { LoginComponent } from './component/login/login.component';
+import { AuthGuardService } from './shared/service/auth-guard.service';
 
 const routes: Routes = [
-  { path: 'shop', component: ShopComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'order-list', component: OrderListComponent },
-  { path: 'order-detail/:id', component: OrderDetailComponent },
-  { path: 'product-list', component: ProductListComponent },
-  { path: 'manufacturer-list', component: ManufacturerListComponent },
-  { path: 'user-list', component: UserListComponent },
-  { path: 'right-list', component: RightListComponent },
-  { path: 'role-list', component: RoleListComponent },
-  { path: 'role-right-list', component: RoleRightListComponent },
-  { path: '', redirectTo: 'shop', pathMatch: 'full' },
-  { path: '*', redirectTo: 'shop', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'shop', canActivate: [AuthGuardService], component: ShopComponent },
+  {
+    path: 'checkout',
+    canActivate: [AuthGuardService],
+    component: CheckoutComponent,
+  },
+  {
+    path: 'order-list',
+    canActivate: [AuthGuardService],
+    component: OrderListComponent,
+  },
+  {
+    path: 'order-detail/:id',
+    canActivate: [AuthGuardService],
+    component: OrderDetailComponent,
+  },
+  {
+    path: 'product-list',
+    canActivate: [AuthGuardService],
+    component: ProductListComponent,
+  },
+  {
+    path: 'manufacturer-list',
+    canActivate: [AuthGuardService],
+    component: ManufacturerListComponent,
+  },
+  {
+    path: 'user-list',
+    canActivate: [AuthGuardService],
+    component: UserListComponent,
+  },
+  {
+    path: 'right-list',
+    canActivate: [AuthGuardService],
+    component: RightListComponent,
+  },
+  {
+    path: 'role-list',
+    canActivate: [AuthGuardService],
+    component: RoleListComponent,
+  },
+  {
+    path: 'role-right-list',
+    canActivate: [AuthGuardService],
+    component: RoleRightListComponent,
+  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '*', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

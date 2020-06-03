@@ -42,7 +42,6 @@ export class OrderListComponent implements OnInit {
   }
 
   async saveEditedInput(order: Order) {
-    console.log(order);
     await this.storeService.putOrder(order);
     this.storeService.reload();
   }

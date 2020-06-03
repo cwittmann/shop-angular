@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
@@ -15,11 +15,29 @@ import { BaseModel } from '../model/BaseModel';
 })
 export class BackendService {
   headers: HttpHeaders;
+  userAuthenticated: EventEmitter<Boolean>;
 
   constructor(private httpClient: HttpClient) {
+    this.userAuthenticated = new EventEmitter();
+  }
+
+  // AUTHENTICATION
+
+  authenticate(user: string, password: string) {
     this.headers = new HttpHeaders({
-      Authorization: 'Basic ' + btoa('user1:password1'),
+      authorization: 'Basic ' + btoa(user + ':' + password),
     });
+
+    this.httpClient
+      .get('http://localhost:8000/auth', {
+        headers: this.headers,
+        responseType: 'text',
+      })
+      .subscribe((res) => {
+        if (res === 'Successful') {
+          this.userAuthenticated.emit(true);
+        }
+      });
   }
 
   // GENERIC
