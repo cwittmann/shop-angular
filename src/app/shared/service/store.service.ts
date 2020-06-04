@@ -57,16 +57,17 @@ export class StoreService {
     this.loading = false;
   }
 
-  post<T>(item: T, dbName: string) {
-    this.backendService.post<T>(item, dbName);
+  post<T>(item: T, dbNamePlural: string) {
+    this.backendService.post<T>(item, dbNamePlural);
   }
 
-  put<T extends BaseModel>(item: T, dbName: string) {
-    this.backendService.put<T>(item, dbName);
+  put<T extends BaseModel>(item: T, dbNamePlural: string) {
+    console.log(item);
+    this.backendService.put<T>(item, dbNamePlural);
   }
 
-  delete<T>(id: string, dbName: string) {
-    this.backendService.delete<T>(id, dbName);
+  delete<T>(id: string, dbNamePlural: string) {
+    this.backendService.delete<T>(id, dbNamePlural);
   }
 
   loadUser() {

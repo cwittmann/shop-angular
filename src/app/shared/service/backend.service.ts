@@ -42,25 +42,25 @@ export class BackendService {
 
   // GENERIC
 
-  async post<T>(item: T, dbName: string): Promise<T> {
+  async post<T>(item: T, dbNamePlural: string): Promise<T> {
     return await this.httpClient
-      .post<T>('http://localhost:8000/' + dbName, item, {
+      .post<T>('http://localhost:8000/' + dbNamePlural, item, {
         headers: this.headers,
       })
       .toPromise();
   }
 
-  async put<T extends BaseModel>(item: T, dbName: string): Promise<T> {
+  async put<T extends BaseModel>(item: T, dbNamePlural: string): Promise<T> {
     return await this.httpClient
-      .put<T>('http://localhost:8000/' + dbName + '/' + item.id, item, {
+      .put<T>('http://localhost:8000/' + dbNamePlural + '/' + item.id, item, {
         headers: this.headers,
       })
       .toPromise();
   }
 
-  async delete<T>(id: string, dbName: string) {
+  async delete<T>(id: string, dbNamePlural: string) {
     return await this.httpClient
-      .delete<T>('http://localhost:8000/' + dbName + '/' + id, {
+      .delete<T>('http://localhost:8000/' + dbNamePlural + '/' + id, {
         headers: this.headers,
       })
       .toPromise();

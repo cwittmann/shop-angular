@@ -2,7 +2,8 @@ import { BaseModel } from './BaseModel';
 import { Product } from './Product';
 
 export class OrderLine extends BaseModel {
-  public static dbName = 'orderLines';
+  public static dbNameSingular = 'orderLine';
+  public static dbNamePlural = 'orderLines';
   public id: string;
   public orderId: string;
   public amount: number;

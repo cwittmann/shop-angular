@@ -2,7 +2,8 @@ import { BaseModel } from './BaseModel';
 import { Manufacturer } from './Manufacturer';
 
 export class Product extends BaseModel {
-  public static dbName = 'products';
+  public static dbNameSingular = 'product';
+  public static dbNamePlural = 'products';
   public id: string;
   public name: string;
   public description: string;

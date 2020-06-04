@@ -3,9 +3,17 @@ h5 {
 }
 
 input {
+  padding: 0.5vw;
   font-size: calc(8px + 0.5vw);
-  background: 0;
-  border: 0;
+  background: white;
+  border: 1px solid lightgray;
+}
+
+select {
+  padding: 0.5vw;
+  font-size: calc(8px + 0.5vw);
+  background: white;
+  border: 1px solid lightgray;
 }
 
 .newInput {

@@ -1,7 +1,8 @@
 import { BaseModel } from './BaseModel';
 
 export class Manufacturer extends BaseModel {
-  public static dbName = 'manufacturers';
+  public static dbNameSingular = 'manufacturer';
+  public static dbNamePlural = 'manufacturers';
   public id: string;
   public name: string;
 

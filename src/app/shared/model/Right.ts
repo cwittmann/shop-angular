@@ -1,7 +1,8 @@
 import { BaseModel } from './BaseModel';
 
 export class Right extends BaseModel {
-  public static dbName = 'rights';
+  public static dbNameSingular = 'right';
+  public static dbNamePlural = 'rights';
   public id: string;
   public entity: string;
   public permission: string;

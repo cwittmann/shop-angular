@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Column } from 'src/app/shared/model/Column';
 import { StoreService } from 'src/app/shared/service/store.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit',
@@ -15,66 +16,48 @@ export class EditComponent implements OnInit {
   model: IGenericModel<any>;
 
   @Input()
+  nestedModel: IGenericModel<any>;
+
+  @Input()
   columns: Column[];
 
-  itemLink: any[];
+  id: string;
 
-  get items(): any[] {
-    return this.storeService[this.model.dbName];
+  get item(): any {
+    return this.storeService[this.model.dbNamePlural].find(
+      (item) => item.id === this.id
+    );
   }
 
-  options: Map<string, any[]>;
+  get options(): any[] {
+    return this.storeService[this.nestedModel.dbNamePlural];
+  }
 
+  isNew: boolean;
   newItem: any;
-  showNew: boolean = false;
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.id = activatedRoute.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
     this.newItem = new this.model(uuidv4());
-    this.options = new Map<string, any[]>();
-
-    for (let column of this.columns) {
-      if (column.dataType === 'select') {
-        let columnOptions = this.storeService[column.name + 's'];
-        this.options.set(column.name, columnOptions);
-      }
-    }
   }
 
-  toggleNew() {
-    this.showNew = !this.showNew;
-  }
-
-  async saveNewInput<T>(newItem: T) {
-    await this.storeService.post<T>(newItem, this.model.dbName);
-    this.storeService.reload();
-    this.ngOnInit();
-    this.toggleNew();
-  }
-
-  async saveEditedInput<T extends BaseModel>(item: T) {
-    await this.storeService.put<T>(item, this.model.dbName);
+  async save<T extends BaseModel>() {
+    console.log(this.item[this.nestedModel.dbNameSingular]);
+    await this.storeService.put<T>(this.item, this.model.dbNamePlural);
     this.storeService.reload();
     this.ngOnInit();
   }
 
-  async deleteInput<T>(id: string) {
-    await this.storeService.delete<T>(id, this.model.dbName);
-    this.storeService.reload();
-    this.ngOnInit();
-  }
-
-  setOption(item: any, event) {
-    let manufacturerId = event.target.value;
-    let manufacturer = this.storeService.manufacturers.find(
-      (manufacturer) => manufacturer.id === manufacturerId
-    );
-    item.manufacturerId = manufacturer.id;
-    item.manufacturer = manufacturer;
-  }
-
-  trackByIdx(index: number, obj: any): any {
-    return index;
+  setOption(event) {
+    let optionId = event.target.value;
+    let option = this.options.find((option) => option.id === optionId);
+    this.item[this.nestedModel.dbNameSingular + 'Id'] = option.id;
+    this.item[this.nestedModel.dbNameSingular] = option;
   }
 }

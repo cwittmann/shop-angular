@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from './shared/service/store.service';
 import { User } from './shared/model/User';
 import { AuthService } from './shared/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,13 @@ export class AppComponent {
 
   constructor(
     private storeService: StoreService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
-  async ngOnInit(): Promise<void> {}
+  async ngOnInit(): Promise<void> {
+    this.router.navigate(['']);
+  }
 
   logout() {
     this.authService.logout();

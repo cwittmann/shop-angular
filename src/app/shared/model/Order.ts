@@ -2,7 +2,8 @@ import { OrderStatus } from '../enum/OrderStatus';
 import { BaseModel } from './BaseModel';
 
 export class Order extends BaseModel {
-  public static dbName = 'orders';
+  public static dbNameSingular = 'order';
+  public static dbNamePlural = 'orders';
   public id: string;
   public userId: string;
   public date: Date;

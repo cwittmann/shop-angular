@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Type } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { Column } from 'src/app/shared/model/Column';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -16,10 +17,10 @@ export class ListComponent implements OnInit {
   columns: Column[];
 
   get items(): any[] {
-    return this.storeService[this.model.dbName];
+    return this.storeService[this.model.dbNamePlural];
   }
 
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -28,7 +29,7 @@ export class ListComponent implements OnInit {
   }
 
   edit(item: any) {
-    alert('EDIT');
+    this.router.navigate(['/product-detail/' + item.id]);
   }
 
   delete(id: string) {

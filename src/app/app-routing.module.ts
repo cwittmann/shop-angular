@@ -12,6 +12,7 @@ import { RoleListComponent } from './component/role-list/role-list.component';
 import { LoginComponent } from './component/login/login.component';
 import { AuthGuardService } from './shared/service/auth-guard.service';
 import { UserListComponent } from './component/user-list/user-list.component';
+import { ProductDetailComponent } from './component/product-detail/product-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +36,11 @@ const routes: Routes = [
     path: 'product-list',
     canActivate: [AuthGuardService],
     component: ProductListComponent,
+  },
+  {
+    path: 'product-detail/:id',
+    canActivate: [AuthGuardService],
+    component: ProductDetailComponent,
   },
   {
     path: 'manufacturer-list',

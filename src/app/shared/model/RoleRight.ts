@@ -3,7 +3,8 @@ import { Role } from './Role';
 import { Right } from './Right';
 
 export class RoleRight extends BaseModel {
-  public static dbName = 'roleRights';
+  public static dbNameSingular = 'roleRight';
+  public static dbNamePlural = 'roleRights';
   public id: string;
   public roleId: string;
   public rightId: string;

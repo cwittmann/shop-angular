@@ -2,7 +2,8 @@ import { BaseModel } from './BaseModel';
 import { Role } from './Role';
 
 export class User extends BaseModel {
-  public static dbName = 'users';
+  public static dbNameSingular = 'user';
+  public static dbNamePlural = 'users';
 
   public id: string;
   public firstName: string;
