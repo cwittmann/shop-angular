@@ -6,6 +6,8 @@ export class Right extends BaseModel {
   public entity: string;
   public permission: string;
 
+  public name: string;
+
   constructor(id: string, entity: string, permission: string) {
     super(id);
     this.entity = entity;

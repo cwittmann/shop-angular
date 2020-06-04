@@ -20,6 +20,13 @@ import { RoleRightListComponent } from './component/role-right-list/role-right-l
 import { RoleListComponent } from './component/role-list/role-list.component';
 import { ListComponent } from './component/list/list.component';
 import { LoginComponent } from './component/login/login.component';
+import { ManufacturerDetailComponent } from './component/manufacturer-detail/manufacturer-detail.component';
+import { ProductDetailComponent } from './component/product-detail/product-detail.component';
+import { RightDetailComponent } from './component/right-detail/right-detail.component';
+import { RoleDetailComponent } from './component/role-detail/role-detail.component';
+import { RoleRightDetailComponent } from './component/role-right-detail/role-right-detail.component';
+import { UserDetailComponent } from './component/user-detail/user-detail.component';
+import { EditComponent } from './component/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +44,13 @@ import { LoginComponent } from './component/login/login.component';
     RoleListComponent,
     ListComponent,
     LoginComponent,
+    ManufacturerDetailComponent,
+    ProductDetailComponent,
+    RightDetailComponent,
+    RoleDetailComponent,
+    RoleRightDetailComponent,
+    UserDetailComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,

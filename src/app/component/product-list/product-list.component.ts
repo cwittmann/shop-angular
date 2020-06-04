@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from 'src/app/shared/service/store.service';
 import { Product } from 'src/app/shared/model/Product';
-import { v4 as uuidv4 } from 'uuid';
-import { Manufacturer } from 'src/app/shared/model/Manufacturer';
+import { IGenericModel } from 'src/app/shared/model/GenericModel';
+import { Column } from 'src/app/shared/model/Column';
 
 @Component({
   selector: 'app-product-list',
@@ -10,58 +9,18 @@ import { Manufacturer } from 'src/app/shared/model/Manufacturer';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  newProduct: Product;
-  showNew: boolean = false;
+  genericModel: IGenericModel<any>;
+  columns: Column[];
 
-  get products(): Product[] {
-    return this.storeService.products;
-  }
-
-  get manufacturers(): Manufacturer[] {
-    return this.storeService.manufacturers;
-  }
-
-  constructor(private storeService: StoreService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.newProduct = new Product(
-      uuidv4(),
-      'Name',
-      'Description',
-      '0.00',
-      null,
-      null
-    );
-  }
-
-  toggleNew() {
-    this.showNew = !this.showNew;
-  }
-
-  async saveEditedInput(product: Product) {
-    await this.storeService.put<Product>(product, 'products');
-    this.storeService.reload();
-    this.ngOnInit();
-  }
-
-  async saveNewInput(newProduct: Product) {
-    await this.storeService.post<Product>(newProduct, 'products');
-    this.storeService.reload();
-    this.ngOnInit();
-    this.toggleNew();
-  }
-
-  async deleteInput(id: string) {
-    await this.storeService.delete<Product>(id, 'products');
-    this.storeService.reload();
-    this.ngOnInit();
-  }
-
-  setManufacturer(product: Product, event) {
-    let manufacturerId = event.target.value;
-    let manufacturer = this.storeService.manufacturers.find(
-      (manufacturer) => manufacturer.id === manufacturerId
-    );
-    product.manufacturer = manufacturer;
+    this.genericModel = Product;
+    this.columns = [
+      new Column('name', 'Name', 'text'),
+      new Column('description', 'Description', 'text'),
+      new Column('price', 'Price', 'text'),
+      new Column('manufacturer', 'Manufacturer', 'select'),
+    ];
   }
 }

@@ -4,7 +4,6 @@ import { OrderListComponent } from './component/order-list/order-list.component'
 import { OrderDetailComponent } from './component/order-detail/order-detail.component';
 import { ProductListComponent } from './component/product-list/product-list.component';
 import { ManufacturerListComponent } from './component/manufacturer-list/manufacturer-list.component';
-import { UserListComponent } from './component/user-list/user-list.component';
 import { ShopComponent } from './component/shop/shop.component';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { RightListComponent } from './component/right-list/right-list.component';
@@ -12,6 +11,7 @@ import { RoleRightListComponent } from './component/role-right-list/role-right-l
 import { RoleListComponent } from './component/role-list/role-list.component';
 import { LoginComponent } from './component/login/login.component';
 import { AuthGuardService } from './shared/service/auth-guard.service';
+import { UserListComponent } from './component/user-list/user-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

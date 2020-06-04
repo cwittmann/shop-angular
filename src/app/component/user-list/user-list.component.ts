@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from 'src/app/shared/service/store.service';
+import { IGenericModel } from 'src/app/shared/model/GenericModel';
+import { Column } from 'src/app/shared/model/Column';
 import { User } from 'src/app/shared/model/User';
-import { v4 as uuidv4 } from 'uuid';
-import { Role } from 'src/app/shared/model/Role';
 
 @Component({
   selector: 'app-user-list',
@@ -10,56 +9,18 @@ import { Role } from 'src/app/shared/model/Role';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
-  newUser: User;
-  showNew: boolean = false;
+  genericModel: IGenericModel<any>;
+  columns: Column[];
 
-  get users(): User[] {
-    return this.storeService.users;
-  }
-
-  get roles(): Role[] {
-    return this.storeService.roles;
-  }
-
-  constructor(private storeService: StoreService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.newUser = new User(
-      uuidv4(),
-      'First name',
-      'Last name',
-      'City',
-      null,
-      null
-    );
-  }
-
-  toggleNew() {
-    this.showNew = !this.showNew;
-  }
-
-  async saveEditedInput(user: User) {
-    await this.storeService.put<User>(user, 'users');
-    this.storeService.reload();
-    this.ngOnInit();
-  }
-
-  async saveNewInput(newUser: User) {
-    await this.storeService.post<User>(newUser, 'users');
-    this.storeService.reload();
-    this.ngOnInit();
-    this.toggleNew();
-  }
-
-  async deleteInput(id: string) {
-    await this.storeService.delete<User>(id, 'users');
-    this.storeService.reload();
-    this.ngOnInit();
-  }
-
-  setRole(user: User, event) {
-    let roleId = event.target.value;
-    let role = this.storeService.roles.find((role) => role.id === roleId);
-    user.role = role;
+    this.genericModel = User;
+    this.columns = [
+      new Column('firstName', 'First name', 'text'),
+      new Column('lastName', 'Last name', 'text'),
+      new Column('city', 'City', 'text'),
+      new Column('role', 'Role', 'select'),
+    ];
   }
 }

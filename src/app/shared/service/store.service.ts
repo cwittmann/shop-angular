@@ -70,9 +70,10 @@ export class StoreService {
   }
 
   loadUser() {
-    let numberOfUsers = this.users.length;
+    let admins = this.users.filter((user) => user.role.name === 'Admin');
+    let numberOfUsers = admins.length;
     let randomNumber = Math.floor(Math.random() * Math.floor(numberOfUsers));
-    this.currentUser = this.users[randomNumber];
+    this.currentUser = admins[randomNumber];
   }
 
   async loadOrder(id: string) {
@@ -136,8 +137,13 @@ export class StoreService {
 
   private async loadData() {
     this.rights = (await this.backendService.loadRights()) as Right[];
+    this.rights.forEach(
+      (right) => (right.name = right.entity + ' - ' + right.permission)
+    );
+
     this.roleRights = (await this.backendService.loadRoleRights()) as RoleRight[];
     this.roles = (await this.backendService.loadRoles()) as Role[];
+    this.appendRolesAndRightsToRoleRights();
     this.appendRightsToRoles();
 
     this.users = (await this.backendService.loadUsers()) as User[];
@@ -169,6 +175,15 @@ export class StoreService {
         let right = this.rights.find((right) => right.id === roleRight.rightId);
         role.rights.push(right);
       }
+    }
+  }
+
+  private appendRolesAndRightsToRoleRights() {
+    for (let roleRight of this.roleRights) {
+      let role = this.roles.find((role) => role.id === roleRight.roleId);
+      let right = this.rights.find((right) => right.id === roleRight.rightId);
+      roleRight.role = role;
+      roleRight.right = right;
     }
   }
 
