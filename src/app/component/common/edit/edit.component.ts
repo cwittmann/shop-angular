@@ -41,7 +41,6 @@ export class EditComponent implements OnInit {
     return this.storeService[this.secondaryNestedModel.dbNamePlural];
   }
 
-  isNew: boolean;
   newItem: any;
 
   orderStatusTypes = OrderStatus;

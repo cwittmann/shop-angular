@@ -1,0 +1,38 @@
+<app-title [title]="model.name + 's'"></app-title>
+<table class="table table-hover">
+  <thead class="">
+    <tr>
+      <th *ngFor="let column of columns">{{ column.displayName }}</th>
+      <th>
+        <a class="btn btn-primary ml-auto" (click)="create()">
+          Add {{ model.name }}
+        </a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td *ngFor="let column of columns">
+        <input
+          *ngIf="column.dataType === 'text' || column.dataType === 'number'"
+          [type]="column.dataType"
+          [(ngModel)]="item[column.name]"
+        />
+        <select
+          *ngIf="column.dataType === 'select'"
+          [ngModel]="item[column.name].id"
+          (change)="setOption(item, $event)"
+        >
+          <option *ngFor="let option of options" [value]="option.id">
+            {{ option.name }}</option
+          >
+        </select>
+      </td>
+      <td>
+        <button class="ml-auto" (click)="save(item)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

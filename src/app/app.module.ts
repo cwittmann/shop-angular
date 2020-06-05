@@ -28,6 +28,7 @@ import { RoleRightDetailComponent } from './component/role-right-detail/role-rig
 import { UserDetailComponent } from './component/user-detail/user-detail.component';
 import { EditComponent } from './component/common/edit/edit.component';
 import { TitleComponent } from './component/common/title/title.component';
+import { LinesComponent } from './component/common/lines/lines.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { TitleComponent } from './component/common/title/title.component';
     UserDetailComponent,
     EditComponent,
     TitleComponent,
+    LinesComponent,
   ],
   imports: [
     BrowserModule,
