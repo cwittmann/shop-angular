@@ -15,18 +15,62 @@ h1 {
   margin: 1vw;
 }
 
+h4 {
+  width: 100%;
+  font-size: calc(8px + 0.5vw);
+  color: #4788c7;
+}
+
+h5 {
+  width: 100%;
+  font-size: calc(8px + 0.5vw);
+  color: #4788c7;
+  border-bottom: 1px solid #4788c7;
+}
+
+th {
+  font-size: calc(8px + 0.3vw);
+  color: #4788c7;
+}
+
+td {
+  font-size: calc(8px + 0.5vw);
+  color: #555555;
+}
+
+td::nth-child(odd) {
+  background-color: red;
+}
+
 section {
   margin: 1vw;
 }
 
+input,
+select {
+  width: 100%;
+  padding: 0.5vw;
+  font-size: calc(8px + 0.4vw);
+  background: #dff0fe;
+  color: #4788c7;
+  border: 1px solid #4788c7;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
 .btn-primary {
-  background-color: #0275d8;
-  border: 0;
+  background-color: #dff0fe;
+  color: #4788c7;
+  border: 1 px solid #4788c7;
   transition: background-color 0.5s;
 }
 
 .btn-primary:hover {
-  background-color: #d9534f;
+  background-color: #4788c7;
+  color: white;
 }
 
 .spinner {

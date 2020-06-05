@@ -20,6 +20,7 @@
           [ngModel]="item[column.name] | date: 'yyyy-MM-dd'"
           (ngModelChange)="item[column.name] = $event"
           [value]="item[column.name]"
+          required
         />
         <select *ngIf="column.dataType === 'status'" [(ngModel)]="item.status">
           <option *ngFor="let key of orderStatusTypeOptions" [value]="key">

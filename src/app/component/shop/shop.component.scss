@@ -8,7 +8,7 @@ h5 {
 }
 
 .cart {
-  color: white;
+  color: #4788c7;
 }
 
 .cart:hover {
@@ -22,7 +22,7 @@ h5 {
 .card {
   display: inline-block;
   padding: 1vw;
-  background-color: #eeeeee;
+  border: none;
 }
 
 .card-img-container {
@@ -54,9 +54,4 @@ h5 {
   width: 25%;
   height: 100%;
   margin-right: 1vw;
-}
-
-.btn {
-  display: inline-block;
-  transition: 1s;
 }

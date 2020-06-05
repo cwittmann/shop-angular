@@ -46,21 +46,18 @@
       </select>
       <button
         *ngIf="!isInOrder(product.id)"
-        class="btn btn-primary text-white"
+        class="btn btn-primary"
         (click)="addToCart(product)"
       >
         Order
       </button>
       <button
         *ngIf="isInOrder(product.id)"
-        class="btn btn-danger text-white"
+        class="btn btn-danger"
         (click)="removeFromCart(product)"
       >
         Remove
       </button>
     </div>
   </div>
-</section>
-<section *ngIf="!shoppingCart">
-  <h5>Loading...</h5>
 </section>
