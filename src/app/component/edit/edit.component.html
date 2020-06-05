@@ -14,11 +14,20 @@
           [(ngModel)]="item[column.name]"
         />
         <select
-          *ngIf="column.dataType === 'select'"
+          *ngIf="column.dataType === 'select' && !column.secondary"
           [ngModel]="item[column.name].id"
-          (change)="setOption($event)"
+          (change)="setOption(column.secondary, $event)"
         >
           <option *ngFor="let option of options" [value]="option.id">
+            {{ option.name }}</option
+          >
+        </select>
+        <select
+          *ngIf="column.dataType === 'select' && column.secondary"
+          [ngModel]="item[column.name].id"
+          (change)="setOption(column.secondary, $event)"
+        >
+          <option *ngFor="let option of secondaryOptions" [value]="option.id">
             {{ option.name }}</option
           >
         </select>

@@ -13,6 +13,11 @@ import { LoginComponent } from './component/login/login.component';
 import { AuthGuardService } from './shared/service/auth-guard.service';
 import { UserListComponent } from './component/user-list/user-list.component';
 import { ProductDetailComponent } from './component/product-detail/product-detail.component';
+import { ManufacturerDetailComponent } from './component/manufacturer-detail/manufacturer-detail.component';
+import { UserDetailComponent } from './component/user-detail/user-detail.component';
+import { RightDetailComponent } from './component/right-detail/right-detail.component';
+import { RoleDetailComponent } from './component/role-detail/role-detail.component';
+import { RoleRightDetailComponent } from './component/role-right-detail/role-right-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,9 +53,19 @@ const routes: Routes = [
     component: ManufacturerListComponent,
   },
   {
+    path: 'manufacturer-detail/:id',
+    canActivate: [AuthGuardService],
+    component: ManufacturerDetailComponent,
+  },
+  {
     path: 'user-list',
     canActivate: [AuthGuardService],
     component: UserListComponent,
+  },
+  {
+    path: 'user-detail/:id',
+    canActivate: [AuthGuardService],
+    component: UserDetailComponent,
   },
   {
     path: 'right-list',
@@ -58,14 +73,29 @@ const routes: Routes = [
     component: RightListComponent,
   },
   {
+    path: 'right-detail/:id',
+    canActivate: [AuthGuardService],
+    component: RightDetailComponent,
+  },
+  {
     path: 'role-list',
     canActivate: [AuthGuardService],
     component: RoleListComponent,
   },
   {
+    path: 'role-detail/:id',
+    canActivate: [AuthGuardService],
+    component: RoleDetailComponent,
+  },
+  {
     path: 'role-right-list',
     canActivate: [AuthGuardService],
     component: RoleRightListComponent,
+  },
+  {
+    path: 'role-right-detail/:id',
+    canActivate: [AuthGuardService],
+    component: RoleRightDetailComponent,
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '*', redirectTo: 'login', pathMatch: 'full' },

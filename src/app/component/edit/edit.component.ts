@@ -19,6 +19,9 @@ export class EditComponent implements OnInit {
   nestedModel: IGenericModel<any>;
 
   @Input()
+  secondaryNestedModel: IGenericModel<any>;
+
+  @Input()
   columns: Column[];
 
   id: string;
@@ -31,6 +34,10 @@ export class EditComponent implements OnInit {
 
   get options(): any[] {
     return this.storeService[this.nestedModel.dbNamePlural];
+  }
+
+  get secondaryOptions(): any[] {
+    return this.storeService[this.secondaryNestedModel.dbNamePlural];
   }
 
   isNew: boolean;
@@ -48,14 +55,22 @@ export class EditComponent implements OnInit {
   }
 
   async save<T extends BaseModel>() {
-    console.log(this.item[this.nestedModel.dbNameSingular]);
     await this.storeService.put<T>(this.item, this.model.dbNamePlural);
     this.storeService.reload();
     this.ngOnInit();
   }
 
-  setOption(event) {
+  setOption(isSecondary: boolean, event) {
     let optionId = event.target.value;
+
+    if (isSecondary) {
+      let option = this.secondaryOptions.find(
+        (option) => option.id === optionId
+      );
+      this.item[this.secondaryNestedModel.dbNameSingular + 'Id'] = option.id;
+      this.item[this.secondaryNestedModel.dbNameSingular] = option;
+      return;
+    }
     let option = this.options.find((option) => option.id === optionId);
     this.item[this.nestedModel.dbNameSingular + 'Id'] = option.id;
     this.item[this.nestedModel.dbNameSingular] = option;

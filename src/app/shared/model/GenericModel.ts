@@ -3,4 +3,5 @@ export interface IGenericModel<T> {
   name: string;
   dbNameSingular: string;
   dbNamePlural: string;
+  route: string;
 }

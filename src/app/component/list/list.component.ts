@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
   }
 
   edit(item: any) {
-    this.router.navigate(['/product-detail/' + item.id]);
+    this.router.navigate(['/' + this.model.route + '-detail/' + item.id]);
   }
 
   delete(id: string) {

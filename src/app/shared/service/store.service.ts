@@ -62,7 +62,6 @@ export class StoreService {
   }
 
   put<T extends BaseModel>(item: T, dbNamePlural: string) {
-    console.log(item);
     this.backendService.put<T>(item, dbNamePlural);
   }
 

@@ -4,6 +4,7 @@ import { Role } from './Role';
 export class User extends BaseModel {
   public static dbNameSingular = 'user';
   public static dbNamePlural = 'users';
+  public static route = 'user';
 
   public id: string;
   public firstName: string;
