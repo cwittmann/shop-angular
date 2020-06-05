@@ -147,6 +147,9 @@ export class StoreService {
     this.appendRightsToRoles();
 
     this.users = (await this.backendService.loadUsers()) as User[];
+    this.users.forEach(
+      (user) => (user.name = user.lastName + ', ' + user.firstName)
+    );
     this.appendRolesToUsers();
 
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];

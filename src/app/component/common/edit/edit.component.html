@@ -10,10 +10,22 @@
     <tr>
       <td *ngFor="let column of columns">
         <input
-          *ngIf="column.dataType !== 'select'"
+          *ngIf="column.dataType === 'text'"
           [type]="column.dataType"
           [(ngModel)]="item[column.name]"
         />
+        <input
+          *ngIf="column.dataType === 'date'"
+          [type]="column.dataType"
+          [ngModel]="item[column.name] | date: 'yyyy-MM-dd'"
+          (ngModelChange)="item[column.name] = $event"
+          [value]="item[column.name]"
+        />
+        <select *ngIf="column.dataType === 'status'" [(ngModel)]="item.status">
+          <option *ngFor="let key of orderStatusTypeOptions" [value]="key">
+            {{ key }}</option
+          >
+        </select>
         <select
           *ngIf="column.dataType === 'select' && !column.secondary"
           [ngModel]="item[column.name].id"

@@ -13,7 +13,12 @@
   <tbody>
     <tr *ngFor="let item of items">
       <td *ngFor="let column of columns">
-        <p *ngIf="column.dataType !== 'select'">{{ item[column.name] }}</p>
+        <p *ngIf="column.dataType === 'text' || column.dataType === 'status'">
+          {{ item[column.name] }}
+        </p>
+        <p *ngIf="column.dataType === 'date'">
+          {{ item[column.name] | date: "yyyy-MM-dd" }}
+        </p>
         <p *ngIf="column.dataType === 'select'">{{ item[column.name].name }}</p>
       </td>
       <td>

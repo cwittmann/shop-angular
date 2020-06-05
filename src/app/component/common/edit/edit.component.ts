@@ -5,6 +5,7 @@ import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Column } from 'src/app/shared/model/Column';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { ActivatedRoute } from '@angular/router';
+import { OrderStatus } from 'src/app/shared/enum/OrderStatus';
 
 @Component({
   selector: 'app-edit',
@@ -43,6 +44,9 @@ export class EditComponent implements OnInit {
   isNew: boolean;
   newItem: any;
 
+  orderStatusTypes = OrderStatus;
+  orderStatusTypeOptions = [];
+
   constructor(
     private storeService: StoreService,
     private activatedRoute: ActivatedRoute
@@ -52,6 +56,10 @@ export class EditComponent implements OnInit {
 
   ngOnInit(): void {
     this.newItem = new this.model(uuidv4());
+
+    this.orderStatusTypeOptions = Object.keys(this.orderStatusTypes)
+      .map((key) => this.orderStatusTypes[key])
+      .filter((value) => typeof value == 'string') as string[];
   }
 
   async save<T extends BaseModel>() {

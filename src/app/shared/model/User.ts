@@ -13,6 +13,8 @@ export class User extends BaseModel {
   public roleId: string;
   public role: Role;
 
+  public name: string;
+
   constructor(
     id: string,
     firstName: string,
