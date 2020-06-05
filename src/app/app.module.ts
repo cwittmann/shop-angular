@@ -18,7 +18,7 @@ import { RightsPipe } from './shared/pipe/rights.pipe';
 import { RightListComponent } from './component/right-list/right-list.component';
 import { RoleRightListComponent } from './component/role-right-list/role-right-list.component';
 import { RoleListComponent } from './component/role-list/role-list.component';
-import { ListComponent } from './component/list/list.component';
+import { ListComponent } from './component/common/list/list.component';
 import { LoginComponent } from './component/login/login.component';
 import { ManufacturerDetailComponent } from './component/manufacturer-detail/manufacturer-detail.component';
 import { ProductDetailComponent } from './component/product-detail/product-detail.component';
@@ -26,7 +26,8 @@ import { RightDetailComponent } from './component/right-detail/right-detail.comp
 import { RoleDetailComponent } from './component/role-detail/role-detail.component';
 import { RoleRightDetailComponent } from './component/role-right-detail/role-right-detail.component';
 import { UserDetailComponent } from './component/user-detail/user-detail.component';
-import { EditComponent } from './component/edit/edit.component';
+import { EditComponent } from './component/common/edit/edit.component';
+import { TitleComponent } from './component/common/title/title.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { EditComponent } from './component/edit/edit.component';
     RoleRightDetailComponent,
     UserDetailComponent,
     EditComponent,
+    TitleComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,17 @@
+<app-title title="Shop"></app-title>
 <div *ngIf="shoppingCart" class="d-flex m-4 sort">
-  <h5 class="mr-auto p-2"><b>Shop</b></h5>
   <a
     *ngIf="shoppingCart.orderLines.length > 0"
     [routerLink]="['/checkout']"
-    class="btn btn-primary cart"
+    class="btn btn-primary cart ml-auto"
     ><img class="icon" src="../../../assets/icons/shopping-cart.png" />{{
       shoppingCart?.orderLines?.length
     }}
     items</a
   >
-  <a *ngIf="shoppingCart.orderLines.length == 0" class="btn btn-primary cart"
+  <a
+    *ngIf="shoppingCart.orderLines.length == 0"
+    class="btn btn-primary cart ml-auto"
     ><img class="icon" src="../../../assets/icons/shopping-cart.png" />0
     items</a
   >
