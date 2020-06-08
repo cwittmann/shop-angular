@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/' + this.model.route + '-detail/' + item.id]);
   }
 
-  delete(id: string) {
-    alert('DELETE');
+  delete<T>(id: string) {
+    this.storeService.delete<T>(id, this.model.dbNamePlural);
   }
 }

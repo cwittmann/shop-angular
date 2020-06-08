@@ -118,12 +118,10 @@ export class EditComponent implements OnInit {
       );
       this.item[this.secondaryNestedModel.dbNameSingular + 'Id'] = option.id;
       this.item[this.secondaryNestedModel.dbNameSingular] = option;
-      console.log(this.item);
       return;
     }
     let option = this.options.find((option) => option.id === optionId);
     this.item[this.nestedModel.dbNameSingular + 'Id'] = option.id;
     this.item[this.nestedModel.dbNameSingular] = option;
-    console.log(this.item);
   }
 }
