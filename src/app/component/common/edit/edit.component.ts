@@ -77,14 +77,8 @@ export class EditComponent implements OnInit {
     this.newItem = new this.model(uuidv4());
 
     for (let column of this.columns) {
-      if (column.dataType === 'select') {
-        this.newItem[column.name] = this.getDefaultValueForDataType(column);
-      } else {
-        this.newItem[column.name] = this.getDefaultValueForDataType(column);
-      }
+      this.newItem[column.name] = this.getDefaultValueForDataType(column);
     }
-
-    console.log(this.newItem);
   }
 
   getDefaultValueForDataType(column: Column) {
