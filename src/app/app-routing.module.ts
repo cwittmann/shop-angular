@@ -18,6 +18,8 @@ import { UserDetailComponent } from './component/user-detail/user-detail.compone
 import { RightDetailComponent } from './component/right-detail/right-detail.component';
 import { RoleDetailComponent } from './component/role-detail/role-detail.component';
 import { RoleRightDetailComponent } from './component/role-right-detail/role-right-detail.component';
+import { CategoryListComponent } from './component/category-list/category-list.component';
+import { CategoryDetailComponent } from './component/category-detail/category-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -56,6 +58,21 @@ const routes: Routes = [
     path: 'product-detail/:id',
     canActivate: [AuthGuardService],
     component: ProductDetailComponent,
+  },
+  {
+    path: 'category-list',
+    canActivate: [AuthGuardService],
+    component: CategoryListComponent,
+  },
+  {
+    path: 'category-detail',
+    canActivate: [AuthGuardService],
+    component: CategoryDetailComponent,
+  },
+  {
+    path: 'category-detail/:id',
+    canActivate: [AuthGuardService],
+    component: CategoryDetailComponent,
   },
   {
     path: 'manufacturer-list',

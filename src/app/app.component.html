@@ -12,6 +12,9 @@
     <li ngbNavItem *ngIf="['Product', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/product-list']">Products</a>
     </li>
+    <li ngbNavItem *ngIf="['Category', 'Read'] | rights">
+      <a ngbNavLink [routerLink]="['/category-list']">Category</a>
+    </li>
     <li ngbNavItem *ngIf="['Manufacturer', 'Read'] | rights">
       <a ngbNavLink [routerLink]="['/manufacturer-list']">Manufacturers</a>
     </li>

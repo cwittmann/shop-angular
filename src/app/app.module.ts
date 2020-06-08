@@ -29,6 +29,8 @@ import { UserDetailComponent } from './component/user-detail/user-detail.compone
 import { EditComponent } from './component/common/edit/edit.component';
 import { TitleComponent } from './component/common/title/title.component';
 import { LinesComponent } from './component/common/lines/lines.component';
+import { CategoryListComponent } from './component/category-list/category-list.component';
+import { CategoryDetailComponent } from './component/category-detail/category-detail.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { LinesComponent } from './component/common/lines/lines.component';
     EditComponent,
     TitleComponent,
     LinesComponent,
+    CategoryListComponent,
+    CategoryDetailComponent,
   ],
   imports: [
     BrowserModule,

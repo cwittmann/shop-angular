@@ -12,6 +12,7 @@ import { Right } from '../model/Right';
 import { RoleRight } from '../model/RoleRight';
 import { Role } from '../model/Role';
 import { BaseModel } from '../model/BaseModel';
+import { Category } from '../model/Category';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class StoreService {
   currentOrder: OrderViewModel;
   manufacturers: Manufacturer[] = [];
   products: Product[] = [];
+  categories: Category[] = [];
   orderLines: OrderLine[] = [];
   users: User[] = [];
   roles: Role[] = [];
@@ -134,6 +136,7 @@ export class StoreService {
     this.appendRolesToUsers();
 
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
+    this.categories = (await this.backendService.loadCategories()) as Manufacturer[];
     this.products = (await this.backendService.loadProducts()) as Product[];
     this.appendManufacturersToProducts();
 

@@ -9,6 +9,7 @@ import { Right } from '../model/Right';
 import { RoleRight } from '../model/RoleRight';
 import { Role } from '../model/Role';
 import { BaseModel } from '../model/BaseModel';
+import { Category } from '../model/Category';
 
 @Injectable({
   providedIn: 'root',
@@ -201,6 +202,42 @@ export class BackendService {
   async deleteManufacturer(id: string) {
     return await this.httpClient
       .delete<Manufacturer>('http://localhost:8000/manufacturers/' + id, {
+        headers: this.headers,
+      })
+      .toPromise();
+  }
+
+  // CATEGORIES
+
+  async loadCategories(): Promise<Category[]> {
+    return await this.httpClient
+      .get<Category[]>('http://localhost:8000/categories', {
+        headers: this.headers,
+      })
+      .toPromise();
+  }
+
+  async postCategories(category: Category): Promise<Category> {
+    return await this.httpClient
+      .post<Category>('http://localhost:8000/categories', category, {
+        headers: this.headers,
+      })
+      .toPromise();
+  }
+
+  async putCategories(category: Category): Promise<Category> {
+    return await this.httpClient
+      .put<Category>(
+        'http://localhost:8000/categories/' + category.id,
+        category,
+        { headers: this.headers }
+      )
+      .toPromise();
+  }
+
+  async deleteCategory(id: string) {
+    return await this.httpClient
+      .delete<Category>('http://localhost:8000/categories/' + id, {
         headers: this.headers,
       })
       .toPromise();

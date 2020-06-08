@@ -99,7 +99,12 @@ export class EditComponent implements OnInit {
   }
 
   async save<T extends BaseModel>() {
-    await this.storeService.put<T>(this.item, this.model.dbNamePlural);
+    if (this.isNew) {
+      await this.storeService.post<T>(this.item, this.model.dbNamePlural);
+    } else {
+      await this.storeService.put<T>(this.item, this.model.dbNamePlural);
+    }
+
     this.storeService.reload();
     this.ngOnInit();
   }
@@ -113,10 +118,12 @@ export class EditComponent implements OnInit {
       );
       this.item[this.secondaryNestedModel.dbNameSingular + 'Id'] = option.id;
       this.item[this.secondaryNestedModel.dbNameSingular] = option;
+      console.log(this.item);
       return;
     }
     let option = this.options.find((option) => option.id === optionId);
     this.item[this.nestedModel.dbNameSingular + 'Id'] = option.id;
     this.item[this.nestedModel.dbNameSingular] = option;
+    console.log(this.item);
   }
 }
