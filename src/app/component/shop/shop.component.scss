@@ -1,3 +1,7 @@
+p {
+  margin: 0;
+}
+
 .list-group-item {
   margin: 0.2vw;
   border-radius: 1vw;
@@ -48,6 +52,10 @@
 .card-img-top:hover {
   opacity: 0;
   transform: scale(1.5, 1.5) rotate(15deg);
+}
+
+.buttons {
+  margin-top: 1vw;
 }
 
 .numberSelect {

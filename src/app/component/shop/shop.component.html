@@ -29,35 +29,41 @@
     <div class="card-body">
       <p class="card-title">{{ product?.name }}</p>
       <p class="card-text">
+        <small>{{ product?.category?.name }}</small>
+      </p>
+      <p class="card-text">
         <small>{{ product?.description }}</small>
       </p>
+
       <p class="card-text">
         {{ product?.price | currency }}
       </p>
-      <select
-        [disabled]="isInOrder(product.id)"
-        class="form-control numberSelect"
-        [id]="product.id"
-        #linkRef
-      >
-        <option *ngFor="let number of numbers" [value]="number">{{
-          number
-        }}</option>
-      </select>
-      <button
-        *ngIf="!isInOrder(product.id)"
-        class="btn btn-primary"
-        (click)="addToCart(product)"
-      >
-        Order
-      </button>
-      <button
-        *ngIf="isInOrder(product.id)"
-        class="btn btn-danger"
-        (click)="removeFromCart(product)"
-      >
-        Remove
-      </button>
+      <div class="buttons">
+        <select
+          [disabled]="isInOrder(product.id)"
+          class="form-control numberSelect"
+          [id]="product.id"
+          #linkRef
+        >
+          <option *ngFor="let number of numbers" [value]="number">{{
+            number
+          }}</option>
+        </select>
+        <button
+          *ngIf="!isInOrder(product.id)"
+          class="btn btn-primary"
+          (click)="addToCart(product)"
+        >
+          Order
+        </button>
+        <button
+          *ngIf="isInOrder(product.id)"
+          class="btn btn-danger"
+          (click)="removeFromCart(product)"
+        >
+          Remove
+        </button>
+      </div>
     </div>
   </div>
 </section>
