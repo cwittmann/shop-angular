@@ -7,7 +7,6 @@ import { OrderService } from './order.service';
 import { User } from '../model/User';
 import { Manufacturer } from '../model/Manufacturer';
 import { Product } from '../model/Product';
-import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { Right } from '../model/Right';
 import { RoleRight } from '../model/RoleRight';
@@ -108,21 +107,6 @@ export class StoreService {
   async postOrderViewModel() {
     await this.orderService.postOrder(this.shoppingCart);
     this.shoppingCart.clear(this.currentUser);
-  }
-
-  async putOrderViewModel(order: OrderViewModel) {
-    await this.orderService.putOrder(order);
-  }
-
-  async putOrder(order: Order) {
-    await this.backendService.putOrder(order);
-  }
-
-  async deleteOrderViewModel(order: OrderViewModel) {
-    await this.orderService.deleteOrder(order);
-  }
-  async deleteOrder(id: string) {
-    await this.backendService.deleteOrder(id);
   }
 
   private initializeShoppingCart() {
