@@ -28,9 +28,7 @@ export class EditComponent implements OnInit {
   id: string;
 
   get item(): any {
-    return this.storeService[this.model.dbNamePlural].find(
-      (item) => item.id === this.id
-    );
+    return this.getItem();
   }
 
   get options(): any[] {
@@ -41,6 +39,7 @@ export class EditComponent implements OnInit {
     return this.storeService[this.secondaryNestedModel.dbNamePlural];
   }
 
+  isNew: boolean = false;
   newItem: any;
 
   orderStatusTypes = OrderStatus;
@@ -51,14 +50,58 @@ export class EditComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.id = activatedRoute.snapshot.params['id'];
+    this.isNew = !this.id;
   }
 
   ngOnInit(): void {
-    this.newItem = new this.model(uuidv4());
+    if (this.isNew) {
+      this.initializeNewItem();
+    }
 
     this.orderStatusTypeOptions = Object.keys(this.orderStatusTypes)
       .map((key) => this.orderStatusTypes[key])
       .filter((value) => typeof value == 'string') as string[];
+  }
+
+  getItem() {
+    if (this.isNew) {
+      return this.newItem;
+    }
+
+    return this.storeService[this.model.dbNamePlural].find(
+      (item) => item.id === this.id
+    );
+  }
+
+  initializeNewItem() {
+    this.newItem = new this.model(uuidv4());
+
+    for (let column of this.columns) {
+      if (column.dataType === 'select') {
+        this.newItem[column.name] = this.getDefaultValueForDataType(column);
+      } else {
+        this.newItem[column.name] = this.getDefaultValueForDataType(column);
+      }
+    }
+
+    console.log(this.newItem);
+  }
+
+  getDefaultValueForDataType(column: Column) {
+    switch (column.dataType) {
+      case 'date':
+        return new Date(1900, 1, 1);
+      case 'text':
+        return column.displayName;
+      case 'status':
+        return 'Created';
+      case 'number':
+        return 0;
+      case 'select':
+        return this.options[0];
+      case 'default':
+        return null;
+    }
   }
 
   async save<T extends BaseModel>() {

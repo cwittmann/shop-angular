@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from 'src/app/shared/service/store.service';
-import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
 import { OrderLine } from 'src/app/shared/model/OrderLine';
-import { v4 as uuidv4 } from 'uuid';
 import { Product } from 'src/app/shared/model/Product';
-import { ActivatedRoute } from '@angular/router';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Column } from 'src/app/shared/model/Column';
 import { Order } from 'src/app/shared/model/Order';

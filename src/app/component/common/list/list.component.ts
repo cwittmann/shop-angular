@@ -25,7 +25,7 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {}
 
   create() {
-    alert('CREATE');
+    this.router.navigate(['/' + this.model.route + '-detail']);
   }
 
   edit(item: any) {

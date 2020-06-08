@@ -33,6 +33,11 @@ const routes: Routes = [
     component: OrderListComponent,
   },
   {
+    path: 'order-detail',
+    canActivate: [AuthGuardService],
+    component: OrderDetailComponent,
+  },
+  {
     path: 'order-detail/:id',
     canActivate: [AuthGuardService],
     component: OrderDetailComponent,
@@ -41,6 +46,11 @@ const routes: Routes = [
     path: 'product-list',
     canActivate: [AuthGuardService],
     component: ProductListComponent,
+  },
+  {
+    path: 'product-detail',
+    canActivate: [AuthGuardService],
+    component: ProductDetailComponent,
   },
   {
     path: 'product-detail/:id',
@@ -53,6 +63,11 @@ const routes: Routes = [
     component: ManufacturerListComponent,
   },
   {
+    path: 'manufacturer-detail',
+    canActivate: [AuthGuardService],
+    component: ManufacturerDetailComponent,
+  },
+  {
     path: 'manufacturer-detail/:id',
     canActivate: [AuthGuardService],
     component: ManufacturerDetailComponent,
@@ -61,6 +76,11 @@ const routes: Routes = [
     path: 'user-list',
     canActivate: [AuthGuardService],
     component: UserListComponent,
+  },
+  {
+    path: 'user-detail',
+    canActivate: [AuthGuardService],
+    component: UserDetailComponent,
   },
   {
     path: 'user-detail/:id',
@@ -73,6 +93,11 @@ const routes: Routes = [
     component: RightListComponent,
   },
   {
+    path: 'right-detail',
+    canActivate: [AuthGuardService],
+    component: RightDetailComponent,
+  },
+  {
     path: 'right-detail/:id',
     canActivate: [AuthGuardService],
     component: RightDetailComponent,
@@ -83,6 +108,11 @@ const routes: Routes = [
     component: RoleListComponent,
   },
   {
+    path: 'role-detail',
+    canActivate: [AuthGuardService],
+    component: RoleDetailComponent,
+  },
+  {
     path: 'role-detail/:id',
     canActivate: [AuthGuardService],
     component: RoleDetailComponent,
@@ -91,6 +121,11 @@ const routes: Routes = [
     path: 'role-right-list',
     canActivate: [AuthGuardService],
     component: RoleRightListComponent,
+  },
+  {
+    path: 'role-right-detail',
+    canActivate: [AuthGuardService],
+    component: RoleRightDetailComponent,
   },
   {
     path: 'role-right-detail/:id',
