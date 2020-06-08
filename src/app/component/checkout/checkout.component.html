@@ -11,9 +11,9 @@
 
         <h4>{{ orderLine.totalPrice | currency }}</h4>
       </div>
-      <div class="d-flex w-100 justify-content-between">
+      <div class="d-flex w-100">
+        <small>{{ orderLine.amount }} x </small>
         <h4>
-          <small>{{ orderLine.amount }} x </small>
           {{ orderLine.product.name }} ({{ orderLine.product.description }})
         </h4>
       </div>
