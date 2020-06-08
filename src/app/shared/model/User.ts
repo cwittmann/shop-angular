@@ -10,6 +10,8 @@ export class User extends BaseModel {
   public firstName: string;
   public lastName: string;
   public city: string;
+  public userName: string;
+  public password: string;
   public roleId: string;
   public role: Role;
 
@@ -20,6 +22,8 @@ export class User extends BaseModel {
     firstName: string,
     lastName: string,
     city: string,
+    userName: string,
+    password: string,
     roleId: string,
     role: Role
   ) {
@@ -27,6 +31,8 @@ export class User extends BaseModel {
     this.firstName = firstName;
     this.lastName = lastName;
     this.city = city;
+    this.userName = userName;
+    this.password = password;
     this.roleId = roleId;
     this.role = role;
   }

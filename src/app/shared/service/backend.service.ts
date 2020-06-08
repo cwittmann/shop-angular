@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Order } from '../model/Order';
 import { OrderLine } from '../model/OrderLine';
 import { User } from '../model/User';
@@ -36,6 +36,8 @@ export class BackendService {
       .subscribe((res) => {
         if (res === 'Successful') {
           this.userAuthenticated.emit(true);
+        } else {
+          this.userAuthenticated.emit(false);
         }
       });
   }

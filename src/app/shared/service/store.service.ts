@@ -37,11 +37,11 @@ export class StoreService {
     private orderService: OrderService
   ) {}
 
-  async initialize(): Promise<boolean> {
+  async initialize(userName: string): Promise<boolean> {
     this.loading = true;
 
     await this.loadData();
-    await this.loadUser();
+    await this.loadUser(userName);
     await this.initializeShoppingCart();
 
     this.loading = false;
@@ -68,11 +68,8 @@ export class StoreService {
     this.backendService.delete<T>(id, dbNamePlural);
   }
 
-  loadUser() {
-    let admins = this.users.filter((user) => user.role.name === 'Admin');
-    let numberOfUsers = admins.length;
-    let randomNumber = Math.floor(Math.random() * Math.floor(numberOfUsers));
-    this.currentUser = admins[randomNumber];
+  loadUser(userName: string) {
+    this.currentUser = this.users.find((user) => user.userName === userName);
   }
 
   async loadOrder(id: string) {

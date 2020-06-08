@@ -10,7 +10,7 @@ import { StoreService } from 'src/app/shared/service/store.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  username: string;
+  userName: string;
   userPassword: string;
   errorMessage: string;
 
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.backendService.userAuthenticated.subscribe(() => {
-      this.authService.setUserInfo({ user: this.username });
-      this.storeService.initialize();
+      this.authService.setUserInfo({ user: this.userName });
+      this.storeService.initialize(this.userName);
       this.router.navigate(['/shop']);
     });
   }
@@ -30,6 +30,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.authService.validate(this.username, this.userPassword);
+    this.authService.validate(this.userName, this.userPassword);
   }
 }
