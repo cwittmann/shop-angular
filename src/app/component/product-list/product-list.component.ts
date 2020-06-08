@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit {
       new Column('name', 'Name', 'text'),
       new Column('description', 'Description', 'text'),
       new Column('price', 'Price', 'text'),
+      new Column('category', 'Category', 'select'),
       new Column('manufacturer', 'Manufacturer', 'select'),
     ];
   }

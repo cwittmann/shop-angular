@@ -138,6 +138,7 @@ export class StoreService {
     this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
     this.categories = (await this.backendService.loadCategories()) as Manufacturer[];
     this.products = (await this.backendService.loadProducts()) as Product[];
+    this.appendCategoriesToProducts();
     this.appendManufacturersToProducts();
 
     this.orderLines = (await this.backendService.loadOrderLines()) as OrderLine[];
@@ -178,6 +179,15 @@ export class StoreService {
     for (let user of this.users) {
       let role = this.roles.find((role) => role.id === user.roleId);
       user.role = role;
+    }
+  }
+
+  private appendCategoriesToProducts() {
+    for (let product of this.products) {
+      let category = this.categories.find(
+        (category) => category.id === product.categoryId
+      );
+      product.category = category;
     }
   }
 

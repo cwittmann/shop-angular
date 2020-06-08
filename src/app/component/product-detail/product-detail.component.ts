@@ -3,6 +3,7 @@ import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Column } from 'src/app/shared/model/Column';
 import { Product } from 'src/app/shared/model/Product';
 import { Manufacturer } from 'src/app/shared/model/Manufacturer';
+import { Category } from 'src/app/shared/model/Category';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,18 +13,21 @@ import { Manufacturer } from 'src/app/shared/model/Manufacturer';
 export class ProductDetailComponent implements OnInit {
   genericModel: IGenericModel<any>;
   nestedModel: IGenericModel<any>;
+  secondaryNestedModel: IGenericModel<any>;
   columns: Column[];
 
   constructor() {}
 
   ngOnInit(): void {
     this.genericModel = Product;
-    this.nestedModel = Manufacturer;
+    this.nestedModel = Category;
+    this.secondaryNestedModel = Manufacturer;
     this.columns = [
       new Column('name', 'Name', 'text'),
       new Column('description', 'Description', 'text'),
       new Column('price', 'Price', 'text'),
-      new Column('manufacturer', 'Manufacturer', 'select'),
+      new Column('category', 'Category', 'select'),
+      new Column('manufacturer', 'Manufacturer', 'select', true),
     ];
   }
 }

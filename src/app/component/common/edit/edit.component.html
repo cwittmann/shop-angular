@@ -29,7 +29,7 @@
         </select>
         <select
           *ngIf="column.dataType === 'select' && !column.secondary"
-          [ngModel]="item[column.name].id"
+          [ngModel]="item[column.name]?.id"
           (change)="setOption(column.secondary, $event)"
         >
           <option *ngFor="let option of options" [value]="option.id">
@@ -38,7 +38,7 @@
         </select>
         <select
           *ngIf="column.dataType === 'select' && column.secondary"
-          [ngModel]="item[column.name].id"
+          [ngModel]="item[column.name]?.id"
           (change)="setOption(column.secondary, $event)"
         >
           <option *ngFor="let option of secondaryOptions" [value]="option.id">
