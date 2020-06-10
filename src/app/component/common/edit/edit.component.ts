@@ -92,7 +92,6 @@ export class EditComponent implements OnInit {
       case 'number':
         return 0;
       case 'select':
-        return this.options[0];
       case 'default':
         return null;
     }

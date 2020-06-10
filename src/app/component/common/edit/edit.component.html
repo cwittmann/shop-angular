@@ -32,6 +32,7 @@
           [ngModel]="item[column.name]?.id"
           (change)="setOption(column.secondary, $event)"
         >
+          <option [ngValue]="null" disabled> None</option>
           <option *ngFor="let option of options" [value]="option.id">
             {{ option.name }}</option
           >
@@ -41,6 +42,7 @@
           [ngModel]="item[column.name]?.id"
           (change)="setOption(column.secondary, $event)"
         >
+          <option [ngValue]="null" disabled> None</option>
           <option *ngFor="let option of secondaryOptions" [value]="option.id">
             {{ option.name }}</option
           >
