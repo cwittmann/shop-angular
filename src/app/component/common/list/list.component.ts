@@ -20,9 +20,17 @@ export class ListComponent implements OnInit {
     return this.storeService[this.model.dbNamePlural];
   }
 
+  config: any;
+
   constructor(private storeService: StoreService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.config = {
+      itemsPerPage: 10,
+      currentPage: 1,
+      totalItems: this.items.length,
+    };
+  }
 
   create() {
     this.router.navigate(['/' + this.model.route + '-detail']);
@@ -34,5 +42,9 @@ export class ListComponent implements OnInit {
 
   delete<T>(id: string) {
     this.storeService.delete<T>(id, this.model.dbNamePlural);
+  }
+
+  pageChanged(event) {
+    this.config.currentPage = event;
   }
 }

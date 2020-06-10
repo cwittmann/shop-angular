@@ -31,6 +31,7 @@ import { TitleComponent } from './component/common/title/title.component';
 import { LinesComponent } from './component/common/lines/lines.component';
 import { CategoryListComponent } from './component/category-list/category-list.component';
 import { CategoryDetailComponent } from './component/category-detail/category-detail.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { CategoryDetailComponent } from './component/category-detail/category-de
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
