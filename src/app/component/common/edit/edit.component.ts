@@ -45,6 +45,8 @@ export class EditComponent implements OnInit {
   orderStatusTypes = OrderStatus;
   orderStatusTypeOptions = [];
 
+  errors: string[] = [];
+
   constructor(
     private storeService: StoreService,
     private activatedRoute: ActivatedRoute
@@ -84,9 +86,9 @@ export class EditComponent implements OnInit {
   getDefaultValueForDataType(column: Column) {
     switch (column.dataType) {
       case 'date':
-        return new Date(1900, 1, 1);
+        return new Date();
       case 'text':
-        return column.displayName;
+        return '';
       case 'status':
         return 'Created';
       case 'number':
@@ -98,6 +100,10 @@ export class EditComponent implements OnInit {
   }
 
   async save<T extends BaseModel>() {
+    if (!this.validate()) {
+      return;
+    }
+
     if (this.isNew) {
       await this.storeService.post<T>(this.item, this.model.dbNamePlural);
     } else {
@@ -106,6 +112,28 @@ export class EditComponent implements OnInit {
 
     this.storeService.reload();
     this.ngOnInit();
+  }
+
+  validate(): boolean {
+    this.errors = [];
+
+    let valid = true;
+
+    for (let column of this.columns) {
+      if (column.dataType === 'date') {
+        continue;
+      }
+
+      let value = this.item[column.name];
+      let defaultValue = this.getDefaultValueForDataType(column);
+
+      if (value === defaultValue) {
+        this.errors.push('Invalid value for "' + column.displayName + '"');
+        valid = false;
+      }
+    }
+
+    return valid;
   }
 
   setOption(isSecondary: boolean, event) {
