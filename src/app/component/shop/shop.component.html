@@ -1,5 +1,21 @@
 <app-title title="Shop"></app-title>
 <div *ngIf="shoppingCart" class="d-flex m-4 sort">
+  <ul ngbNav>
+    <li ngbNavItem>
+      <a
+        [ngClass]="{ active: !selectedCategory?.id }"
+        (click)="selectCategory()"
+        >Show All</a
+      >
+      <a
+        [ngClass]="{ active: selectedCategory?.id === category.id }"
+        *ngFor="let category of categories"
+        (click)="selectCategory(category)"
+        >{{ category.name }}</a
+      >
+    </li>
+  </ul>
+
   <a
     *ngIf="shoppingCart.orderLines.length > 0"
     [routerLink]="['/checkout']"

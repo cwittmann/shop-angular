@@ -25,6 +25,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'shop', canActivate: [AuthGuardService], component: ShopComponent },
   {
+    path: 'shop/:id',
+    canActivate: [AuthGuardService],
+    component: ShopComponent,
+  },
+  {
     path: 'checkout',
     canActivate: [AuthGuardService],
     component: CheckoutComponent,
