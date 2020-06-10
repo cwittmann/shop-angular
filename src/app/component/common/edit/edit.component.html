@@ -57,6 +57,6 @@
     </tr>
   </tbody>
 </table>
-<div *ngIf="errors">
-  <div *ngFor="let error of errors" class="error">{{ error }}</div>
+<div class="error" *ngIf="errors">
+  <div *ngFor="let error of errors">{{ error }}</div>
 </div>
