@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
     private storeService: StoreService,
     private router: Router
   ) {
-    this.backendService.userAuthenticated.subscribe(() => {
+    this.backendService.userAuthenticated.subscribe((result) => {
+      if (!result) {
+        return;
+      }
+
       this.authService.setUserInfo({ user: this.userName });
       this.storeService.initialize(this.userName);
       this.router.navigate(['/shop']);

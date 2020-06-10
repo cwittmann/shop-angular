@@ -24,7 +24,7 @@ export class UserDetailComponent implements OnInit {
       new Column('lastName', 'Last name', 'text'),
       new Column('city', 'City', 'text'),
       new Column('userName', 'User Name', 'text'),
-      new Column('password', 'Password', 'text'),
+      new Column('password', 'Password', 'password'),
       new Column('role', 'Role', 'select'),
     ];
   }

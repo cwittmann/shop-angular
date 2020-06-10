@@ -26,11 +26,11 @@ export class BackendService {
 
   authenticate(user: string, password: string) {
     this.headers = new HttpHeaders({
-      authorization: 'Basic ' + btoa(user + ':' + password),
+      authorization: 'Basic ' + btoa('user1:password1'),
     });
 
     this.httpClient
-      .get('http://localhost:8000/auth', {
+      .post('http://localhost:8000/auth', [user, password], {
         headers: this.headers,
         responseType: 'text',
       })

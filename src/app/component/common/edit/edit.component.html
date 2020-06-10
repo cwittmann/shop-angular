@@ -10,7 +10,7 @@
     <tr>
       <td *ngFor="let column of columns">
         <input
-          *ngIf="column.dataType === 'text'"
+          *ngIf="column.dataType === 'text' || column.dataType === 'password'"
           [type]="column.dataType"
           [(ngModel)]="item[column.name]"
           [placeholder]="column.displayName"

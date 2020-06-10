@@ -96,6 +96,7 @@ export class EditComponent implements OnInit {
       case 'date':
         return new Date();
       case 'text':
+      case 'password':
         return '';
       case 'number':
         return 0;
