@@ -23,15 +23,40 @@
           [value]="item[column.name]"
           required
         />
-        <select *ngIf="column.dataType === 'status'" [(ngModel)]="item.status">
+        <select
+          *ngIf="
+            column.dataType === 'select' &&
+            column.name === 'status' &&
+            column.isEnum
+          "
+          [(ngModel)]="item.status"
+        >
+          <option [ngValue]="null" disabled> None</option>
           <option *ngFor="let key of orderStatusTypeOptions" [value]="key">
             {{ key }}</option
           >
         </select>
         <select
-          *ngIf="column.dataType === 'select' && !column.secondary"
+          *ngIf="
+            column.dataType === 'select' &&
+            column.name === 'permission' &&
+            column.isEnum
+          "
+          [(ngModel)]="item.permission"
+        >
+          <option [ngValue]="null" disabled> None</option>
+          <option *ngFor="let key of permissionTypeOptions" [value]="key">
+            {{ key }}</option
+          >
+        </select>
+        <select
+          *ngIf="
+            column.dataType === 'select' &&
+            !column.isSecondary &&
+            !column.isEnum
+          "
           [ngModel]="item[column.name]?.id"
-          (change)="setOption(column.secondary, $event)"
+          (change)="setOption(column.isSecondary, $event)"
         >
           <option [ngValue]="null" disabled> None</option>
           <option *ngFor="let option of options" [value]="option.id">
@@ -39,9 +64,11 @@
           >
         </select>
         <select
-          *ngIf="column.dataType === 'select' && column.secondary"
+          *ngIf="
+            column.dataType === 'select' && column.isSecondary && !column.isEnum
+          "
           [ngModel]="item[column.name]?.id"
-          (change)="setOption(column.secondary, $event)"
+          (change)="setOption(column.isSecondary, $event)"
         >
           <option [ngValue]="null" disabled> None</option>
           <option *ngFor="let option of secondaryOptions" [value]="option.id">

@@ -29,7 +29,7 @@ export class OrderDetailComponent implements OnInit {
     this.columns = [
       new Column('date', 'Date', 'date'),
       new Column('user', 'User', 'select'),
-      new Column('status', 'Status', 'status'),
+      new Column('status', 'Status', 'select', false, true),
     ];
     this.secondaryColumns = [
       new Column('product', 'Product', 'select'),

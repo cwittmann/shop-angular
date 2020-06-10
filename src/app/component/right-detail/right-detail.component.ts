@@ -20,7 +20,7 @@ export class RightDetailComponent implements OnInit {
 
     this.columns = [
       new Column('entity', 'Entity', 'text'),
-      new Column('permission', 'Permission', 'text'),
+      new Column('permission', 'Permission', 'select', false, true),
     ];
   }
 }

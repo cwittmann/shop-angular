@@ -4,17 +4,20 @@ export class Column {
   public name: string;
   public displayName: string;
   public dataType: string;
-  public secondary: boolean;
+  public isSecondary: boolean;
+  public isEnum: boolean;
 
   constructor(
     name: string,
     displayName: string,
     dataType: string,
-    secondary: boolean = false
+    isSecondary: boolean = false,
+    isEnum: boolean = false
   ) {
     this.name = name;
     this.displayName = displayName;
     this.dataType = dataType;
-    this.secondary = secondary;
+    this.isSecondary = isSecondary;
+    this.isEnum = isEnum;
   }
 }

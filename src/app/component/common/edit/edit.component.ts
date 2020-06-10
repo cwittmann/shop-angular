@@ -6,6 +6,7 @@ import { Column } from 'src/app/shared/model/Column';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { ActivatedRoute } from '@angular/router';
 import { OrderStatus } from 'src/app/shared/enum/OrderStatus';
+import { Permission } from 'src/app/shared/enum/Permission';
 
 @Component({
   selector: 'app-edit',
@@ -45,6 +46,9 @@ export class EditComponent implements OnInit {
   orderStatusTypes = OrderStatus;
   orderStatusTypeOptions = [];
 
+  permissionTypes = Permission;
+  permissionTypeOptions = [];
+
   errors: string[] = [];
 
   constructor(
@@ -62,6 +66,10 @@ export class EditComponent implements OnInit {
 
     this.orderStatusTypeOptions = Object.keys(this.orderStatusTypes)
       .map((key) => this.orderStatusTypes[key])
+      .filter((value) => typeof value == 'string') as string[];
+
+    this.permissionTypeOptions = Object.keys(this.permissionTypes)
+      .map((key) => this.permissionTypes[key])
       .filter((value) => typeof value == 'string') as string[];
   }
 
@@ -89,8 +97,6 @@ export class EditComponent implements OnInit {
         return new Date();
       case 'text':
         return '';
-      case 'status':
-        return 'Created';
       case 'number':
         return 0;
       case 'select':
