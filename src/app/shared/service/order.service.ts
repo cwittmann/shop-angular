@@ -17,12 +17,12 @@ export class OrderService {
   postOrder(orderViewModel: OrderViewModel) {
     try {
       let order: Order = orderViewModel as Order;
-      this.backendService.postOrder(order);
+      this.backendService.post<Order>(order, 'orders');
 
       let orderLines: OrderLine[] = orderViewModel.orderLines as OrderLine[];
 
       for (let orderLine of orderLines) {
-        this.backendService.postOrderLine(orderLine);
+        this.backendService.post<OrderLine>(orderLine, 'orderLines');
       }
 
       this.savedSuccessfully.emit(true);
@@ -34,12 +34,12 @@ export class OrderService {
   putOrder(orderViewModel: OrderViewModel) {
     try {
       let order: Order = orderViewModel as Order;
-      this.backendService.putOrder(order);
+      this.backendService.put<Order>(order, 'orders');
 
       let orderLines: OrderLine[] = orderViewModel.orderLines as OrderLine[];
 
       for (let orderLine of orderLines) {
-        this.backendService.putOrderLine(orderLine);
+        this.backendService.put<OrderLine>(orderLine, 'orderLines');
       }
 
       this.savedSuccessfully.emit(true);
@@ -51,14 +51,7 @@ export class OrderService {
   deleteOrder(orderViewModel: OrderViewModel) {
     try {
       let order: Order = orderViewModel as Order;
-      this.backendService.deleteOrder(order.id);
-
-      let orderLines: OrderLine[] = orderViewModel.orderLines as OrderLine[];
-
-      for (let orderLine of orderLines) {
-        this.backendService.deleteOrderLine(orderLine.id);
-      }
-
+      this.backendService.delete<Order>(order.id, 'orders');
       this.savedSuccessfully.emit(true);
     } catch (exception) {
       console.log('Could not save order:' + exception);

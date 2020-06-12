@@ -13,6 +13,7 @@ import { RoleRight } from '../model/RoleRight';
 import { Role } from '../model/Role';
 import { BaseModel } from '../model/BaseModel';
 import { Category } from '../model/Category';
+import { Order } from '../model/Order';
 
 @Injectable({
   providedIn: 'root',
@@ -119,30 +120,42 @@ export class StoreService {
   }
 
   private async loadData() {
-    this.rights = (await this.backendService.loadRights()) as Right[];
+    this.rights = (await this.backendService.get<Right[]>('rights')) as Right[];
     this.rights.forEach(
       (right) => (right.name = right.entity + ' - ' + right.permission)
     );
 
-    this.roleRights = (await this.backendService.loadRoleRights()) as RoleRight[];
-    this.roles = (await this.backendService.loadRoles()) as Role[];
+    this.roleRights = (await this.backendService.get<RoleRight[]>(
+      'roleRights'
+    )) as RoleRight[];
+    this.roles = (await this.backendService.get<Role[]>('roles')) as Role[];
     this.appendRolesAndRightsToRoleRights();
     this.appendRightsToRoles();
 
-    this.users = (await this.backendService.loadUsers()) as User[];
+    this.users = (await this.backendService.get<User[]>('users')) as User[];
     this.users.forEach(
       (user) => (user.name = user.lastName + ', ' + user.firstName)
     );
     this.appendRolesToUsers();
 
-    this.manufacturers = (await this.backendService.loadManufacturers()) as Manufacturer[];
-    this.categories = (await this.backendService.loadCategories()) as Manufacturer[];
-    this.products = (await this.backendService.loadProducts()) as Product[];
+    this.manufacturers = (await this.backendService.get<Manufacturer[]>(
+      'manufacturers'
+    )) as Manufacturer[];
+    this.categories = (await this.backendService.get<Category[]>(
+      'categories'
+    )) as Manufacturer[];
+    this.products = (await this.backendService.get<Product[]>(
+      'products'
+    )) as Product[];
     this.appendCategoriesToProducts();
     this.appendManufacturersToProducts();
 
-    this.orderLines = (await this.backendService.loadOrderLines()) as OrderLine[];
-    this.orders = (await this.backendService.loadOrders()) as OrderViewModel[];
+    this.orderLines = (await this.backendService.get<OrderLine[]>(
+      'orderLines'
+    )) as OrderLine[];
+    this.orders = (await this.backendService.get<Order[]>(
+      'orders'
+    )) as OrderViewModel[];
     this.appendOrderLinesToOrders();
 
     this.appendUsersToOrders();
