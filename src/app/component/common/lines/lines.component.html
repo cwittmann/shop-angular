@@ -20,9 +20,10 @@
         />
         <select
           *ngIf="column.dataType === 'select'"
-          [ngModel]="newItem[column.name].id"
+          [ngModel]="newItem[column.name]?.id"
           (change)="setOption(newItem, $event)"
         >
+          <option [ngValue]="null" disabled> None</option>
           <option *ngFor="let option of options" [value]="option.id">
             {{ option.name }}</option
           >
