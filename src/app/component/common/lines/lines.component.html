@@ -4,13 +4,37 @@
     <tr>
       <th *ngFor="let column of columns">{{ column.displayName }}</th>
       <th>
-        <a class="btn btn-primary ml-auto" (click)="create()">
+        <a *ngIf="!showNew" class="btn btn-primary ml-auto" (click)="create()">
           Add {{ model.name }}
         </a>
       </th>
     </tr>
   </thead>
   <tbody>
+    <tr *ngIf="showNew">
+      <td *ngFor="let column of columns">
+        <input
+          *ngIf="column.dataType === 'text' || column.dataType === 'number'"
+          [type]="column.dataType"
+          [(ngModel)]="newItem[column.name]"
+        />
+        <select
+          *ngIf="column.dataType === 'select'"
+          [ngModel]="newItem[column.name].id"
+          (change)="setOption(newItem, $event)"
+        >
+          <option *ngFor="let option of options" [value]="option.id">
+            {{ option.name }}</option
+          >
+        </select>
+      </td>
+      <td>
+        <button class="ml-auto" (click)="save(newItem, true)">
+          <img src="../../../assets/icons/save.png" />
+        </button>
+      </td>
+    </tr>
+
     <tr *ngFor="let item of items">
       <td *ngFor="let column of columns">
         <input
@@ -29,8 +53,11 @@
         </select>
       </td>
       <td>
-        <button class="ml-auto" (click)="save(item)">
+        <button class="ml-auto" (click)="save(item, false)">
           <img src="../../../assets/icons/save.png" />
+        </button>
+        <button (click)="delete(item.id)">
+          <img src="../../../assets/icons/delete.png" />
         </button>
       </td>
     </tr>
