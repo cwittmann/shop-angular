@@ -5,7 +5,11 @@
     <tr>
       <th *ngFor="let column of columns">{{ column.displayName }}</th>
       <th>
-        <a class="btn btn-primary ml-auto" (click)="create()">
+        <a
+          *ngIf="[model.name, 'Write'] | rights"
+          class="btn btn-primary ml-auto"
+          (click)="create()"
+        >
           Add {{ model.name }}
         </a>
       </th>
@@ -25,10 +29,17 @@
         </p>
       </td>
       <td>
-        <button class="ml-auto" (click)="edit(item)">
+        <button
+          *ngIf="[model.name, 'Write'] | rights"
+          class="ml-auto"
+          (click)="edit(item)"
+        >
           <img src="../../../assets/icons/edit.png" />
         </button>
-        <button (click)="delete(item.id)">
+        <button
+          *ngIf="[model.name, 'Delete'] | rights"
+          (click)="delete(item.id)"
+        >
           <img src="../../../assets/icons/delete.png" />
         </button>
       </td>

@@ -3,7 +3,7 @@
 <nav *ngIf="!loading && currentUser" class="navbar">
   <ul ngbNav class="nav-tabs mr-auto">
     <img class="logo" src="../assets/images/logo.png" />
-    <li ngbNavItem *ngIf="['Shop', 'Read'] | rights">
+    <li ngbNavItem *ngIf="['Shop', 'Write'] | rights">
       <a ngbNavLink [routerLink]="['/shop']">Shop</a>
     </li>
     <li ngbNavItem *ngIf="['Order', 'Read'] | rights">

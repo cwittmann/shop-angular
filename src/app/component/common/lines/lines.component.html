@@ -54,10 +54,17 @@
         </select>
       </td>
       <td>
-        <button class="ml-auto" (click)="save(item, false)">
+        <button
+          *ngIf="[model.name, 'Delete'] | rights"
+          class="ml-auto"
+          (click)="save(item, false)"
+        >
           <img src="../../../assets/icons/save.png" />
         </button>
-        <button (click)="delete(item.id)">
+        <button
+          *ngIf="[model.name, 'Delete'] | rights"
+          (click)="delete(item.id)"
+        >
           <img src="../../../assets/icons/delete.png" />
         </button>
       </td>

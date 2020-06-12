@@ -131,6 +131,7 @@ export class StoreService {
       'roleRights'
     )) as RoleRight[];
     this.roles = (await this.backendService.get<Role[]>('roles')) as Role[];
+
     this.appendRolesAndRightsToRoleRights();
     this.appendRightsToRoles();
 
