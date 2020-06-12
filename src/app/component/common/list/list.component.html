@@ -36,4 +36,7 @@
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls
+  *ngIf="items.length > 10"
+  (pageChange)="pageChanged($event)"
+></pagination-controls>
