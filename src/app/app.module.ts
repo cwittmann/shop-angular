@@ -32,6 +32,8 @@ import { LinesComponent } from './component/common/lines/lines.component';
 import { CategoryListComponent } from './component/category-list/category-list.component';
 import { CategoryDetailComponent } from './component/category-detail/category-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AttributeListComponent } from './component/attribute-list/attribute-list.component';
+import { AttributeDetailComponent } from './component/attribute-detail/attribute-detail.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LinesComponent,
     CategoryListComponent,
     CategoryDetailComponent,
+    AttributeListComponent,
+    AttributeDetailComponent,
   ],
   imports: [
     BrowserModule,

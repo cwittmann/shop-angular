@@ -14,6 +14,7 @@ import { Role } from '../model/Role';
 import { BaseModel } from '../model/BaseModel';
 import { Category } from '../model/Category';
 import { Order } from '../model/Order';
+import { Attribute } from '../model/Attribute';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class StoreService {
   manufacturers: Manufacturer[] = [];
   products: Product[] = [];
   categories: Category[] = [];
+  attributes: Attribute[] = [];
   orderLines: OrderLine[] = [];
   users: User[] = [];
   roles: Role[] = [];
@@ -147,7 +149,11 @@ export class StoreService {
     this.products = (await this.backendService.get<Product[]>(
       'products'
     )) as Product[];
+    this.attributes = (await this.backendService.get<Attribute[]>(
+      'attributes'
+    )) as Attribute[];
     this.appendCategoriesToProducts();
+    this.appendAttributesToProducts();
     this.appendManufacturersToProducts();
 
     this.orderLines = (await this.backendService.get<OrderLine[]>(
@@ -202,6 +208,10 @@ export class StoreService {
       );
       product.category = category;
     }
+  }
+
+  private appendAttributesToProducts() {
+    // TODO
   }
 
   private appendManufacturersToProducts() {
