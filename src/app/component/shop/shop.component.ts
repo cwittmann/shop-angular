@@ -18,6 +18,7 @@ export class ShopComponent implements OnInit {
   @ViewChildren('linkRef') linkRefs;
 
   selectedCategory: Category;
+  selectedProduct: Product;
 
   get products(): Product[] {
     return this.getProducts();
@@ -30,6 +31,8 @@ export class ShopComponent implements OnInit {
   get shoppingCart(): OrderViewModel {
     return this.storeService.shoppingCart;
   }
+
+  showDetails: boolean = false;
 
   constructor(
     private storeService: StoreService,
@@ -47,6 +50,13 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  toggleDetails(product: Product = null) {
+    if (!this.showDetails) {
+      this.selectedProduct = product;
+    }
+    this.showDetails = !this.showDetails;
+  }
 
   getProducts(): Product[] {
     if (this.selectedCategory) {
@@ -97,6 +107,7 @@ export class ShopComponent implements OnInit {
         product
       );
       this.shoppingCart.orderLines.push(orderLine);
+      this.toggleDetails();
     }
   }
 

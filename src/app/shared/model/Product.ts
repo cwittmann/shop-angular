@@ -1,6 +1,7 @@
 import { BaseModel } from './BaseModel';
 import { Manufacturer } from './Manufacturer';
 import { Category } from './Category';
+import { Attribute } from './Attribute';
 
 export class Product extends BaseModel {
   public static dbNameSingular = 'product';
@@ -14,6 +15,7 @@ export class Product extends BaseModel {
   public category: Category;
   public manufacturerId: string;
   public manufacturer: Manufacturer;
+  public attributes: Attribute[];
 
   constructor(
     id: string,
@@ -23,7 +25,8 @@ export class Product extends BaseModel {
     categoryId: string,
     category: Category,
     manufacturerId: string,
-    manufacturer: Manufacturer
+    manufacturer: Manufacturer,
+    attributes: Attribute[]
   ) {
     super(id);
     this.name = name;
@@ -33,5 +36,6 @@ export class Product extends BaseModel {
     this.category = category;
     this.manufacturerId = manufacturerId;
     this.manufacturer = manufacturer;
+    this.attributes = attributes;
   }
 }

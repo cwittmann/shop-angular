@@ -212,7 +212,19 @@ export class StoreService {
   }
 
   private appendAttributesToProducts() {
-    // TODO
+    for (let product of this.products) {
+      if (!product.attributes) {
+        product.attributes = [];
+      }
+
+      let attributes = this.attributes.filter(
+        (attribute) => attribute.productId === product.id
+      );
+
+      for (let attribute of attributes) {
+        product.attributes.push(attribute);
+      }
+    }
   }
 
   private appendManufacturersToProducts() {

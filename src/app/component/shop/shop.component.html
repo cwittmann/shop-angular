@@ -1,6 +1,6 @@
 <app-title title="Shop"></app-title>
 <div *ngIf="shoppingCart" class="d-flex m-4 sort">
-  <ul ngbNav>
+  <ul ngbNav *ngIf="!showDetails">
     <li ngbNavItem>
       <a
         [ngClass]="{ active: !selectedCategory?.id }"
@@ -33,9 +33,56 @@
   >
 </div>
 
-<section *ngIf="shoppingCart">
+<section *ngIf="shoppingCart && showDetails">
+  <p class="card-title">{{ selectedProduct?.name }}</p>
+  <div class="card-img-container-details">
+    <img
+      class="card-img-top-details"
+      [src]="'../../../assets/images/' + selectedProduct.id + '.png'"
+      alt="..."
+    />
+  </div>
+  <div class="card-body">
+    <p class="card-text" *ngFor="let attribute of selectedProduct?.attributes">
+      <b>{{ attribute.name }}:</b> {{ attribute.value }}
+    </p>
+  </div>
+
+  <div class="buttons">
+    <select
+      [disabled]="isInOrder(selectedProduct.id)"
+      class="form-control numberSelect"
+      [id]="selectedProduct.id"
+      #linkRef
+    >
+      <option *ngFor="let number of numbers" [value]="number">{{
+        number
+      }}</option>
+    </select>
+    <button
+      *ngIf="!isInOrder(selectedProduct.id)"
+      class="btn btn-primary"
+      (click)="addToCart(selectedProduct)"
+    >
+      Order
+    </button>
+    <button
+      *ngIf="isInOrder(selectedProduct.id)"
+      class="btn btn-danger"
+      (click)="removeFromCart(selectedProduct)"
+    >
+      Remove
+    </button>
+  </div>
+
+  <button class="btn btn-danger mt-2" (click)="toggleDetails()">
+    Close Details
+  </button>
+</section>
+
+<section *ngIf="shoppingCart && !showDetails">
   <div class="card" *ngFor="let product of products" style="width: 18rem;">
-    <div class="card-img-container">
+    <div class="card-img-container" (click)="toggleDetails(product)">
       <img
         class="card-img-top"
         [src]="'../../../assets/images/' + product.id + '.png'"
