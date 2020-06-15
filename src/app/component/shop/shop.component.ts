@@ -84,12 +84,6 @@ export class ShopComponent implements OnInit {
     );
   }
 
-  getAmount(productId: string) {
-    return this.shoppingCart.orderLines.find(
-      (orderLine) => orderLine.product.id === productId
-    ).amount;
-  }
-
   addToCart(product: Product) {
     let amount = this.linkRefs.find(
       (linkRef) => linkRef.nativeElement.id === product.id
@@ -107,7 +101,10 @@ export class ShopComponent implements OnInit {
         product
       );
       this.shoppingCart.orderLines.push(orderLine);
-      this.toggleDetails();
+
+      if (this.showDetails) {
+        this.toggleDetails();
+      }
     }
   }
 
@@ -120,5 +117,16 @@ export class ShopComponent implements OnInit {
       this.shoppingCart.orderLines.indexOf(orderLineWithProduct),
       1
     );
+  }
+
+  selectAmount(number: number, productId: string): boolean {
+    let orderLine = this.shoppingCart.orderLines.find(
+      (orderLine) => orderLine.product.id === productId
+    );
+    if (!orderLine) {
+      return false;
+    }
+
+    return orderLine?.amount == number;
   }
 }

@@ -55,9 +55,12 @@
       [id]="selectedProduct.id"
       #linkRef
     >
-      <option *ngFor="let number of numbers" [value]="number">{{
-        number
-      }}</option>
+      <option
+        *ngFor="let number of numbers"
+        [value]="number"
+        [selected]="selectAmount(number, selectedProduct.id)"
+        >{{ number }}</option
+      >
     </select>
     <button
       *ngIf="!isInOrder(selectedProduct.id)"
@@ -94,9 +97,6 @@
       <p class="card-text">
         <small>{{ product?.category?.name }}</small>
       </p>
-      <p class="card-text">
-        <small>{{ product?.description }}</small>
-      </p>
 
       <p class="card-text">
         {{ product?.price | currency }}
@@ -108,9 +108,12 @@
           [id]="product.id"
           #linkRef
         >
-          <option *ngFor="let number of numbers" [value]="number">{{
-            number
-          }}</option>
+          <option
+            *ngFor="let number of numbers"
+            [value]="number"
+            [selected]="selectAmount(number, product.id)"
+            >{{ number }}</option
+          >
         </select>
         <button
           *ngIf="!isInOrder(product.id)"
