@@ -22,6 +22,9 @@ export class ListComponent implements OnInit {
 
   config: any;
 
+  showSearchBar: boolean = false;
+  searchText: string;
+
   constructor(private storeService: StoreService, private router: Router) {}
 
   ngOnInit(): void {
@@ -30,6 +33,10 @@ export class ListComponent implements OnInit {
       currentPage: 1,
       totalItems: this.items.length,
     };
+
+    let instance = new this.model();
+    let propertyNames = Object.getOwnPropertyNames(instance);
+    this.showSearchBar = propertyNames.includes('name');
   }
 
   create() {

@@ -32,6 +32,7 @@ import { LinesComponent } from './component/common/lines/lines.component';
 import { CategoryListComponent } from './component/category-list/category-list.component';
 import { CategoryDetailComponent } from './component/category-detail/category-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FilterPipe } from './shared/pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     LinesComponent,
     CategoryListComponent,
     CategoryDetailComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
