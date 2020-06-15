@@ -129,4 +129,9 @@ export class ShopComponent implements OnInit {
 
     return orderLine?.amount == number;
   }
+
+  getImage(id: string) {
+    let result = this.storeService.images.find((image) => image.id === id);
+    return result.data;
+  }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BackendService } from './backend.service';
 import { v4 as uuidv4 } from 'uuid';
 import { OrderStatus } from '../enum/OrderStatus';
+import { Image } from '../model/Image';
 import { OrderViewModel } from '../model/OrderViewModel';
 import { OrderService } from './order.service';
 import { User } from '../model/User';
@@ -32,6 +33,8 @@ export class StoreService {
   rights: Right[] = [];
   roleRights: RoleRight[] = [];
   currentUser: User;
+
+  images: Image[];
 
   shoppingCart: OrderViewModel;
 
@@ -71,6 +74,10 @@ export class StoreService {
 
   delete<T>(id: string, dbNamePlural: string) {
     this.backendService.delete<T>(id, dbNamePlural);
+  }
+
+  postImage(item: FormData) {
+    this.backendService.postImage(item);
   }
 
   loadUser(userName: string) {
@@ -122,6 +129,9 @@ export class StoreService {
   }
 
   private async loadData() {
+    let imageObjects = (await this.backendService.getImages()) as Image[];
+    this.convertImages(imageObjects);
+
     this.rights = (await this.backendService.get<Right[]>('rights')) as Right[];
     this.rights.forEach(
       (right) => (right.name = right.entity + ' - ' + right.permission)
@@ -167,6 +177,20 @@ export class StoreService {
 
     this.appendUsersToOrders();
     this.sortOrders();
+  }
+
+  private convertImages(imageObjects: Image[]) {
+    if (!this.images) {
+      this.images = [];
+    }
+
+    for (let imageObject of imageObjects) {
+      let image = new Image(
+        imageObject.id,
+        'data:image/jpeg;base64,' + imageObject.data
+      );
+      this.images.push(image);
+    }
   }
 
   private appendRightsToRoles() {

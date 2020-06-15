@@ -49,6 +49,8 @@ export class EditComponent implements OnInit {
   permissionTypes = Permission;
   permissionTypeOptions = [];
 
+  selectedFile: File;
+
   errors: string[] = [];
 
   constructor(
@@ -111,6 +113,8 @@ export class EditComponent implements OnInit {
       return;
     }
 
+    this.saveImage();
+
     if (this.isNew) {
       await this.storeService.post<T>(this.item, this.model.dbNamePlural);
     } else {
@@ -121,6 +125,19 @@ export class EditComponent implements OnInit {
     this.ngOnInit();
   }
 
+  saveImage() {
+    const uploadImageData = new FormData();
+    uploadImageData.append(
+      'imageFile',
+      this.selectedFile,
+      this.selectedFile.name
+    );
+
+    uploadImageData.append('id', this.isNew ? this.newItem.id : this.item.id);
+
+    this.storeService.postImage(uploadImageData);
+  }
+
   validate(): boolean {
     this.errors = [];
 
@@ -128,6 +145,14 @@ export class EditComponent implements OnInit {
 
     for (let column of this.columns) {
       if (column.dataType === 'date') {
+        continue;
+      }
+
+      if (column.dataType === 'file') {
+        if (!this.selectedFile) {
+          this.errors.push('No file selected.');
+          valid = false;
+        }
         continue;
       }
 
@@ -157,5 +182,9 @@ export class EditComponent implements OnInit {
     let option = this.options.find((option) => option.id === optionId);
     this.item[this.nestedModel.dbNameSingular + 'Id'] = option.id;
     this.item[this.nestedModel.dbNameSingular] = option;
+  }
+
+  public onFileChanged(event) {
+    this.selectedFile = event.target.files[0];
   }
 }

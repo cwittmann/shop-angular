@@ -23,6 +23,11 @@
           [value]="item[column.name]"
           required
         />
+        <input
+          *ngIf="column.dataType === 'file'"
+          type="file"
+          (change)="onFileChanged($event)"
+        />
         <select
           *ngIf="
             column.dataType === 'select' &&

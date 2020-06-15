@@ -32,6 +32,7 @@ export class ProductDetailComponent implements OnInit {
       new Column('price', 'Price', 'text'),
       new Column('category', 'Category', 'select'),
       new Column('manufacturer', 'Manufacturer', 'select', true),
+      new Column('image', 'Image', 'file'),
     ];
     this.secondaryColumns = [
       new Column('name', 'Name', 'text'),

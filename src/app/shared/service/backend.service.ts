@@ -72,4 +72,20 @@ export class BackendService {
       })
       .toPromise();
   }
+
+  // IMAGES
+
+  async postImage(item: FormData) {
+    return await this.httpClient
+      .post('http://localhost:8000/images', item, {
+        headers: this.headers,
+      })
+      .toPromise();
+  }
+
+  async getImages() {
+    return await this.httpClient
+      .get('http://localhost:8000/images', { headers: this.headers })
+      .toPromise();
+  }
 }
