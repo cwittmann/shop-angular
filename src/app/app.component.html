@@ -1,43 +1,136 @@
 <div *ngIf="loading" class="spinner" role="status"></div>
 
-<nav *ngIf="!loading && currentUser" class="navbar">
-  <ul ngbNav class="nav-tabs mr-auto">
-    <img class="logo" src="../assets/images/logo.png" />
-    <li ngbNavItem *ngIf="['Shop', 'Write'] | rights">
-      <a ngbNavLink [routerLink]="['/shop']">Shop</a>
-    </li>
-    <li ngbNavItem *ngIf="['Order', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/order-list']">Orders</a>
-    </li>
-    <li ngbNavItem *ngIf="['Product', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/product-list']">Products</a>
-    </li>
-    <li ngbNavItem *ngIf="['Category', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/category-list']">Category</a>
-    </li>
-    <li ngbNavItem *ngIf="['Manufacturer', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/manufacturer-list']">Manufacturers</a>
-    </li>
-    <li ngbNavItem *ngIf="['User', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/user-list']">Users</a>
-    </li>
-    <li ngbNavItem *ngIf="['Role', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/role-list']">Roles</a>
-    </li>
-    <li ngbNavItem *ngIf="['Right', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/right-list']">Rights</a>
-    </li>
-    <li ngbNavItem *ngIf="['RoleRight', 'Read'] | rights">
-      <a ngbNavLink [routerLink]="['/role-right-list']">Role Rights</a>
-    </li>
-  </ul>
-  <span class="navbar-text">
-    {{ currentUser?.firstName }} {{ currentUser?.lastName }}
-    <small>({{ currentUser?.role?.name }})</small>
-    <button class="btn ml-1" (click)="logout()">
-      <img src="../assets/icons/logout.png" />
-    </button>
-  </span>
-</nav>
+<mdb-navbar
+  *ngIf="!loading && currentUser"
+  SideClass="navbar navbar-expand-lg navbar-dark indigo"
+  [containerInside]="false"
+>
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Shop</a></mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/shop']"
+          ><mdb-icon fas icon="store"></mdb-icon> Shop<span class="sr-only"
+            >(current)</span
+          ></a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link waves-light"
+          mdbWavesEffect
+          [routerLink]="['/order-list']"
+          ><mdb-icon fas icon="shopping-bag"></mdb-icon> Orders</a
+        >
+      </li>
+
+      <li class="nav-item dropdown" dropdown>
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          <mdb-icon fas icon="box"></mdb-icon> Products<span
+            class="caret"
+          ></span
+        ></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/product-list']"
+            ><mdb-icon fas icon="box"></mdb-icon> Products</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/manufacturer-list']"
+            ><mdb-icon fas icon="industry"></mdb-icon> Manufacturers</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/category-list']"
+            ><mdb-icon fas icon="project-diagram"></mdb-icon> Categories</a
+          >
+        </div>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          <mdb-icon fas icon="user"></mdb-icon> Users<span class="caret"></span
+        ></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+          role="menu"
+        >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/user-list']"
+            ><mdb-icon fas icon="user"></mdb-icon> Users</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/role-list']"
+            ><mdb-icon fas icon="user-tag"></mdb-icon> Roles</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/right-list']"
+            ><mdb-icon fas icon="balance-scale"></mdb-icon> Rights</a
+          >
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/role-right-list']"
+            ><mdb-icon fas icon="project-diagram"></mdb-icon> Role-Rights</a
+          >
+        </div>
+      </li>
+      <li class="nav-item avatar dropdown" dropdown>
+        <a
+          dropdownToggle
+          mdbWavesEffect
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect
+        >
+          <img
+            src="../assets/icons/user.svg"
+            style="width: 2vw;"
+            alt=""
+            class="img-fluid rounded-circle z-depth-0"
+          />
+          {{ currentUser?.firstName }} {{ currentUser?.lastName }}</a
+        >
+
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown-menu-right dropdown dropdown-primary"
+          role="menu"
+        >
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()"
+            ><mdb-icon fas icon="sign-out-alt"></mdb-icon> Log out</a
+          >
+        </div>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
 
 <router-outlet></router-outlet>
