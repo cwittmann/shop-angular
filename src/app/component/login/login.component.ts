@@ -12,7 +12,7 @@ import { StoreService } from 'src/app/shared/service/store.service';
 export class LoginComponent implements OnInit {
   userName: string;
   userPassword: string;
-  errorMessage: string;
+  errors: string[];
 
   constructor(
     private authService: AuthService,
@@ -26,11 +26,26 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/shop']);
       this.storeService.loading = false;
     });
+    this.backendService.authenticationFailed.subscribe(async () => {
+      this.errors = ["User name and password don't match."];
+      this.storeService.loading = false;
+    });
   }
 
   ngOnInit(): void {}
 
   login() {
+    this.errors = [];
+    if (this.userName === undefined || this.userName.length < 1) {
+      this.errors.push('User name is missing.');
+    }
+    if (this.userPassword === undefined || this.userPassword.length < 1) {
+      this.errors.push('Password is missing.');
+    }
+    if (this.errors.length > 0) {
+      return;
+    }
+
     this.storeService.loading = true;
     this.authService.validate(this.userName, this.userPassword);
   }

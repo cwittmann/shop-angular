@@ -29,5 +29,7 @@
   >
     Sign in
   </button>
-  <p class="error">{{ errorMessage }}</p>
+  <div *ngIf="errors" class="error">
+    <p *ngFor="let error of errors">{{ error }}</p>
+  </div>
 </form>

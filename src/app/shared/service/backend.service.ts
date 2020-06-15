@@ -8,9 +8,11 @@ import { BaseModel } from '../model/BaseModel';
 export class BackendService {
   headers: HttpHeaders;
   userAuthenticated: EventEmitter<Boolean>;
+  authenticationFailed: EventEmitter<Boolean>;
 
   constructor(private httpClient: HttpClient) {
     this.userAuthenticated = new EventEmitter();
+    this.authenticationFailed = new EventEmitter();
   }
 
   // AUTHENTICATION
@@ -25,13 +27,16 @@ export class BackendService {
         headers: this.headers,
         responseType: 'text',
       })
-      .subscribe((res) => {
-        if (res === 'Successful') {
-          this.userAuthenticated.emit(true);
-        } else {
-          this.userAuthenticated.emit(false);
+      .subscribe(
+        (res) => {
+          if (res === 'Successful') {
+            this.userAuthenticated.emit(true);
+          }
+        },
+        (error) => {
+          this.authenticationFailed.emit(true);
         }
-      });
+      );
   }
 
   // GENERIC
