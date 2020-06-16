@@ -5,6 +5,8 @@ export class Order extends BaseModel {
   public static dbNameSingular = 'order';
   public static dbNamePlural = 'orders';
   public static route = 'order';
+  public static searchFields = ['status'];
+
   public id: string;
   public userId: string;
   public date: Date;

@@ -5,6 +5,7 @@ export class User extends BaseModel {
   public static dbNameSingular = 'user';
   public static dbNamePlural = 'users';
   public static route = 'user';
+  public static searchFields = ['firstName', 'lastName', 'city', 'userName'];
 
   public id: string;
   public firstName: string;

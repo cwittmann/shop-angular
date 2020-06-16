@@ -4,6 +4,7 @@ export class Category extends BaseModel {
   public static dbNameSingular = 'category';
   public static dbNamePlural = 'categories';
   public static route = 'category';
+  public static searchFields = ['name'];
 
   public id: string;
   public name: string;

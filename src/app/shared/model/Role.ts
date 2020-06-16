@@ -5,6 +5,7 @@ export class Role extends BaseModel {
   public static dbNameSingular = 'role';
   public static dbNamePlural = 'roles';
   public static route = 'role';
+  public static searchFields = ['name'];
 
   public id: string;
   public name: string;

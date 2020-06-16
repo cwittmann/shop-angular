@@ -4,6 +4,7 @@ export class Attribute extends BaseModel {
   public static dbNameSingular = 'attribute';
   public static dbNamePlural = 'attributes';
   public static route = 'attribute';
+  public static searchFields = ['name', 'value'];
 
   public id: string;
   public productId: string;

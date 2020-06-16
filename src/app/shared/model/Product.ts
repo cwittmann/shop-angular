@@ -7,6 +7,8 @@ export class Product extends BaseModel {
   public static dbNameSingular = 'product';
   public static dbNamePlural = 'products';
   public static route = 'product';
+  public static searchFields = ['name', 'description'];
+
   public id: string;
   public name: string;
   public description: string;

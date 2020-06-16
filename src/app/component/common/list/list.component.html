@@ -7,7 +7,7 @@
     name="search"
     type="search"
     [(ngModel)]="searchText"
-    placeholder="Search text"
+    [placeholder]="'Search text (' + searchPlaceholder + ')'"
   />
 </form>
 <table class="table table-borderless">
@@ -26,7 +26,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of items | filter: searchText | paginate: config">
+    <tr
+      *ngFor="
+        let item of items
+          | filter: searchText:model.searchFields
+          | paginate: config
+      "
+    >
       <td *ngFor="let column of columns">
         <p *ngIf="column.dataType === 'text' || column.dataType === 'status'">
           {{ item[column.name] }}

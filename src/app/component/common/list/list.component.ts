@@ -25,6 +25,7 @@ export class ListComponent implements OnInit {
 
   showSearchBar: boolean = false;
   searchText: string;
+  searchPlaceholder: string;
 
   constructor(private storeService: StoreService, private router: Router) {}
 
@@ -35,9 +36,8 @@ export class ListComponent implements OnInit {
       totalItems: this.items.length,
     };
 
-    let instance = new this.model();
-    let propertyNames = Object.getOwnPropertyNames(instance);
-    this.showSearchBar = propertyNames.includes('name');
+    this.showSearchBar = this.model.searchFields?.length > 0;
+    this.searchPlaceholder = this.model.searchFields.join(', ');
   }
 
   create() {
