@@ -31,6 +31,8 @@ export class LinesComponent implements OnInit {
   newItem: any;
   showNew: boolean = false;
 
+  errors: string[] = [];
+
   get items(): any[] {
     if (this.model.name === 'OrderLine') {
       return this.storeService[this.model.dbNamePlural].filter(
@@ -74,6 +76,10 @@ export class LinesComponent implements OnInit {
   }
 
   async save<T extends BaseModel>(item: any, isNew: boolean) {
+    if (!this.validate(item)) {
+      return;
+    }
+
     if (isNew) {
       await this.storeService.post<T>(item, this.model.dbNamePlural);
     } else {
@@ -83,6 +89,43 @@ export class LinesComponent implements OnInit {
     this.showNew = false;
     await this.storeService.reload();
     this.ngOnInit();
+  }
+
+  validate(item: any): boolean {
+    this.errors = [];
+
+    let valid = true;
+
+    for (let column of this.columns) {
+      if (column.dataType === 'date') {
+        continue;
+      }
+
+      let value = item[column.name];
+      let defaultValue = this.getDefaultValueForDataType(column);
+
+      if (value === defaultValue) {
+        this.errors.push('Invalid value for "' + column.displayName + '"');
+        valid = false;
+      }
+    }
+
+    return valid;
+  }
+
+  getDefaultValueForDataType(column: Column) {
+    switch (column.dataType) {
+      case 'date':
+        return new Date();
+      case 'text':
+      case 'password':
+        return '';
+      case 'number':
+        return 0;
+      case 'select':
+      case 'default':
+        return null;
+    }
   }
 
   setOption(item: any, event) {
