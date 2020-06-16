@@ -121,7 +121,7 @@ export class EditComponent implements OnInit {
       await this.storeService.put<T>(this.item, this.model.dbNamePlural);
     }
 
-    this.storeService.reload();
+    await this.storeService.reload();
     this.ngOnInit();
   }
 

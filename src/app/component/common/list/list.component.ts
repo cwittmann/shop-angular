@@ -47,8 +47,10 @@ export class ListComponent implements OnInit {
     this.router.navigate(['/' + this.model.route + '-detail/' + item.id]);
   }
 
-  delete<T>(id: string) {
-    this.storeService.delete<T>(id, this.model.dbNamePlural);
+  async delete<T>(id: string) {
+    await this.storeService.delete<T>(id, this.model.dbNamePlural);
+    await this.storeService.reload();
+    this.ngOnInit();
   }
 
   pageChanged(event) {
