@@ -3,6 +3,7 @@ import { StoreService } from 'src/app/shared/service/store.service';
 import { Column } from 'src/app/shared/model/Column';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-list',
@@ -40,7 +41,8 @@ export class ListComponent implements OnInit {
   }
 
   create() {
-    this.router.navigate(['/' + this.model.route + '-detail']);
+    let id = uuidv4();
+    this.router.navigate(['/' + this.model.route + '-new/' + id]);
   }
 
   edit(item: any) {

@@ -40,7 +40,7 @@ const routes: Routes = [
     component: OrderListComponent,
   },
   {
-    path: 'order-detail',
+    path: 'order-new/:id',
     canActivate: [AuthGuardService],
     component: OrderDetailComponent,
   },
@@ -55,7 +55,7 @@ const routes: Routes = [
     component: ProductListComponent,
   },
   {
-    path: 'product-detail',
+    path: 'product-new/:id',
     canActivate: [AuthGuardService],
     component: ProductDetailComponent,
   },
@@ -70,7 +70,7 @@ const routes: Routes = [
     component: CategoryListComponent,
   },
   {
-    path: 'category-detail',
+    path: 'category-new/:id',
     canActivate: [AuthGuardService],
     component: CategoryDetailComponent,
   },
@@ -85,7 +85,7 @@ const routes: Routes = [
     component: ManufacturerListComponent,
   },
   {
-    path: 'manufacturer-detail',
+    path: 'manufacturer-new/:id',
     canActivate: [AuthGuardService],
     component: ManufacturerDetailComponent,
   },
@@ -100,7 +100,7 @@ const routes: Routes = [
     component: UserListComponent,
   },
   {
-    path: 'user-detail',
+    path: 'user-new/:id',
     canActivate: [AuthGuardService],
     component: UserDetailComponent,
   },
@@ -115,7 +115,7 @@ const routes: Routes = [
     component: RightListComponent,
   },
   {
-    path: 'right-detail',
+    path: 'right-new/:id',
     canActivate: [AuthGuardService],
     component: RightDetailComponent,
   },
@@ -130,7 +130,7 @@ const routes: Routes = [
     component: RoleListComponent,
   },
   {
-    path: 'role-detail',
+    path: 'role-new/:id',
     canActivate: [AuthGuardService],
     component: RoleDetailComponent,
   },
@@ -145,7 +145,7 @@ const routes: Routes = [
     component: RoleRightListComponent,
   },
   {
-    path: 'role-right-detail',
+    path: 'role-right-new/:id',
     canActivate: [AuthGuardService],
     component: RoleRightDetailComponent,
   },

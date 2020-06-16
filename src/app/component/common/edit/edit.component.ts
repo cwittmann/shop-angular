@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Column } from 'src/app/shared/model/Column';
 import { StoreService } from 'src/app/shared/service/store.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrderStatus } from 'src/app/shared/enum/OrderStatus';
 import { Permission } from 'src/app/shared/enum/Permission';
 
@@ -55,10 +55,11 @@ export class EditComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.id = activatedRoute.snapshot.params['id'];
-    this.isNew = !this.id;
+    this.isNew = router.url.includes('-new');
   }
 
   ngOnInit(): void {
@@ -113,7 +114,9 @@ export class EditComponent implements OnInit {
       return;
     }
 
-    this.saveImage();
+    if (this.model.dbNameSingular === 'product') {
+      this.saveImage();
+    }
 
     if (this.isNew) {
       await this.storeService.post<T>(this.item, this.model.dbNamePlural);
@@ -122,7 +125,7 @@ export class EditComponent implements OnInit {
     }
 
     await this.storeService.reload();
-    this.ngOnInit();
+    this.router.navigate(['/' + this.model.dbNameSingular + '-list']);
   }
 
   saveImage() {
