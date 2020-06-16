@@ -1,4 +1,4 @@
-<app-title [title]="model.dbNamePlural | titlecase"></app-title>
+<app-title [title]="model?.dbNamePlural | titlecase"></app-title>
 
 <form *ngIf="showSearchBar" class="form-inline md-form form-sm">
   <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
@@ -16,11 +16,11 @@
       <th *ngFor="let column of columns">{{ column.displayName }}</th>
       <th>
         <a
-          *ngIf="[model.name, 'Write'] | rights"
+          *ngIf="[model?.name, 'Write'] | rights"
           class="btn btn-primary ml-auto"
           (click)="create()"
         >
-          Add {{ model.name }}
+          Add {{ model?.name }}
         </a>
       </th>
     </tr>
@@ -29,7 +29,7 @@
     <tr
       *ngFor="
         let item of items
-          | filter: searchText:model.searchFields
+          | filter: searchText:model?.searchFields
           | paginate: config
       "
     >
@@ -64,6 +64,6 @@
 </table>
 
 <pagination-controls
-  *ngIf="items.length > 10"
+  *ngIf="items?.length > 10"
   (pageChange)="pageChanged($event)"
 ></pagination-controls>

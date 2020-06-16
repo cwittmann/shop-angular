@@ -34,12 +34,12 @@ export class LinesComponent implements OnInit {
   errors: string[] = [];
 
   get items(): any[] {
-    if (this.model.name === 'OrderLine') {
+    if (this.model?.name === 'OrderLine') {
       return this.storeService[this.model.dbNamePlural].filter(
         (item) => item.orderId === this.parentId
       );
     }
-    if (this.model.name === 'Attribute') {
+    if (this.model?.name === 'Attribute') {
       return this.storeService[this.model.dbNamePlural].filter(
         (item) => item.productId === this.parentId
       );
@@ -136,10 +136,10 @@ export class LinesComponent implements OnInit {
   }
 
   initializeNewItem() {
-    if (this.model.name === 'OrderLine') {
+    if (this.model?.name === 'OrderLine') {
       this.newItem = new OrderLine(uuidv4(), this.parentId, 0, null);
     }
-    if (this.model.name === 'Attribute') {
+    if (this.model?.name === 'Attribute') {
       this.newItem = new Attribute(uuidv4(), this.parentId, '', '');
     }
   }

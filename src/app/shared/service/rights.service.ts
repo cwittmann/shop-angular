@@ -10,7 +10,7 @@ export class RightsService {
 
   userHasRights(entity: string, permission: string) {
     let currentUser = this.storeService.currentUser;
-    let result = currentUser.role.rights.some(
+    let result = currentUser?.role.rights.some(
       (right) =>
         right.entity === entity &&
         Permission[right.permission] >= Permission[permission]

@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
 
   get shoppingCart(): OrderViewModel {
     let shoppingCart = this.storeService.shoppingCart;
-    shoppingCart.calculatePrices();
+    shoppingCart?.calculatePrices();
     return shoppingCart;
   }
 

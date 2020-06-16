@@ -1,11 +1,11 @@
-<app-title [title]="model.name + 's'"></app-title>
+<app-title [title]="model?.name + 's'"></app-title>
 <table class="table table-hover">
   <thead class="">
     <tr>
       <th *ngFor="let column of columns">{{ column.displayName }}</th>
       <th>
         <a *ngIf="!showNew" class="btn btn-primary ml-auto" (click)="create()">
-          Add {{ model.name }}
+          Add {{ model?.name }}
         </a>
       </th>
     </tr>
@@ -55,14 +55,14 @@
       </td>
       <td>
         <button
-          *ngIf="[model.name, 'Delete'] | rights"
+          *ngIf="[model?.name, 'Delete'] | rights"
           class="ml-auto"
           (click)="save(item, false)"
         >
           <img src="../../../assets/icons/save.png" />
         </button>
         <button
-          *ngIf="[model.name, 'Delete'] | rights"
+          *ngIf="[model?.name, 'Delete'] | rights"
           (click)="delete(item.id)"
         >
           <img src="../../../assets/icons/delete.png" />

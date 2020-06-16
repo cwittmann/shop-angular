@@ -10,6 +10,9 @@ import {
 import { BackendService } from 'src/app/shared/service/backend.service';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { RightsPipe } from 'src/app/shared/pipe/rights.pipe';
+import { PaginatePipe, PaginationService } from 'ngx-pagination';
+import { FilterPipe } from 'src/app/shared/pipe/filter.pipe';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -17,8 +20,9 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ListComponent],
+      declarations: [ListComponent, RightsPipe, PaginatePipe, FilterPipe],
       imports: [HttpClientModule, RouterTestingModule.withRoutes([])],
+      providers: [PaginationService],
     }).compileComponents();
   }));
 

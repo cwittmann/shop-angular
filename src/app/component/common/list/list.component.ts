@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
   columns: Column[];
 
   get items(): any[] {
-    return this.storeService[this.model.dbNamePlural];
+    return this.storeService[this.model?.dbNamePlural];
   }
 
   config: any;
@@ -33,11 +33,11 @@ export class ListComponent implements OnInit {
     this.config = {
       itemsPerPage: 10,
       currentPage: 1,
-      totalItems: this.items.length,
+      totalItems: this.items?.length,
     };
 
-    this.showSearchBar = this.model.searchFields?.length > 0;
-    this.searchPlaceholder = this.model.searchFields.join(', ');
+    this.showSearchBar = this.model?.searchFields?.length > 0;
+    this.searchPlaceholder = this.model?.searchFields.join(', ');
   }
 
   create() {

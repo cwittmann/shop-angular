@@ -4,7 +4,7 @@
   <ul class="list-group">
     <li
       class="list-group-item"
-      *ngFor="let orderLine of shoppingCart.orderLines"
+      *ngFor="let orderLine of shoppingCart?.orderLines"
     >
       <div class="d-flex w-100 justify-content-between">
         <small>{{ orderLine.product.manufacturer.name }}</small>
