@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ReturnStatement } from '@angular/compiler';
 
 @Pipe({
   name: 'filter',
@@ -10,7 +9,12 @@ export class FilterPipe implements PipeTransform {
       return [];
     }
 
-    if (!searchText || searchFields.length === 0) {
+    if (
+      !searchText ||
+      searchText.length === 0 ||
+      !searchFields ||
+      searchFields.length === 0
+    ) {
       return items;
     }
 
