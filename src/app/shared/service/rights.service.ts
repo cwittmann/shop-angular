@@ -20,9 +20,6 @@ export class RightsService {
 
     let currentUser = this.storeService.currentUser;
 
-    console.log('!!!!!!!!!!!!!!!!!!');
-    console.log(currentUser);
-
     let result = currentUser?.role?.rights.some(
       (right) =>
         right.entity === entity &&
