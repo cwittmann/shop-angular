@@ -25,31 +25,31 @@ describe('RightsPipe', () => {
 
   afterEach(() => {});
 
-  it('create an instance', () => {
+  it('should create an instance', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('transform with undefined parameter', () => {
+  it('should transform to false with undefined parameter', () => {
     let result = pipe.transform(undefined);
     expect(result).toBe(false);
   });
 
-  it('transform with empty array', () => {
+  it('should transform to false with empty array', () => {
     let result = pipe.transform([]);
     expect(result).toBe(false);
   });
 
-  it('transform with one-element array', () => {
+  it('should transform to false with one-element array', () => {
     let result = pipe.transform(['Order']);
     expect(result).toBe(false);
   });
 
-  it('transform with three-element array', () => {
+  it('should transform to false with three-element array', () => {
     let result = pipe.transform(['Order', 'Write', 'Read']);
     expect(result).toBe(false);
   });
 
-  it('transform with two-element array', () => {
+  it('should transform to true with two-element array', () => {
     let result = pipe.transform(['Order', 'Write']);
     expect(result).toBe(true);
   });

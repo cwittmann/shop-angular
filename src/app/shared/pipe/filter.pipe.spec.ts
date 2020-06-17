@@ -7,11 +7,11 @@ describe('FilterPipe', () => {
     pipe = new FilterPipe();
   });
 
-  it('create an instance', () => {
+  it('should create an instance', () => {
     expect(pipe).toBeTruthy();
   });
 
-  it('transform with undefined paramenters', () => {
+  it('transform undefined parameters into empty array', () => {
     let result = pipe.transform(undefined, undefined, undefined);
     expect(result).toEqual([]);
   });
@@ -21,14 +21,14 @@ describe('FilterPipe', () => {
     expect(result).toEqual([]);
   });
 
-  it('transform with string array items and empty searchText & searchFields', () => {
+  it('should transform string array into itself when searchText & searchFields are empty', () => {
     let items = ['One', 'Two', 'Three'];
 
     let result = pipe.transform(items, '', []);
     expect(result).toEqual(items);
   });
 
-  it('transform with valid items, searchText and searchFields', () => {
+  it('should transform object array into array with one item that matches searchText and searchFields', () => {
     let items = [{ name: 'One' }, { name: 'Two' }, { name: 'Three' }];
 
     let result = pipe.transform(items, 'Two', ['name']);
@@ -37,7 +37,7 @@ describe('FilterPipe', () => {
     expect(result[0]).toEqual(items[1]);
   });
 
-  it('transform with valid items & searchFields, but different-case searchText', () => {
+  it('should transform object array into array with one item when searchText has different case and searchFields matches', () => {
     let items = [{ name: 'One' }, { name: 'Two' }, { name: 'Three' }];
 
     let result = pipe.transform(items, 'TwO', ['name']);
@@ -46,7 +46,7 @@ describe('FilterPipe', () => {
     expect(result[0]).toEqual(items[1]);
   });
 
-  it('transform with valid values but wrong case of searchField', () => {
+  it('should transform object array into empty array when searchText matches but searchFields has wrong case', () => {
     let items = [{ name: 'One' }, { name: 'Two' }, { name: 'Three' }];
 
     let result = pipe.transform(items, 'Two', ['Name']);
@@ -54,7 +54,7 @@ describe('FilterPipe', () => {
     expect(result.length).toEqual(0);
   });
 
-  it('transform with valid values but non-matching searchText', () => {
+  it('should transform object array into empty array when searchText does not match any element in array', () => {
     let items = [{ name: 'One' }, { name: 'Two' }, { name: 'Three' }];
 
     let result = pipe.transform(items, 'Twoo', ['name']);
