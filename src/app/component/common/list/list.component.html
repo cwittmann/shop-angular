@@ -1,6 +1,6 @@
 <app-title [title]="model?.dbNamePlural | titlecase"></app-title>
 
-<form *ngIf="showSearchBar" class="form-inline md-form form-sm">
+<form [@fadeLeft] *ngIf="showSearchBar" class="form-inline md-form form-sm">
   <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
   <input
     class="form-control form-control-sm ml-3 w-75"

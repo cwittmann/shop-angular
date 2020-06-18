@@ -25,6 +25,15 @@ import {
       ]),
       transition(':leave', animate(600, style({ opacity: 0 }))),
     ]),
+
+    trigger('fadeLeft', [
+      state('in', style({ opacity: 1, transform: 'translate(0, 0)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translate(1000px, 0)' }),
+        animate('800ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(100, style({ opacity: 0 }))),
+    ]),
   ],
 })
 export class ListComponent implements OnInit {

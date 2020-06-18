@@ -1,6 +1,6 @@
 <app-title title="Shop"></app-title>
 <div *ngIf="shoppingCart" class="d-flex m-4 sort">
-  <ul ngbNav *ngIf="!showDetails">
+  <ul [@fadeLeft] ngbNav *ngIf="!showDetails">
     <li ngbNavItem>
       <a
         [ngClass]="{ active: !selectedCategory?.id }"
@@ -17,6 +17,7 @@
   </ul>
 
   <a
+    [@highlight]="isUpdating ? 'highlight' : 'rest'"
     *ngIf="shoppingCart.orderLines.length > 0"
     [routerLink]="['/checkout']"
     class="btn btn-primary cart ml-auto"
@@ -26,6 +27,7 @@
     items</a
   >
   <a
+    [@highlight]="isUpdating ? 'highlight' : 'rest'"
     *ngIf="shoppingCart.orderLines.length == 0"
     class="btn btn-primary cart ml-auto"
     ><img class="icon" src="../../../assets/icons/shopping-cart.png" />0

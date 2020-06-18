@@ -27,6 +27,29 @@ import {
       ]),
       transition(':leave', animate(100, style({ opacity: 0 }))),
     ]),
+    trigger('fadeLeft', [
+      state('in', style({ opacity: 1, transform: 'translate(0, 0)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translate(1000px, 0)' }),
+        animate('800ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(100, style({ opacity: 0 }))),
+    ]),
+
+    trigger('highlight', [
+      state(
+        'highlight',
+        style({
+          transform: 'scale(0.8,0.8)',
+          backgroundColor: '#4788c7',
+          color: 'white',
+        })
+      ),
+      state('rest', style({ transform: 'scale(1,1)' })),
+      transition('* <=> highlight', [
+        animate('200ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+    ]),
 
     trigger('rotate', [
       state(
@@ -68,6 +91,7 @@ export class ShopComponent implements OnInit {
   }
 
   showDetails: boolean = false;
+  isUpdating: boolean = false;
 
   constructor(
     private storeService: StoreService,
@@ -120,6 +144,8 @@ export class ShopComponent implements OnInit {
   }
 
   addToCart(product: Product) {
+    this.isUpdating = true;
+
     let amount = this.linkRefs.find(
       (linkRef) => linkRef.nativeElement.id === product.id
     ).nativeElement.value;
@@ -141,9 +167,14 @@ export class ShopComponent implements OnInit {
         this.toggleDetails();
       }
     }
+
+    setTimeout(() => {
+      this.isUpdating = false;
+    }, 400);
   }
 
   removeFromCart(product: Product) {
+    this.isUpdating = true;
     let orderLineWithProduct = this.shoppingCart.orderLines.find(
       (orderLine) => orderLine.product.id === product.id
     );
@@ -152,6 +183,9 @@ export class ShopComponent implements OnInit {
       this.shoppingCart.orderLines.indexOf(orderLineWithProduct),
       1
     );
+    setTimeout(() => {
+      this.isUpdating = false;
+    }, 400);
   }
 
   selectAmount(number: number, productId: string): boolean {
