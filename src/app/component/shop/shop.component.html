@@ -40,8 +40,7 @@
   <div class="card-img-container-details">
     <img
       class="card-img-top-details"
-      [src]="getImage(selectedProduct.id)"
-      alt="..."
+      [src]="'data:image/jpg;base64,' + getImage(selectedProduct.id) | safeHtml"
     />
   </div>
   <div class="card-body">
@@ -93,7 +92,10 @@
     style="width: 18rem;"
   >
     <div class="card-img-container" (click)="toggleDetails(product)">
-      <img class="card-img-top" [src]="getImage(product.id)" alt="..." />
+      <img
+        class="card-img-top"
+        [src]="'data:image/jpg;base64,' + getImage(product.id) | safeHtml"
+      />
     </div>
     <div class="card-body">
       <p class="card-title">{{ product?.name }}</p>

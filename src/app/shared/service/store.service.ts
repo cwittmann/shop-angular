@@ -186,10 +186,7 @@ export class StoreService {
     }
 
     for (let imageObject of imageObjects) {
-      let image = new Image(
-        imageObject.id,
-        'data:image/jpeg;base64,' + imageObject.data
-      );
+      let image = new Image(imageObject.id, imageObject.data);
       this.images.push(image);
     }
   }
