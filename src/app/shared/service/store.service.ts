@@ -115,7 +115,8 @@ export class StoreService {
 
   async postOrderViewModel() {
     await this.orderService.postOrder(this.shoppingCart);
-    this.shoppingCart.clear(this.currentUser);
+    await this.shoppingCart.clear(this.currentUser);
+    this.reload();
   }
 
   private initializeShoppingCart() {
