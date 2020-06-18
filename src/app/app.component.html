@@ -1,6 +1,7 @@
 <div *ngIf="loading" class="spinner" role="status"></div>
 
 <mdb-navbar
+  [@fade]
   *ngIf="!loading && currentUser"
   SideClass="navbar navbar-expand-lg navbar-dark indigo"
   [containerInside]="false"

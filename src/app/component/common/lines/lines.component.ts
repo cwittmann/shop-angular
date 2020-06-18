@@ -5,15 +5,30 @@ import { StoreService } from 'src/app/shared/service/store.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BaseModel } from 'src/app/shared/model/BaseModel';
 import { v4 as uuidv4 } from 'uuid';
-import { Order } from 'src/app/shared/model/Order';
-import { Product } from 'src/app/shared/model/Product';
 import { OrderLine } from 'src/app/shared/model/OrderLine';
 import { Attribute } from 'src/app/shared/model/Attribute';
+import {
+  trigger,
+  state,
+  transition,
+  animate,
+  style,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-lines',
   templateUrl: './lines.component.html',
   styleUrls: ['./lines.component.scss'],
+  animations: [
+    trigger('fade', [
+      state('in', style({ opacity: 1, transform: 'scale(1,1)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0,0)' }),
+        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(600, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class LinesComponent implements OnInit {
   @Input()

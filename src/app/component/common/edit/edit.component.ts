@@ -7,11 +7,28 @@ import { StoreService } from 'src/app/shared/service/store.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrderStatus } from 'src/app/shared/enum/OrderStatus';
 import { Permission } from 'src/app/shared/enum/Permission';
+import {
+  trigger,
+  state,
+  transition,
+  animate,
+  style,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
+  animations: [
+    trigger('fade', [
+      state('in', style({ opacity: 1, transform: 'scale(1,1)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0,0)' }),
+        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(600, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class EditComponent implements OnInit {
   @Input()

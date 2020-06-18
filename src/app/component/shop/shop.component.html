@@ -33,7 +33,7 @@
   >
 </div>
 
-<section *ngIf="shoppingCart && showDetails">
+<section [@fade] *ngIf="shoppingCart && showDetails">
   <p class="card-title">{{ selectedProduct?.name }}</p>
   <div class="card-img-container-details">
     <img
@@ -84,7 +84,12 @@
 </section>
 
 <section *ngIf="shoppingCart && !showDetails">
-  <div class="card" *ngFor="let product of products" style="width: 18rem;">
+  <div
+    [@rotate]
+    class="card"
+    *ngFor="let product of products"
+    style="width: 18rem;"
+  >
     <div class="card-img-container" (click)="toggleDetails(product)">
       <img class="card-img-top" [src]="getImage(product.id)" alt="..." />
     </div>

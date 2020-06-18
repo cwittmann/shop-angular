@@ -48,10 +48,15 @@ select {
   padding-right: 0.2vw;
 }
 
+section {
+  perspective: 400px;
+}
+
 .card {
   display: inline-block;
   padding: 0;
   border: none;
+  transform-origin: center center;
 }
 
 .card-title {

@@ -33,6 +33,7 @@ import { CategoryListComponent } from './component/category-list/category-list.c
 import { CategoryDetailComponent } from './component/category-detail/category-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './shared/pipe/filter.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { FilterPipe } from './shared/pipe/filter.pipe';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,

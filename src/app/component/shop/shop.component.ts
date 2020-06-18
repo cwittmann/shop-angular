@@ -6,11 +6,46 @@ import { OrderViewModel } from 'src/app/shared/model/OrderViewModel';
 import { OrderLine } from 'src/app/shared/model/OrderLine';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/shared/model/Category';
+import {
+  trigger,
+  state,
+  transition,
+  animate,
+  style,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
+  animations: [
+    trigger('fade', [
+      state('in', style({ opacity: 1, transform: 'scale(1,1)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0,0)' }),
+        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(100, style({ opacity: 0 }))),
+    ]),
+
+    trigger('rotate', [
+      state(
+        'in',
+        style({
+          opacity: 1,
+          transform: 'rotateY(0deg)',
+        })
+      ),
+      transition(':enter', [
+        style({
+          opacity: 0,
+          transform: 'rotateY(180deg)',
+        }),
+        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(100, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class ShopComponent implements OnInit {
   numbers: Number[] = [1, 2, 3];

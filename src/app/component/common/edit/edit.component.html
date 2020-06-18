@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr [@fade]>
       <td *ngFor="let column of columns">
         <input
           *ngIf="column.dataType === 'text' || column.dataType === 'password'"

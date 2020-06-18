@@ -4,11 +4,28 @@ import { Column } from 'src/app/shared/model/Column';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  trigger,
+  state,
+  transition,
+  animate,
+  style,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  animations: [
+    trigger('fade', [
+      state('in', style({ opacity: 1, transform: 'scale(1,1)' })),
+      transition(':enter', [
+        style({ opacity: 0, transform: 'scale(0,0)' }),
+        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+      ]),
+      transition(':leave', animate(600, style({ opacity: 0 }))),
+    ]),
+  ],
 })
 export class ListComponent implements OnInit {
   @Input()
