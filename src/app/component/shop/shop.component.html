@@ -87,6 +87,7 @@
 <section *ngIf="shoppingCart && !showDetails">
   <div
     [@rotate]
+    [@fade]="isUpdating && updatingProduct === product ? 'in' : 'void'"
     class="card"
     *ngFor="let product of products"
     style="width: 18rem;"
@@ -122,6 +123,9 @@
         </select>
         <button
           *ngIf="!isInOrder(product.id)"
+          [@highlight]="
+            isUpdating && updatingProduct === product ? 'highlight' : 'rest'
+          "
           class="btn btn-primary"
           (click)="addToCart(product)"
         >
@@ -129,6 +133,9 @@
         </button>
         <button
           *ngIf="isInOrder(product.id)"
+          [@highlight]="
+            isUpdating && updatingProduct === product ? 'highlight' : 'rest'
+          "
           class="btn btn-danger"
           (click)="removeFromCart(product)"
         >

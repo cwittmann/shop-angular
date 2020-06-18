@@ -46,7 +46,7 @@ import {
         })
       ),
       state('rest', style({ transform: 'scale(1,1)' })),
-      transition('* <=> highlight', [
+      transition('rest <=> highlight', [
         animate('200ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
       ]),
     ]),
@@ -92,6 +92,7 @@ export class ShopComponent implements OnInit {
 
   showDetails: boolean = false;
   isUpdating: boolean = false;
+  updatingProduct: Product;
 
   constructor(
     private storeService: StoreService,
@@ -145,6 +146,7 @@ export class ShopComponent implements OnInit {
 
   addToCart(product: Product) {
     this.isUpdating = true;
+    this.updatingProduct = product;
 
     let amount = this.linkRefs.find(
       (linkRef) => linkRef.nativeElement.id === product.id
@@ -170,11 +172,14 @@ export class ShopComponent implements OnInit {
 
     setTimeout(() => {
       this.isUpdating = false;
+      this.updatingProduct = null;
     }, 400);
   }
 
   removeFromCart(product: Product) {
     this.isUpdating = true;
+    this.updatingProduct = product;
+
     let orderLineWithProduct = this.shoppingCart.orderLines.find(
       (orderLine) => orderLine.product.id === product.id
     );
@@ -185,6 +190,7 @@ export class ShopComponent implements OnInit {
     );
     setTimeout(() => {
       this.isUpdating = false;
+      this.updatingProduct = null;
     }, 400);
   }
 
