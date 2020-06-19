@@ -23,7 +23,7 @@ import {
         style({ opacity: 0, transform: 'scale(0,0)' }),
         animate('400ms {{delay}}ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
       ]),
-      transition(':leave', animate(600, style({ opacity: 0 }))),
+      transition(':leave', animate(100, style({ opacity: 0 }))),
     ]),
 
     trigger('fadeLeft', [
