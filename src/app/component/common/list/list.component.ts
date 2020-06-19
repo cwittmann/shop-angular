@@ -84,8 +84,9 @@ export class ListComponent implements OnInit {
     await this.storeService.delete<T>(id, this.model.dbNamePlural);
     await this.storeService.reload();
     await this.ngOnInit();
-    this.snackBar.open(this.model.name + ' ' + id + ' deleted.', null, {
+    this.snackBar.open(this.model.name + ' deleted.', null, {
       duration: 5000,
+      panelClass: 'snackbar',
     });
   }
 

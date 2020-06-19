@@ -144,7 +144,10 @@ export class EditComponent implements OnInit {
     }
 
     await this.storeService.reload();
-    this.snackBar.open(this.model.name + ' saved.', null, { duration: 5000 });
+    this.snackBar.open(this.model.name + ' saved.', null, {
+      duration: 5000,
+      panelClass: 'snackbar',
+    });
     this.router.navigate(['/' + this.model.dbNameSingular + '-list']);
   }
 

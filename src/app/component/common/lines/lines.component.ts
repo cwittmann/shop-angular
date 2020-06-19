@@ -90,8 +90,9 @@ export class LinesComponent implements OnInit {
     await this.storeService.delete<T>(id, this.model.dbNamePlural);
     await this.storeService.reload();
     await this.ngOnInit();
-    this.snackBar.open(this.model.name + ' ' + id + ' deleted.', null, {
+    this.snackBar.open(this.model.name + ' deleted.', null, {
       duration: 5000,
+      panelClass: 'snackbar',
     });
   }
 
@@ -109,7 +110,10 @@ export class LinesComponent implements OnInit {
     this.showNew = false;
     await this.storeService.reload();
     await this.ngOnInit();
-    this.snackBar.open(this.model.name + ' saved.', null, { duration: 5000 });
+    this.snackBar.open(this.model.name + ' saved.', null, {
+      duration: 5000,
+      panelClass: 'snackbar',
+    });
   }
 
   validate(item: any): boolean {
