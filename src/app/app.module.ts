@@ -35,6 +35,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './shared/pipe/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafeHtmlPipe } from './shared/pipe/safe-html.pipe';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { SafeHtmlPipe } from './shared/pipe/safe-html.pipe';
     ReactiveFormsModule,
     NgxPaginationModule,
     MDBBootstrapModule.forRoot(),
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

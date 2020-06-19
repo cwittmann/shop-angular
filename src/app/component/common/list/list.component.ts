@@ -4,6 +4,7 @@ import { Column } from 'src/app/shared/model/Column';
 import { IGenericModel } from 'src/app/shared/model/GenericModel';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   trigger,
   state,
@@ -53,7 +54,11 @@ export class ListComponent implements OnInit {
   searchText: string;
   searchPlaceholder: string;
 
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(
+    private storeService: StoreService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.config = {
@@ -78,7 +83,10 @@ export class ListComponent implements OnInit {
   async delete<T>(id: string) {
     await this.storeService.delete<T>(id, this.model.dbNamePlural);
     await this.storeService.reload();
-    this.ngOnInit();
+    await this.ngOnInit();
+    this.snackBar.open(this.model.name + ' ' + id + ' deleted.', null, {
+      duration: 5000,
+    });
   }
 
   pageChanged(event) {

@@ -14,6 +14,7 @@ import {
   animate,
   style,
 } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lines',
@@ -68,7 +69,8 @@ export class LinesComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.parentId = activatedRoute.snapshot.params['id'];
   }
@@ -87,7 +89,10 @@ export class LinesComponent implements OnInit {
   async delete<T>(id: string) {
     await this.storeService.delete<T>(id, this.model.dbNamePlural);
     await this.storeService.reload();
-    this.ngOnInit();
+    await this.ngOnInit();
+    this.snackBar.open(this.model.name + ' ' + id + ' deleted.', null, {
+      duration: 5000,
+    });
   }
 
   async save<T extends BaseModel>(item: any, isNew: boolean) {
@@ -103,7 +108,8 @@ export class LinesComponent implements OnInit {
 
     this.showNew = false;
     await this.storeService.reload();
-    this.ngOnInit();
+    await this.ngOnInit();
+    this.snackBar.open(this.model.name + ' saved.', null, { duration: 5000 });
   }
 
   validate(item: any): boolean {

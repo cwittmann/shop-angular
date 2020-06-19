@@ -14,6 +14,7 @@ import {
   animate,
   style,
 } from '@angular/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit',
@@ -73,7 +74,8 @@ export class EditComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.id = activatedRoute.snapshot.params['id'];
     this.isNew = router.url.includes('-new');
@@ -142,6 +144,7 @@ export class EditComponent implements OnInit {
     }
 
     await this.storeService.reload();
+    this.snackBar.open(this.model.name + ' saved.', null, { duration: 5000 });
     this.router.navigate(['/' + this.model.dbNameSingular + '-list']);
   }
 
