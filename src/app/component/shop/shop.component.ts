@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, Input } from '@angular/core';
 import { StoreService } from 'src/app/shared/service/store.service';
 import { Product } from 'src/app/shared/model/Product';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,6 +12,7 @@ import {
   transition,
   animate,
   style,
+  keyframes,
 } from '@angular/animations';
 
 @Component({
@@ -53,18 +54,44 @@ import {
 
     trigger('rotate', [
       state(
-        'in',
+        'rest',
         style({
           opacity: 1,
           transform: 'rotateY(0deg)',
         })
       ),
+      transition('move => rest', [
+        style({
+          opacity: 1,
+          transform: 'rotateY(15deg)',
+        }),
+        animate(
+          '800ms cubic-bezier(0.680, -0.550, 0.265, 1.550)',
+          keyframes([
+            style({
+              transform: 'rotateY(0deg)',
+            }),
+            style({
+              transform: 'rotateY(360deg)',
+            }),
+            style({
+              transform: 'rotateY(0deg)',
+            }),
+            style({
+              transform: 'rotateY(90deg)',
+            }),
+            style({
+              transform: 'rotateY(0deg)',
+            }),
+          ])
+        ),
+      ]),
       transition(':enter', [
         style({
           opacity: 0,
-          transform: 'rotateY(180deg)',
+          transform: 'rotateY(90deg)',
         }),
-        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+        animate('800ms {{delay}}ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
       ]),
       transition(':leave', animate(100, style({ opacity: 0 }))),
     ]),

@@ -27,11 +27,12 @@
   </thead>
   <tbody>
     <tr
-      [@fade]
+      [@fade]="{ value: '', params: { delay: i * 50 } }"
       *ngFor="
         let item of items
           | filter: searchText:model?.searchFields
-          | paginate: config
+          | paginate: config;
+        index as i
       "
     >
       <td *ngFor="let column of columns">

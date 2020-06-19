@@ -24,7 +24,7 @@ import {
       state('in', style({ opacity: 1, transform: 'scale(1,1)' })),
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0,0)' }),
-        animate('400ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
+        animate('400ms {{delay}}ms cubic-bezier(0.680, -0.550, 0.265, 1.550)'),
       ]),
       transition(':leave', animate(600, style({ opacity: 0 }))),
     ]),

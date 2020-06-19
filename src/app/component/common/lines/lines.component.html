@@ -36,7 +36,10 @@
       </td>
     </tr>
 
-    <tr [@fade] *ngFor="let item of items">
+    <tr
+      [@fade]="{ value: '', params: { delay: i * 50 } }"
+      *ngFor="let item of items; index as i"
+    >
       <td *ngFor="let column of columns">
         <input
           *ngIf="column.dataType === 'text' || column.dataType === 'number'"

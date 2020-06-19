@@ -48,10 +48,6 @@ select {
   padding-right: 0.2vw;
 }
 
-section {
-  perspective: 400px;
-}
-
 .card {
   display: inline-block;
   padding: 0;
@@ -71,6 +67,7 @@ section {
   border: 0;
   background-image: url("../../../assets/images/shop-background.png");
   background-position: center center;
+  perspective: 400px;
 }
 
 .card-img-container:hover {
