@@ -5,6 +5,7 @@ export class Category extends BaseModel {
   public static dbNamePlural = 'categories';
   public static route = 'category';
   public static searchFields = ['name'];
+  public static icon = 'project-diagram';
 
   public id: string;
   public name: string;

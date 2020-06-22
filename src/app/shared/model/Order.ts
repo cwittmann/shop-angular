@@ -6,6 +6,7 @@ export class Order extends BaseModel {
   public static dbNamePlural = 'orders';
   public static route = 'order';
   public static searchFields = ['status'];
+  public static icon = 'shopping-bag';
 
   public id: string;
   public userId: string;

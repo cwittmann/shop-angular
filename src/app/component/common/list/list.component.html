@@ -13,6 +13,7 @@
 <table class="table table-borderless">
   <thead class="">
     <tr>
+      <th><mdb-icon fas [icon]="model.icon"></mdb-icon></th>
       <th
         *ngFor="let column of columns"
         (click)="sortByColumn(column)"
@@ -46,6 +47,7 @@
         index as i
       "
     >
+      <td><mdb-icon fas [icon]="model.icon"></mdb-icon></td>
       <td *ngFor="let column of columns">
         <p *ngIf="column.dataType === 'text' || column.dataType === 'status'">
           {{ item[column.name] }}

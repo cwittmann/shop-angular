@@ -6,6 +6,7 @@ export class Role extends BaseModel {
   public static dbNamePlural = 'roles';
   public static route = 'role';
   public static searchFields = ['name'];
+  public static icon = 'user-tag';
 
   public id: string;
   public name: string;

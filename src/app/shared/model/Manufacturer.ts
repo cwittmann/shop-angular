@@ -5,6 +5,7 @@ export class Manufacturer extends BaseModel {
   public static dbNamePlural = 'manufacturers';
   public static route = 'manufacturer';
   public static searchFields = ['name'];
+  public static icon = 'industry';
 
   public id: string;
   public name: string;

@@ -7,6 +7,7 @@ export class RoleRight extends BaseModel {
   public static dbNamePlural = 'roleRights';
   public static route = 'role-right';
   public static searchFields = [];
+  public static icon = 'project-diagram';
 
   public id: string;
   public roleId: string;

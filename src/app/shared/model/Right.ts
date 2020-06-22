@@ -5,6 +5,7 @@ export class Right extends BaseModel {
   public static dbNamePlural = 'rights';
   public static route = 'right';
   public static searchFields = ['entity', 'permission'];
+  public static icon = 'balance-scale';
 
   public id: string;
   public entity: string;
