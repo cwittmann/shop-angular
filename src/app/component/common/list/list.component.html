@@ -7,7 +7,9 @@
     name="search"
     type="search"
     [(ngModel)]="searchText"
-    [placeholder]="'Search text (' + searchPlaceholder + ')'"
+    [placeholder]="
+      'You can search the following attributes: ' + searchPlaceholder
+    "
   />
 </form>
 <table class="table table-borderless">

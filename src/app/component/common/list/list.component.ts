@@ -71,7 +71,14 @@ export class ListComponent implements OnInit {
     };
 
     this.showSearchBar = this.model?.searchFields?.length > 0;
-    this.searchPlaceholder = this.model?.searchFields.join(', ');
+
+    let searchFieldsCapitalized = this.model?.searchFields.map(function (
+      searchField
+    ) {
+      return searchField[0].toUpperCase() + searchField.substr(1).toLowerCase();
+    });
+
+    this.searchPlaceholder = searchFieldsCapitalized.join(', ');
   }
 
   create() {
