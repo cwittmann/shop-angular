@@ -5,4 +5,5 @@ export interface IGenericModel<T> {
   dbNamePlural: string;
   route: string;
   searchFields: string[];
+  icon: string;
 }

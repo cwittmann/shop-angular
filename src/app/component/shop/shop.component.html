@@ -46,6 +46,14 @@
   <div class="card-body">
     <p class="card-text" *ngFor="let attribute of selectedProduct?.attributes">
       <b>{{ attribute.name }}:</b> {{ attribute.value }}
+      <mdb-icon
+        *ngIf="attribute.info"
+        fas
+        icon="info-circle"
+        data-toggle="tooltip"
+        [title]="attribute.info"
+      >
+      </mdb-icon>
     </p>
   </div>
 

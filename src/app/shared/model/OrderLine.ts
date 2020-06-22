@@ -6,6 +6,7 @@ export class OrderLine extends BaseModel {
   public static dbNamePlural = 'orderLines';
   public static route = 'order-line';
   public static searchFields = [];
+  public static icon = '';
 
   public id: string;
   public orderId: string;

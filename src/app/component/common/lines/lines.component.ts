@@ -165,7 +165,7 @@ export class LinesComponent implements OnInit {
       this.newItem = new OrderLine(uuidv4(), this.parentId, 0, null);
     }
     if (this.model?.name === 'Attribute') {
-      this.newItem = new Attribute(uuidv4(), this.parentId, '', '');
+      this.newItem = new Attribute(uuidv4(), this.parentId, '', '', '');
     }
   }
 }
