@@ -16,6 +16,7 @@ import { BaseModel } from '../model/BaseModel';
 import { Category } from '../model/Category';
 import { Order } from '../model/Order';
 import { Attribute } from '../model/Attribute';
+import { SortService } from './sort.service';
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +43,8 @@ export class StoreService {
 
   constructor(
     private backendService: BackendService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private sortService: SortService
   ) {}
 
   async initialize(userName: string): Promise<boolean> {
@@ -119,6 +121,14 @@ export class StoreService {
     this.reload();
   }
 
+  sort(itemsName: string, attributes: string[], orderByDescending: boolean) {
+    this[itemsName] = this.sortService.sortByAttributes(
+      this[itemsName],
+      attributes,
+      orderByDescending
+    );
+  }
+
   private initializeShoppingCart() {
     this.shoppingCart = new OrderViewModel(
       uuidv4(),
@@ -177,7 +187,18 @@ export class StoreService {
     this.appendOrderLinesToOrders();
 
     this.appendUsersToOrders();
-    this.sortOrders();
+    this.sortItems();
+  }
+
+  private sortItems() {
+    this.sort(RoleRight.dbNamePlural, ['roleId', 'rightId'], true);
+    this.sort(Right.dbNamePlural, ['entity', 'permission'], true);
+    this.sort(Role.dbNamePlural, ['name'], true);
+    this.sort(User.dbNamePlural, ['lastName', 'firstName'], true);
+    this.sort(Category.dbNamePlural, ['name'], true);
+    this.sort(Manufacturer.dbNamePlural, ['name'], true);
+    this.sort(Product.dbNamePlural, ['name'], true);
+    this.sort(Order.dbNamePlural, ['date'], false);
   }
 
   private convertImages(imageObjects: Image[]) {
@@ -272,9 +293,5 @@ export class StoreService {
       );
       order.orderLines = orderLines;
     }
-  }
-
-  private sortOrders() {
-    this.orders.sort((order1, order2) => (order1.date < order2.date ? 1 : -1));
   }
 }

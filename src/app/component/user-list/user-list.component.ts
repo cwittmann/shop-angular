@@ -17,12 +17,12 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     this.genericModel = User;
     this.columns = [
-      new Column('firstName', 'First name', 'text'),
-      new Column('lastName', 'Last name', 'text'),
-      new Column('city', 'City', 'text'),
-      new Column('userName', 'User Name', 'text'),
-      new Column('password', 'Password', 'text'),
-      new Column('role', 'Role', 'select'),
+      new Column('firstName', 'First name', 'text', false, false, true),
+      new Column('lastName', 'Last name', 'text', false, false, true),
+      new Column('city', 'City', 'text', false, false, true),
+      new Column('userName', 'User Name', 'text', false, false, true),
+      new Column('password', 'Password', 'text', false, false, false),
+      new Column('role', 'Role', 'select', false, false, false),
     ];
   }
 }

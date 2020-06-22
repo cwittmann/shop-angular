@@ -17,8 +17,8 @@ export class RoleRightListComponent implements OnInit {
   ngOnInit(): void {
     this.genericModel = RoleRight;
     this.columns = [
-      new Column('role', 'Role', 'select'),
-      new Column('right', 'Right', 'select'),
+      new Column('role', 'Role', 'select', false, false, false),
+      new Column('right', 'Right', 'select', false, false, false),
     ];
   }
 }

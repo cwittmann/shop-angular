@@ -17,9 +17,9 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
     this.genericModel = Order;
     this.columns = [
-      new Column('date', 'Date', 'date'),
-      new Column('user', 'User', 'select'),
-      new Column('status', 'Status', 'status'),
+      new Column('date', 'Date', 'date', false, false, true),
+      new Column('user', 'User', 'select', false, false, false),
+      new Column('status', 'Status', 'status', false, false, true),
     ];
   }
 }

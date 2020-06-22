@@ -50,6 +50,9 @@ export class ListComponent implements OnInit {
 
   config: any;
 
+  sortColumn: string;
+  sortDirection: boolean = true;
+
   showSearchBar: boolean = false;
   searchText: string;
   searchPlaceholder: string;
@@ -88,6 +91,28 @@ export class ListComponent implements OnInit {
       duration: 5000,
       panelClass: 'snackbar',
     });
+  }
+
+  sortByColumn(event) {
+    let isSortable = event.isSortable;
+    if (!isSortable) {
+      return;
+    }
+
+    let columnName = event.name;
+
+    if (this.sortColumn === columnName) {
+      this.sortDirection = !this.sortDirection;
+      this.storeService.sort(
+        this.model.dbNamePlural,
+        [columnName],
+        this.sortDirection
+      );
+      return;
+    }
+
+    this.sortColumn = columnName;
+    this.storeService.sort(this.model.dbNamePlural, [columnName], true);
   }
 
   pageChanged(event) {

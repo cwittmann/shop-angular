@@ -17,8 +17,8 @@ export class RightListComponent implements OnInit {
   ngOnInit(): void {
     this.genericModel = Right;
     this.columns = [
-      new Column('entity', 'Entity', 'text'),
-      new Column('permission', 'Permission', 'text'),
+      new Column('entity', 'Entity', 'text', false, false, true),
+      new Column('permission', 'Permission', 'text', false, false, true),
     ];
   }
 }

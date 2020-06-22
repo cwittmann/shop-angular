@@ -17,11 +17,11 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.genericModel = Product;
     this.columns = [
-      new Column('name', 'Name', 'text'),
-      new Column('description', 'Description', 'text'),
-      new Column('price', 'Price', 'text'),
-      new Column('category', 'Category', 'select'),
-      new Column('manufacturer', 'Manufacturer', 'select'),
+      new Column('name', 'Name', 'text', false, false, true),
+      new Column('description', 'Description', 'text', false, false, true),
+      new Column('price', 'Price', 'text', false, false, false),
+      new Column('category', 'Category', 'select', false, false, false),
+      new Column('manufacturer', 'Manufacturer', 'select', false, false, false),
     ];
   }
 }

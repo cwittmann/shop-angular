@@ -13,7 +13,18 @@
 <table class="table table-borderless">
   <thead class="">
     <tr>
-      <th *ngFor="let column of columns">{{ column.displayName }}</th>
+      <th
+        *ngFor="let column of columns"
+        (click)="sortByColumn(column)"
+        [ngClass]="{ sortable: column.isSortable }"
+      >
+        {{ column.displayName }}
+        <mdb-icon
+          *ngIf="sortColumn == column.name"
+          fas
+          [icon]="sortDirection ? 'caret-up' : 'caret-down'"
+        ></mdb-icon>
+      </th>
       <th>
         <a
           *ngIf="[model?.name, 'Write'] | rights"
