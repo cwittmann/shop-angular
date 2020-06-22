@@ -16,7 +16,7 @@
       <th
         *ngFor="let column of columns"
         (click)="sortByColumn(column)"
-        [ngClass]="{ sortable: column.isSortable }"
+        [class.sortable]="column.isSortable"
       >
         {{ column.displayName }}
         <mdb-icon
