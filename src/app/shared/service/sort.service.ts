@@ -25,18 +25,27 @@ export class SortService {
     orderByDescending: boolean
   ): boolean {
     for (let attribute of attributes) {
-      if (item1[attribute] == item2[attribute]) {
+      let attribute1 = item1[attribute];
+      let attribute2 = item2[attribute];
+
+      if (attribute1 == attribute2) {
         continue;
       }
+
+      if (attribute == 'price') {
+        attribute1 = parseFloat(attribute1);
+        attribute2 = parseFloat(attribute2);
+      }
+
       if (
-        (item1[attribute] > item2[attribute] && orderByDescending) ||
-        (item1[attribute] < item2[attribute] && !orderByDescending)
+        (attribute1 > attribute2 && orderByDescending) ||
+        (attribute1 < attribute2 && !orderByDescending)
       ) {
         return true;
       }
       if (
-        (item1[attribute] < item2[attribute] && orderByDescending) ||
-        (item1[attribute] > item2[attribute] && !orderByDescending)
+        (attribute1 < attribute2 && orderByDescending) ||
+        (attribute1 > attribute2 && !orderByDescending)
       ) {
         return false;
       }

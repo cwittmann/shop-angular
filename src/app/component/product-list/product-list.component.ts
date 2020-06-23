@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
     this.columns = [
       new Column('name', 'Name', 'text', false, false, true),
       new Column('description', 'Description', 'text', false, false, true),
-      new Column('price', 'Price', 'text', false, false, false),
+      new Column('price', 'Price', 'text', false, false, true),
       new Column('category', 'Category', 'select', false, false, false),
       new Column('manufacturer', 'Manufacturer', 'select', false, false, false),
     ];
