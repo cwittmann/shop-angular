@@ -75,7 +75,7 @@ export class ListComponent implements OnInit {
     let searchFieldsCapitalized = this.model?.searchFields.map(function (
       searchField
     ) {
-      return searchField[0].toUpperCase() + searchField.substr(1).toLowerCase();
+      return searchField[0].toUpperCase() + searchField.substr(1);
     });
 
     this.searchPlaceholder = searchFieldsCapitalized.join(', ');
