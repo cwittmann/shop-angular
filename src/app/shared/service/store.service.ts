@@ -140,9 +140,54 @@ export class StoreService {
   }
 
   private async loadData() {
-    let imageObjects = (await this.backendService.getImages()) as Image[];
-    this.convertImages(imageObjects);
+    this.loadImages();
+    let userPromise = this.loadUsersAndSubEntities();
+    let productPromise = this.loadProductsAndSubEntities();
+    let orderLinePromise = this.loadOrderLines();
 
+    await Promise.all([userPromise, productPromise, orderLinePromise]);
+
+    this.appendUsersToOrders();
+    this.sortItems();
+  }
+
+  private async loadOrderLines(): Promise<boolean> {
+    this.orderLines = (await this.backendService.get<OrderLine[]>(
+      'orderLines'
+    )) as OrderLine[];
+    this.orders = (await this.backendService.get<Order[]>(
+      'orders'
+    )) as OrderViewModel[];
+    this.appendOrderLinesToOrders();
+
+    return new Promise((resolve) => {
+      resolve(true);
+    });
+  }
+
+  private async loadProductsAndSubEntities(): Promise<boolean> {
+    this.manufacturers = (await this.backendService.get<Manufacturer[]>(
+      'manufacturers'
+    )) as Manufacturer[];
+    this.categories = (await this.backendService.get<Category[]>(
+      'categories'
+    )) as Manufacturer[];
+    this.products = (await this.backendService.get<Product[]>(
+      'products'
+    )) as Product[];
+    this.attributes = (await this.backendService.get<Attribute[]>(
+      'attributes'
+    )) as Attribute[];
+    this.appendCategoriesToProducts();
+    this.appendAttributesToProducts();
+    this.appendManufacturersToProducts();
+
+    return new Promise((resolve) => {
+      resolve(true);
+    });
+  }
+
+  private async loadUsersAndSubEntities(): Promise<boolean> {
     this.rights = (await this.backendService.get<Right[]>('rights')) as Right[];
     this.rights.forEach(
       (right) => (right.name = right.entity + ' - ' + right.permission)
@@ -162,32 +207,14 @@ export class StoreService {
     );
     this.appendRolesToUsers();
 
-    this.manufacturers = (await this.backendService.get<Manufacturer[]>(
-      'manufacturers'
-    )) as Manufacturer[];
-    this.categories = (await this.backendService.get<Category[]>(
-      'categories'
-    )) as Manufacturer[];
-    this.products = (await this.backendService.get<Product[]>(
-      'products'
-    )) as Product[];
-    this.attributes = (await this.backendService.get<Attribute[]>(
-      'attributes'
-    )) as Attribute[];
-    this.appendCategoriesToProducts();
-    this.appendAttributesToProducts();
-    this.appendManufacturersToProducts();
+    return new Promise((resolve) => {
+      resolve(true);
+    });
+  }
 
-    this.orderLines = (await this.backendService.get<OrderLine[]>(
-      'orderLines'
-    )) as OrderLine[];
-    this.orders = (await this.backendService.get<Order[]>(
-      'orders'
-    )) as OrderViewModel[];
-    this.appendOrderLinesToOrders();
-
-    this.appendUsersToOrders();
-    this.sortItems();
+  private async loadImages() {
+    let imageObjects = (await this.backendService.getImages()) as Image[];
+    this.convertImages(imageObjects);
   }
 
   private sortItems() {
