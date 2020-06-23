@@ -140,12 +140,17 @@ export class StoreService {
   }
 
   private async loadData() {
-    this.loadImages();
+    let imagePromise = this.loadImages();
     let userPromise = this.loadUsersAndSubEntities();
     let productPromise = this.loadProductsAndSubEntities();
     let orderLinePromise = this.loadOrderLines();
 
-    await Promise.all([userPromise, productPromise, orderLinePromise]);
+    await Promise.all([
+      imagePromise,
+      userPromise,
+      productPromise,
+      orderLinePromise,
+    ]);
 
     this.appendUsersToOrders();
     this.sortItems();
@@ -212,9 +217,13 @@ export class StoreService {
     });
   }
 
-  private async loadImages() {
+  private async loadImages(): Promise<boolean> {
     let imageObjects = (await this.backendService.getImages()) as Image[];
     this.convertImages(imageObjects);
+
+    return new Promise((resolve) => {
+      return resolve(true);
+    });
   }
 
   private sortItems() {
