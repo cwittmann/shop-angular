@@ -11,14 +11,14 @@
   >
   <links>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="['Shop', 'Write'] | rights">
         <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/shop']"
           ><mdb-icon fas icon="store"></mdb-icon> Shop<span class="sr-only"
             >(current)</span
           ></a
         >
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="['Order', 'Read'] | rights">
         <a
           class="nav-link waves-light"
           mdbWavesEffect
@@ -27,7 +27,11 @@
         >
       </li>
 
-      <li class="nav-item dropdown" dropdown>
+      <li
+        class="nav-item dropdown"
+        dropdown
+        *ngIf="['Product', 'Read'] | rights"
+      >
         <a
           dropdownToggle
           mdbWavesEffect
@@ -48,23 +52,26 @@
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/product-list']"
+            *ngIf="['Product', 'Read'] | rights"
             ><mdb-icon fas icon="box"></mdb-icon> Products</a
           >
           <a
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/manufacturer-list']"
+            *ngIf="['Manufacturer', 'Read'] | rights"
             ><mdb-icon fas icon="industry"></mdb-icon> Manufacturers</a
           >
           <a
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/category-list']"
+            *ngIf="['Category', 'Read'] | rights"
             ><mdb-icon fas icon="project-diagram"></mdb-icon> Categories</a
           >
         </div>
       </li>
-      <li class="nav-item dropdown" dropdown>
+      <li class="nav-item dropdown" dropdown *ngIf="['User', 'Read'] | rights">
         <a
           dropdownToggle
           mdbWavesEffect
@@ -83,24 +90,28 @@
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/user-list']"
+            *ngIf="['User', 'Read'] | rights"
             ><mdb-icon fas icon="user"></mdb-icon> Users</a
           >
           <a
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/role-list']"
+            *ngIf="['Role', 'Read'] | rights"
             ><mdb-icon fas icon="user-tag"></mdb-icon> Roles</a
           >
           <a
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/right-list']"
+            *ngIf="['Right', 'Read'] | rights"
             ><mdb-icon fas icon="balance-scale"></mdb-icon> Rights</a
           >
           <a
             class="dropdown-item waves-light"
             mdbWavesEffect
             [routerLink]="['/role-right-list']"
+            *ngIf="['RoleRight', 'Read'] | rights"
             ><mdb-icon fas icon="project-diagram"></mdb-icon> Role-Rights</a
           >
         </div>
