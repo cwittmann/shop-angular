@@ -36,6 +36,7 @@ import { FilterPipe } from './shared/pipe/filter.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SafeHtmlPipe } from './shared/pipe/safe-html.pipe';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ShopItemComponent } from './component/shop-item/shop-item.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     CategoryDetailComponent,
     FilterPipe,
     SafeHtmlPipe,
+    ShopItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,57 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-img-container" (click)="toggleDetails()">
+    <img
+      [@rotate]="{
+        value: isUpdating && updatingProduct === product ? 'rest' : 'move',
+        params: { delay: index * 100 }
+      }"
+      class="card-img-top"
+      [src]="'data:image/jpg;base64,' + getImage(product.id) | safeHtml"
+    />
+  </div>
+  <div [@fade] class="card-body">
+    <p class="card-title">{{ product?.name }}</p>
+    <p class="card-text">
+      <small>{{ product?.category?.name }}</small>
+    </p>
+
+    <p class="card-text">
+      {{ product?.price | currency }}
+    </p>
+    <div class="buttons">
+      <select
+        [disabled]="isInOrder(product.id)"
+        class="form-control numberSelect"
+        [id]="product.id"
+        #linkRef
+      >
+        <option
+          *ngFor="let number of numbers"
+          [value]="number"
+          [selected]="selectAmount(number, product.id)"
+          >{{ number }}</option
+        >
+      </select>
+      <button
+        *ngIf="!isInOrder(product.id)"
+        [@highlight]="
+          isUpdating && updatingProduct === product ? 'highlight' : 'rest'
+        "
+        class="btn btn-primary"
+        (click)="addToCart(product)"
+      >
+        Order
+      </button>
+      <button
+        *ngIf="isInOrder(product.id)"
+        [@highlight]="
+          isUpdating && updatingProduct === product ? 'highlight' : 'rest'
+        "
+        class="btn btn-danger"
+        (click)="removeFromCart(product)"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+</div>
