@@ -86,11 +86,12 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleDetails(product: Product = null) {
-    if (!this.showDetails) {
+  toggleDetails(product: Product) {
+    if (!this.selectedProduct) {
       this.selectedProduct = product;
+    } else {
+      this.selectedProduct = null;
     }
-    this.showDetails = !this.showDetails;
   }
 
   getProducts(): Product[] {
@@ -111,5 +112,9 @@ export class ShopComponent implements OnInit {
 
     let selectedCategoryid = category;
     this.router.navigate(['/shop/', selectedCategoryid]);
+  }
+
+  changeSelectedProduct(product: Product) {
+    this.selectedProduct = product;
   }
 }

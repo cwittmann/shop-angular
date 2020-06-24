@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChildren, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import {
   trigger,
   state,
@@ -88,7 +95,13 @@ export class ShopItemComponent implements OnInit {
   product: Product;
 
   @Input()
+  selectedProduct: Product;
+
+  @Input()
   index: number;
+
+  @Output()
+  selectedProductChanged = new EventEmitter<Product>();
 
   numbers: Number[] = [1, 2, 3];
 
@@ -96,20 +109,21 @@ export class ShopItemComponent implements OnInit {
     return this.storeService.shoppingCart;
   }
 
-  showDetails: boolean = false;
   isUpdating: boolean = false;
   updatingProduct: Product;
 
-  constructor(
-    private storeService: StoreService,
-    private activateRoute: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private storeService: StoreService) {}
 
   ngOnInit(): void {}
 
-  toggleDetails() {
-    this.showDetails = !this.showDetails;
+  showDetails(product: Product) {
+    if (!this.selectedProduct) {
+      this.selectedProductChanged.emit(product);
+    }
+  }
+
+  closeDetails() {
+    this.selectedProductChanged.emit(null);
   }
 
   isInOrder(productId: string) {
@@ -138,10 +152,6 @@ export class ShopItemComponent implements OnInit {
         product
       );
       this.shoppingCart.orderLines.push(orderLine);
-
-      if (this.showDetails) {
-        this.toggleDetails();
-      }
     }
 
     setTimeout(() => {

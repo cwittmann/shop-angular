@@ -39,6 +39,8 @@
   <app-shop-item
     [index]="i"
     [product]="product"
+    [selectedProduct]="selectedProduct"
+    (selectedProductChanged)="changeSelectedProduct($event)"
     *ngFor="let product of products; index as i"
   ></app-shop-item>
 </section>

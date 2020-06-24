@@ -1,5 +1,10 @@
-<div class="card" style="width: 18rem;">
-  <div class="card-img-container" (click)="toggleDetails()">
+<div
+  class="card"
+  [class.expanded]="selectedProduct && product.id === selectedProduct.id"
+  [class.hidden]="selectedProduct && product.id !== selectedProduct.id"
+  style="width: 18rem;"
+>
+  <div class="card-img-container">
     <img
       [@rotate]="{
         value: isUpdating && updatingProduct === product ? 'rest' : 'move',
@@ -7,6 +12,7 @@
       }"
       class="card-img-top"
       [src]="'data:image/jpg;base64,' + getImage(product.id) | safeHtml"
+      (click)="showDetails(product)"
     />
   </div>
   <div [@fade] class="card-body">
@@ -55,3 +61,20 @@
     </div>
   </div>
 </div>
+<div
+  class="m-3"
+  *ngIf="
+    product.attributes && selectedProduct && product.id === selectedProduct.id
+  "
+>
+  <p *ngFor="let attribute of product.attributes">
+    <b>{{ attribute.name }} </b>{{ attribute.value }}
+  </p>
+</div>
+<button
+  *ngIf="selectedProduct && product.id === selectedProduct.id"
+  class="btn btn-primary"
+  (click)="closeDetails()"
+>
+  Close Details
+</button>

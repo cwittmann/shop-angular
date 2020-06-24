@@ -55,6 +55,14 @@ select {
   transform-origin: center center;
 }
 
+.expanded {
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
 .card-title {
   font-size: calc(8px + 0.5vw);
   color: #4788c7;
